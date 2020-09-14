@@ -2,7 +2,7 @@
 
 ## Team Members:
 
-> George Chousiadas
-> John Balatsos
-> Aristotle Symeonidis
-> George Topalidis
+#### George Chousiadas
+#### John Balatsos
+#### Aristotle Symeonidis
+#### George Topalidis
