@@ -10,7 +10,6 @@ import java.util.List;
 public class Patient {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    /** Technical identifier.  primary key */
     private long id;
 
     @Column(unique = true)
@@ -26,6 +25,6 @@ public class Patient {
     private List<Consultation> consultations  = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn(name = "doc_id")
+    @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 }

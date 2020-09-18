@@ -15,7 +15,7 @@ public class PatientData {
     @JoinColumn(name = "patient_id")
     private Patient patient;
 
-    private Timestamp timestamp;
     private Double bloodGlucose;
     private Double carbIntake;
+    private Timestamp timestamp;
 }
