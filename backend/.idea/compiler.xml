@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="pfizer-se-team5" />
         <module name="Sacchon" />
+        <module name="backend" />
       </profile>
     </annotationProcessing>
   </component>
