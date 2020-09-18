@@ -25,9 +25,6 @@ public class DoctorRepresentation {
     }
 
     public Doctor createDoctor() {
-
-
-        System.out.println("asd");
         Doctor doctor = new Doctor();
         doctor.setUsername(username);
         doctor.setPassword(password);
