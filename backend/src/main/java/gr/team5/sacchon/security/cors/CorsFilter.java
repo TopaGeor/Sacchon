@@ -12,6 +12,7 @@ import org.restlet.util.Series;
 
 import java.util.Collections;
 import java.util.HashSet;
+
 public class CorsFilter {
     private Application application;
 
