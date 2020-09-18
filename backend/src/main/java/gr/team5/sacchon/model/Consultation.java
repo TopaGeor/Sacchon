@@ -10,7 +10,9 @@ public class Consultation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String advise;
+    private String advice;
+    private String medication;
+    private double dosage;
 
     @ManyToOne
     @JoinColumn(name = "patient_id")

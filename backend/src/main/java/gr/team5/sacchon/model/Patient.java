@@ -10,7 +10,6 @@ import java.util.List;
 public class Patient {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    /** Technical identifier.  primary key */
     private long id;
 
     @Column(unique = true)
