@@ -12,11 +12,9 @@ import org.restlet.routing.Router;
 import java.util.logging.Logger;
 
 public class ApiMain extends Application {
-
     public static final Logger LOGGER = Engine.getLogger(ApiMain.class);
 
     public static void main(String[] args) throws Exception {
-
         LOGGER.info("Application starting...");
 
         Component component = new Component();
@@ -29,14 +27,12 @@ public class ApiMain extends Application {
     }
 
     public ApiMain() {
-
         setName("WebAPITutorial");
         setDescription("Full Web API tutorial");
     }
 
     @Override
     public Restlet createInboundRoot() {
-
         CustomRouter customRouter = new CustomRouter(this);
 
         Router publicRouter = customRouter.publicResources();

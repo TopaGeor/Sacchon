@@ -5,7 +5,6 @@ import org.restlet.Application;
 import org.restlet.routing.Router;
 
 public class CustomRouter {
-
     private Application app;
 
     public CustomRouter(Application app) {
