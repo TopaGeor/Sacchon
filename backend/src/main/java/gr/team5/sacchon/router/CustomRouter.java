@@ -1,10 +1,14 @@
 package gr.team5.sacchon.router;
 
+import gr.team5.sacchon.resource.PatientDataResourceImpl;
+import gr.team5.sacchon.resource.PatientResourceImpl;
 import gr.team5.sacchon.resource.PingServerResource;
 import org.restlet.Application;
 import org.restlet.routing.Router;
+import org.restlet.routing.TemplateRoute;
 
 public class CustomRouter {
+
     private Application app;
 
     public CustomRouter(Application app) {
@@ -14,6 +18,17 @@ public class CustomRouter {
     public Router publicResources() {
         Router router = new Router();
         router.attach("/ping", PingServerResource.class);
+        return router;
+    }
+
+    public Router createPatientRouter() {
+
+        Router router = new Router(app.getContext());
+
+        router.attach("/patient", PatientDataResourceImpl.class);
+        router.attach("/patient/", PatientDataResourceImpl.class);
+        router.attach("/patient/{id}", PatientResourceImpl.class);
+
         return router;
     }
 }
