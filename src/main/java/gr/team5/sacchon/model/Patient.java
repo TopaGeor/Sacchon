@@ -10,12 +10,14 @@ import java.util.List;
 public class Patient {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private long id;    /** Technical identifier.  primary key */
+    /** Technical identifier.  primary key */
+    private long id;
 
     @Column(unique = true)
     private String username;
 
     private String password;
+    private boolean hasNotification;
 
     @OneToMany(mappedBy = "patient")
     private List<PatientData> patientData = new ArrayList<>();
