@@ -21,10 +21,6 @@ public class ConsultationRepository {
     //find a consultation by id
     public Optional<Consultation> findById(Long id) {
         Consultation consultation = entityManager.find(Consultation.class, id);
-//        {
-//           medication, dosage for patient.id
-//
-//        }
         return consultation != null ? Optional.of(consultation) : Optional.empty();
     }
 

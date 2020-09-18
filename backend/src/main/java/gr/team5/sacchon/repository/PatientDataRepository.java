@@ -21,12 +21,6 @@ public class PatientDataRepository {
     //find patient data by primary key id
     public Optional<PatientData> findById(Long id) {
         PatientData patientData = entityManager.find(PatientData.class, id);
-//        {
-//            bloodglucose, timestamp, carbintake, id.patient
-//            patient = getbyidPatient(id.patient);
-//            patientData.setPatient(patient);
-//
-//        }
         return patientData != null ? Optional.of(patientData) : Optional.empty();
     }
 
