@@ -25,6 +25,6 @@ public class Patient {
     private List<Consultation> consultations  = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn(name = "doc_id")
+    @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 }

@@ -19,6 +19,6 @@ public class Consultation {
     private Patient patient;
 
     @ManyToOne
-    @JoinColumn(name = "doc_id")
+    @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 }
