@@ -34,4 +34,11 @@ public class CustomRouter {
 
         return router;
     }
+
+    public Router createDoctorRouter() {
+
+        Router router = new Router(app.getContext());
+
+        return router;
+    }
 }
