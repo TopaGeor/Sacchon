@@ -1,9 +1,6 @@
 package gr.team5.sacchon.router;
 
-import gr.team5.sacchon.resource.ConsultationResourceImpl;
-import gr.team5.sacchon.resource.PatientDataResourceImpl;
-import gr.team5.sacchon.resource.PatientResourceImpl;
-import gr.team5.sacchon.resource.PingServerResource;
+import gr.team5.sacchon.resource.*;
 import org.restlet.Application;
 import org.restlet.routing.Router;
 
@@ -25,12 +22,12 @@ public class CustomRouter {
 
         Router router = new Router(app.getContext());
 
-//        router.attach("/patient", PatientResourceImpl.class);
-//        router.attach("/patient/", PatientDataResourceImpl.class);
-//        router.attach("/patient/{id}", PatientResourceImpl.class);
-//        router.attach("/patient/{id}/data", PatientDataResourceImpl.class);
-//        router.attach("/patient/{id}/consultation", ConsultationResourceImpl.class);
-//        router.attach("/patient/{id}/data/average", PatientDataResourceImpl.class);
+        router.attach("/patient", PatientResourceImpl.class);
+        router.attach("/patient/", PatientDataResourceImpl.class);
+        router.attach("/patient/{id}", PatientResourceImpl.class);
+        router.attach("/patient/{id}/data", PatientDataResourceImpl.class);
+        router.attach("/patient/{id}/consultation", ConsultationResourceImpl.class);
+        router.attach("/patient/{id}/data/average", PatientDataResourceImpl.class);
 
         return router;
     }
@@ -38,6 +35,11 @@ public class CustomRouter {
     public Router createDoctorRouter() {
 
         Router router = new Router(app.getContext());
+
+        router.attach("/doctor", DoctorResourceImpl.class);
+        router.attach("/doctor/", DoctorResourceImpl.class);
+        router.attach("/doctor/{id}", DoctorResourceImpl.class);
+        router.attach("/doctor/{id}/consultation", ConsultationResourceImpl.class);
 
         return router;
     }
