@@ -1,4 +1,6 @@
 package gr.team5.sacchon.resource;
 
-public class ConsultationResourceImpl {
+import org.restlet.resource.ServerResource;
+
+public class ConsultationResourceImpl extends ServerResource {
 }
