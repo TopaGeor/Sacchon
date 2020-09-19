@@ -4,7 +4,7 @@ public enum Role {
     ROLE_NA("n/a"),
     ROLE_CHIEF("admin"),
     ROLE_DOCTOR("doctor"),
-    ROLE_PATIENT("client");
+    ROLE_PATIENT("patient");
 
     private final String roleName;
 
