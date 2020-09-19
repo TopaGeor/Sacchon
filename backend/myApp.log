@@ -1,0 +1,16 @@
+2020-09-19 16:41:06,227 INFO [main] o.e.j.u.log [Log.java:193] Logging initialized @2375ms to org.eclipse.jetty.util.log.Slf4jLog
+2020-09-19 16:41:06,387 INFO [main] o.e.j.s.Server [Server.java:374] jetty-9.4.11.v20180605; built: 2018-06-05T18:24:03.829Z; git: d5fc0523cfa96bfebfbda19606cad384d772f04c; jvm 14.0.2+12-46
+2020-09-19 16:41:06,696 INFO [main] o.e.j.s.AbstractConnector [AbstractConnector.java:289] Started ServerConnector@477b4cdf{HTTP/1.1,[http/1.1]}{0.0.0.0:9000}
+2020-09-19 16:41:06,697 INFO [main] o.e.j.s.Server [Server.java:411] Started @2859ms
+2020-09-19 16:44:41,325 INFO [main] o.e.j.u.log [Log.java:193] Logging initialized @1583ms to org.eclipse.jetty.util.log.Slf4jLog
+2020-09-19 16:44:41,424 INFO [main] o.e.j.s.Server [Server.java:374] jetty-9.4.11.v20180605; built: 2018-06-05T18:24:03.829Z; git: d5fc0523cfa96bfebfbda19606cad384d772f04c; jvm 14.0.2+12-46
+2020-09-19 16:44:41,617 INFO [main] o.e.j.s.AbstractConnector [AbstractConnector.java:289] Started ServerConnector@3eb25e1a{HTTP/1.1,[http/1.1]}{0.0.0.0:9000}
+2020-09-19 16:44:41,618 INFO [main] o.e.j.s.Server [Server.java:411] Started @1884ms
+2020-09-19 16:48:48,712 INFO [main] o.e.j.u.log [Log.java:193] Logging initialized @1518ms to org.eclipse.jetty.util.log.Slf4jLog
+2020-09-19 16:48:48,809 INFO [main] o.e.j.s.Server [Server.java:374] jetty-9.4.11.v20180605; built: 2018-06-05T18:24:03.829Z; git: d5fc0523cfa96bfebfbda19606cad384d772f04c; jvm 14.0.2+12-46
+2020-09-19 16:48:48,981 INFO [main] o.e.j.s.AbstractConnector [AbstractConnector.java:289] Started ServerConnector@6094731b{HTTP/1.1,[http/1.1]}{0.0.0.0:9000}
+2020-09-19 16:48:48,982 INFO [main] o.e.j.s.Server [Server.java:411] Started @1795ms
+2020-09-19 17:02:20,999 INFO [main] o.e.j.u.log [Log.java:193] Logging initialized @1589ms to org.eclipse.jetty.util.log.Slf4jLog
+2020-09-19 17:02:21,109 INFO [main] o.e.j.s.Server [Server.java:374] jetty-9.4.11.v20180605; built: 2018-06-05T18:24:03.829Z; git: d5fc0523cfa96bfebfbda19606cad384d772f04c; jvm 14.0.2+12-46
+2020-09-19 17:02:21,319 INFO [main] o.e.j.s.AbstractConnector [AbstractConnector.java:289] Started ServerConnector@477b4cdf{HTTP/1.1,[http/1.1]}{0.0.0.0:9000}
+2020-09-19 17:02:21,321 INFO [main] o.e.j.s.Server [Server.java:411] Started @1920ms
