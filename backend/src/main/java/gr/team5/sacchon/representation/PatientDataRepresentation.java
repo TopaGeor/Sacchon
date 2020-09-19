@@ -3,7 +3,7 @@ package gr.team5.sacchon.representation;
 import gr.team5.sacchon.model.PatientData;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.sql.Timestamp;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -11,7 +11,7 @@ public class PatientDataRepresentation {
 
     private Double bloodGlucose;
     private Double carbIntake;
-    private Timestamp timestamp;
+    private Date date;
     /**
      * The URL of this resource which is:
      * http://localhost:9000/patient/{id}/data
@@ -23,7 +23,7 @@ public class PatientDataRepresentation {
         if (patientData != null) {
             bloodGlucose = patientData.getBloodGlucose();
             carbIntake = patientData.getCarbIntake();
-            timestamp = patientData.getTimestamp();
+            date = patientData.getDate();
             uri = "http://localhost:9000/patient/{id}/data" + patientData.getId();
         }
     }
@@ -32,7 +32,7 @@ public class PatientDataRepresentation {
         PatientData patientData = new PatientData();
         patientData.setBloodGlucose(bloodGlucose);
         patientData.setCarbIntake(carbIntake);
-        patientData.setTimestamp(timestamp);
+
         return patientData;
     }
 }
