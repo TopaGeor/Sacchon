@@ -9,7 +9,7 @@ import org.restlet.security.Verifier;
      * Use this class to protect you app from unauthorized access
  */
 public class Shield {
-    public static final String ROLE_SUPER_DOC = "super_doc";
+    public static final String ROLE_SUPER_DOC = "admin";
     public static final String DOCTOR = "doctor";
     public static final String PATIENT = "patient";
 
