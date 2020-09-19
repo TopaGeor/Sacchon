@@ -16,6 +16,7 @@ public class DoctorRepresentation {
      */
     private String uri;
 
+    //constructor
     public DoctorRepresentation(
             Doctor doctor) {
         if (doctor != null) {
@@ -28,6 +29,7 @@ public class DoctorRepresentation {
         Doctor doctor = new Doctor();
         doctor.setUsername(username);
         doctor.setPassword(password);
+
         return doctor;
     }
 }
