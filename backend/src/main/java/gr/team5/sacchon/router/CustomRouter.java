@@ -18,7 +18,7 @@ public class CustomRouter {
         return router;
     }
 
-    public Router createPatientRouter() {
+    public Router createApiRouter() {
 
         Router router = new Router(app.getContext());
 
@@ -28,13 +28,6 @@ public class CustomRouter {
         router.attach("/patient/{id}/data", PatientDataResourceImpl.class);
         router.attach("/patient/{id}/consultation", ConsultationResourceImpl.class);
         router.attach("/patient/{id}/data/average", PatientDataResourceImpl.class);
-
-        return router;
-    }
-
-    public Router createDoctorRouter() {
-
-        Router router = new Router(app.getContext());
 
         router.attach("/doctor", DoctorResourceImpl.class);
         router.attach("/doctor/", DoctorResourceImpl.class);
