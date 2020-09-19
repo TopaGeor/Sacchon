@@ -29,6 +29,7 @@ public class DoctorRepresentation {
         Doctor doctor = new Doctor();
         doctor.setUsername(username);
         doctor.setPassword(password);
+
         return doctor;
     }
 }

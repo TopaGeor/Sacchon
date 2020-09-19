@@ -32,7 +32,7 @@ public class PatientDataRepository {
 
     //save new patient dat
     public Optional<PatientData> save(PatientData patientData){
-        //set date PatientData.setDate(new Date());
+        //set date automatically
         patientData.setDate(new Date());
         try {
             entityManager.getTransaction().begin();
