@@ -1,8 +1,9 @@
 package gr.team5.sacchon.repository;
 
-import gr.team5.sacchon.model.Patient;
 import gr.team5.sacchon.model.PatientData;
 import javax.persistence.EntityManager;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,8 +30,10 @@ public class PatientDataRepository {
         return entityManager.createQuery("from PatientData").getResultList();
     }
 
-    //save new patient data
+    //save new patient dat
     public Optional<PatientData> save(PatientData patientData){
+        //set date PatientData.setDate(new Date());
+        patientData.setDate(new Date());
         try {
             entityManager.getTransaction().begin();
             entityManager.persist (patientData);
@@ -47,7 +50,6 @@ public class PatientDataRepository {
         PatientData in = entityManager.find(PatientData.class, patientData.getId());
         in.setBloodGlucose(patientData.getBloodGlucose());
         in.setCarbIntake(patientData.getCarbIntake());
-        in.setTimestamp(patientData.getTimestamp());
         try {
             entityManager.getTransaction().begin();
             entityManager.persist (in);

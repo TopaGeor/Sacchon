@@ -16,6 +16,7 @@ public class DoctorRepresentation {
      */
     private String uri;
 
+    //constructor
     public DoctorRepresentation(
             Doctor doctor) {
         if (doctor != null) {
