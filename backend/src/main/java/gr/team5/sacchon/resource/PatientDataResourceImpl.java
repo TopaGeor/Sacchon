@@ -1,4 +1,6 @@
 package gr.team5.sacchon.resource;
 
-public class PatientDataResourceImpl {
+import org.restlet.resource.ServerResource;
+
+public class PatientDataResourceImpl extends ServerResource {
 }
