@@ -4,25 +4,24 @@ import org.restlet.data.Status;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
 
+/**
+ * Checks if someone should have access to the resource
+ * @author One-To-Fix-Them-All
+ */
 public class ResourceUtils {
     /**
-     * Indicates if the authenticated client user associated to the current
-     * request is in the given role name.
-     *
-     * @param serverResource
-     *            The current server resource.
-     * @param role
-     *            The role to check.
-     * @throws ResourceException
-     *             In case the current authenticated user has not sufficient
-     *             permission.
+     * Checks if the resource is available of the role
+     * @param serverResource, the resource that a user ask for
+     * @param role, the role of the user
+     * @throws ResourceException when the user ask for a resource that should not have access
      */
-    public static void checkRole(ServerResource serverResource, String role)
+    public static void checkRole (ServerResource serverResource, String role)
             throws ResourceException {
-        if (!serverResource.isInRole(role)) {
+        if(!serverResource.isInRole(role)){
             throw new ResourceException(
-                    Status.CLIENT_ERROR_FORBIDDEN.getCode(),
-                    "You're not authorized to send this call.");
+                    Status.CLIENT_ERROR_FORBIDDEN,
+                    "You are not authorized for that resource"
+            );
         }
     }
 }

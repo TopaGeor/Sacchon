@@ -3,7 +3,11 @@ package gr.team5.sacchon.security;
 import org.restlet.Application;
 import org.restlet.data.ChallengeScheme;
 import org.restlet.security.ChallengeAuthenticator;
+import org.restlet.security.Verifier;
 
+/**
+     * Use this class to protect you app from unauthorized access
+ */
 public class Shield {
     public static final String ROLE_SUPER_DOC = "super_doc";
     public static final String DOCTOR = "doctor";
@@ -12,8 +16,8 @@ public class Shield {
     private Application application;
 
     /**
-     * Set app the application
-     * @param application
+     * Set up the application
+     * @param application the application
      */
     public Shield (Application application){
         this.application = application;
@@ -28,9 +32,8 @@ public class Shield {
                 application.getContext(),
                 ChallengeScheme.HTTP_BASIC,
                 "realm");
-
-
+        Verifier verifier = new CustomVerifier();
+        apiGuard.setVerifier(verifier);
         return apiGuard;
     }
-
 }
