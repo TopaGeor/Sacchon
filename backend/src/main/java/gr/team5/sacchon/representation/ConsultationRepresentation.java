@@ -12,7 +12,7 @@ public class ConsultationRepresentation {
     private double dosage;
     /**
      * The URL of this resource which is:
-     * http://localhost:9000/patient/{id}/consultation
+     * http://localhost:9000/patient/{id}/consultations
      */
     private String uri;
 
@@ -22,7 +22,7 @@ public class ConsultationRepresentation {
             advice = consultation.getAdvice();
             medication = consultation.getMedication();
             dosage = consultation.getDosage();
-            uri = "http://localhost:9000/patient/{id}/consultation" + consultation.getId();
+            uri = "http://localhost:9000/patient/{id}/consultations/" + consultation.getId();
         }
     }
 

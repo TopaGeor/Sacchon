@@ -15,6 +15,7 @@ public class PatientDataRepository {
 
     private EntityManager entityManager;
 
+    //constructor
     public PatientDataRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
@@ -25,12 +26,12 @@ public class PatientDataRepository {
         return patientData != null ? Optional.of(patientData) : Optional.empty();
     }
 
-    //find all patients-data
+    //find all patients data
     public List<PatientData> findAll() {
         return entityManager.createQuery("from PatientData").getResultList();
     }
 
-    //save new patient dat
+    //save new patient data
     public Optional<PatientData> save(PatientData patientData){
         //set date automatically
         patientData.setDate(new Date());
