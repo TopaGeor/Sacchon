@@ -4,6 +4,7 @@ import gr.team5.sacchon.repository.PatientRepository;
 import gr.team5.sacchon.repository.util.JpaUtil;
 import gr.team5.sacchon.representation.PatientRepresentation;
 import org.restlet.engine.Engine;
+import org.restlet.resource.Get;
 import org.restlet.resource.ServerResource;
 
 import java.util.logging.Logger;
@@ -43,4 +44,5 @@ public class PatientResourceImpl extends ServerResource implements PatientResour
     public PatientRepresentation store(PatientRepresentation patientRepresentation) {
         return null;
     }
+
 }
