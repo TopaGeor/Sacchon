@@ -8,7 +8,6 @@ import javax.persistence.Persistence;
  * Jpa Util creates Entity Managers
  */
 public class JpaUtil {
-
     private static final String PERSISTENCE_UNIT_NAME = "PERSISTENCE";
     private static EntityManagerFactory factory;
 
@@ -20,7 +19,6 @@ public class JpaUtil {
     }
 
     public static EntityManager getEntityManager() {
-
         EntityManager em = getEntityManagerFactory().createEntityManager();
         return em;
     }
