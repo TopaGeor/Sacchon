@@ -2,7 +2,7 @@ package gr.team5.sacchon.model;
 
 import lombok.Data;
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.Date;
 
 @Data
 @Entity
@@ -17,5 +17,5 @@ public class PatientData {
 
     private Double bloodGlucose;
     private Double carbIntake;
-    private Timestamp timestamp;
+    private Date date;
 }

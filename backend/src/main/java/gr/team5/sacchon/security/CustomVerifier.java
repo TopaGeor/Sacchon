@@ -1,12 +1,13 @@
 package gr.team5.sacchon.security;
 
-import gr.team5.sacchon.security.dao.ApplicationUser;
+import gr.team5.sacchon.model.DatabaseUser;
 import gr.team5.sacchon.security.dao.UserPersistence;
+import org.restlet.Application;
 import org.restlet.Request;
 import org.restlet.security.Role;
 import org.restlet.security.SecretVerifier;
 
-import java.sql.SQLException;
+import java.util.Optional;
 
 /**
  * verify the user credentials
@@ -24,18 +25,19 @@ public class CustomVerifier extends SecretVerifier {
         UserPersistence userPersistence =
                 UserPersistence.getUserPersistence();
 
-        ApplicationUser user = null;
-        try {
-            user = userPersistence.findByUsername(identifier);
-        } catch (SQLException throwable){
-            throwable.printStackTrace();
-        }
+        Optional<DatabaseUser> user =  userPersistence.findByUsername(identifier);
 
-        if ((user != null) &&
-                compare(user.getPassword().toCharArray(), secret)){
+        if (user.isPresent()){
+            if (!compare(user.get().getPassword().toCharArray(), secret)){
+                return SecretVerifier.RESULT_INVALID;
+            }
             Request request = Request.getCurrent();
-            // Lalilulelo -> change the Role constructor
-            request.getClientInfo().getRoles().add(new Role(user.getRole().getRoleName()));
+
+            request.getClientInfo().getRoles().add(
+                    new Role(Application.getCurrent(),
+                    user.get().getRole().getRoleName(),
+                    null));
+
             return SecretVerifier.RESULT_VALID;
         } else {
             return SecretVerifier.RESULT_INVALID;

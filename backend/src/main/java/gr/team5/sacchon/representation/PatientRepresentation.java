@@ -30,6 +30,7 @@ public class PatientRepresentation {
         patient.setUsername(username);
         patient.setPassword(password);
         patient.isHasNotification();
+
         return patient;
     }
 }

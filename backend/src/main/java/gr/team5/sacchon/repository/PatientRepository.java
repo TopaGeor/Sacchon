@@ -13,6 +13,7 @@ public class PatientRepository {
 
     private EntityManager entityManager;
 
+    //constructor
     public PatientRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
