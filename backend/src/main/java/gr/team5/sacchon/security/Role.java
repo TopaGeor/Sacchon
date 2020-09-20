@@ -16,6 +16,12 @@ public enum Role {
         return roleName;
     }
 
+    /**
+     * Get the Role and check if it exists inside the enum Role.
+     * @param roleParameter
+     * @return
+     */
+
     public static Role getRoleValue(String roleParameter) {
         for (Role role: Role.values()) {
             if (roleParameter.equals((role.getRoleName())))
