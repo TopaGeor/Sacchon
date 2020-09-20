@@ -96,6 +96,11 @@ public class PatientListResourceImpl extends ServerResource implements PatientLi
         }
     }
 
+    /**
+     *
+     * @return list of all patients
+     * @throws NotFoundException
+     */
     @Override
     public List<PatientRepresentation> getPatients() throws NotFoundException {
 
