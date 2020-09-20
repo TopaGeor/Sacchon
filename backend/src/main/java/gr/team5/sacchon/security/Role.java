@@ -1,15 +1,6 @@
 package gr.team5.sacchon.security;
 
-/**
- * This an enumeration with the available roles
- */
 public enum Role {
-    /**
-     *This is an enumeration for the available type of users
-     * admin = 1
-     * doctor = 2
-     * patient = 3
-     */
     ROLE_NA("n/a"),
     ROLE_CHIEF("admin"),
     ROLE_DOCTOR("doctor"),
@@ -25,12 +16,19 @@ public enum Role {
         return roleName;
     }
 
+    /**
+     * Get the Role and check if it exists inside the enum Role.
+     * @param roleParameter
+     * @return
+     */
+
     public static Role getRoleValue(String roleParameter) {
         for (Role role: Role.values()) {
-            if (roleParameter.equals((role.getRoleName()))) {
+            if (roleParameter.equals((role.getRoleName())))
                 return role;
-            }
         }
+
         return ROLE_NA;
     }
+
 }
