@@ -1,6 +1,5 @@
 package gr.team5.sacchon;
 
-import gr.team5.sacchon.repository.util.JpaUtil;
 import gr.team5.sacchon.router.CustomRouter;
 import gr.team5.sacchon.security.Shield;
 import gr.team5.sacchon.security.cors.CorsFilter;
@@ -13,7 +12,6 @@ import org.restlet.routing.Router;
 import org.restlet.security.ChallengeAuthenticator;
 import org.restlet.security.Role;
 
-import javax.persistence.EntityManager;
 import java.util.logging.Logger;
 
 public class ApiMain extends Application {
@@ -21,11 +19,6 @@ public class ApiMain extends Application {
 
     public static void main(String[] args) throws Exception {
         LOGGER.info("Application starting...");
-
-        //Enforce Table Creation
-        EntityManager m = JpaUtil.getEntityManager();
-
-        m.close();
 
         Component component = new Component();
         component.getServers().add(Protocol.HTTP, 9000);
@@ -49,7 +42,6 @@ public class ApiMain extends Application {
     public Restlet createInboundRoot() {
         CustomRouter customRouter = new CustomRouter(this);
         Shield shield = new Shield(this);
-
 
         Router publicRouter = customRouter.publicResources();
         ChallengeAuthenticator apiGuard = shield.createApiGuard();
