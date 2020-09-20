@@ -6,7 +6,7 @@ import java.util.Optional;
 import java.util.List;
 
 /**
- * Consultation uses EntityManager from JpaUtil
+ * ConsultationRepository uses EntityManager from JpaUtil
  * to get/update a consultation for a patient
  * & save a new one
  */
@@ -14,6 +14,7 @@ public class ConsultationRepository {
 
     private EntityManager entityManager;
 
+    //constructor
     public ConsultationRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
     }

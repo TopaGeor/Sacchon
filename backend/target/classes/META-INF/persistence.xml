@@ -18,16 +18,8 @@
 <!--            <property name="javax.persistence.jdbc.password" value="QWE123!@#" />-->
 
             <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServer2012Dialect"/>
-<<<<<<< HEAD
-            <property name="hibernate.hbm2ddl.auto" value="create" />
-<<<<<<< HEAD
-            <property name="hibernate.show_sql" value="false"/>
-=======
-=======
             <property name="hibernate.hbm2ddl.auto" value="update" />
->>>>>>> origin/master
             <property name="hibernate.show_sql" value="true"/>
->>>>>>> origin/master
         </properties>
 
     </persistence-unit>

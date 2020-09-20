@@ -24,7 +24,7 @@ public class PatientDataRepresentation {
             bloodGlucose = patientData.getBloodGlucose();
             carbIntake = patientData.getCarbIntake();
             date = patientData.getDate();
-            uri = "http://localhost:9000/patient/{id}/data" + patientData.getId();
+            uri = "http://localhost:9000/patient/{id}/data/" + patientData.getId();
         }
     }
 
