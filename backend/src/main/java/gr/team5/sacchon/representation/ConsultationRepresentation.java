@@ -4,15 +4,16 @@ import gr.team5.sacchon.model.Consultation;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 public class ConsultationRepresentation {
     private String advice;
-    private String medication;
-    private double dosage;
+    private Date dateCreated;
     /**
      * The URL of this resource which is:
-     * http://localhost:9000/patient/{id}/consultation
+     * http://localhost:9000/patient/{id}/consultations
      */
     private String uri;
 
@@ -20,17 +21,15 @@ public class ConsultationRepresentation {
             Consultation consultation) {
         if (consultation != null) {
             advice = consultation.getAdvice();
-            medication = consultation.getMedication();
-            dosage = consultation.getDosage();
-            uri = "http://localhost:9000/patient/{id}/consultation" + consultation.getId();
+            dateCreated = consultation.getDateCreated();
+            uri = "http://localhost:9000/patient/{id}/consultations/" + consultation.getId();
         }
     }
 
     public Consultation createConsultation() {
         Consultation consultation = new Consultation();
         consultation.setAdvice(advice);
-        consultation.setMedication(medication);
-        consultation.setDosage(dosage);
+        consultation.setDateCreated(dateCreated);
 
         return consultation;
     }

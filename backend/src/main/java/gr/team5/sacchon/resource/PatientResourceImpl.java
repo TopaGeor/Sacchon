@@ -177,4 +177,5 @@ public class PatientResourceImpl extends ServerResource implements PatientResour
             throw new ResourceException(e);
         }
     }
+
 }

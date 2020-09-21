@@ -10,6 +10,8 @@ public class PatientRepresentation {
 
     private String username;
     private String password;
+
+    //patient who has not have a doctor to advice him ->false, otherwise true
     private boolean hasNotification;
     /**
      * The URL of this resource which is:
@@ -29,7 +31,10 @@ public class PatientRepresentation {
         Patient patient = new Patient();
         patient.setUsername(username);
         patient.setPassword(password);
-        patient.isHasNotification();
+        //patient.isHasNotification();
+
+        //initially a new patient on the system has not have a doctor, hasNotification=false
+        patient.setHasNotification(false);
 
         return patient;
     }
