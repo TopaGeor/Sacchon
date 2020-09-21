@@ -2,6 +2,7 @@ package gr.team5.sacchon.model;
 
 import lombok.Data;
 import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @Entity
@@ -11,8 +12,7 @@ public class Consultation {
     private long id;
 
     private String advice;
-    private String medication;
-    private double dosage;
+    private Date dateCreated;
 
     @ManyToOne
     @JoinColumn(name = "patient_id")
