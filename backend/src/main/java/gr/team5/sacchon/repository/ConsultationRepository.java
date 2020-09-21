@@ -47,8 +47,6 @@ public class ConsultationRepository {
     public Optional<Consultation> update(Consultation consultation) {
         Consultation in = entityManager.find(Consultation.class, consultation.getId());
         in.setAdvice(consultation.getAdvice());
-        in.setMedication(consultation.getMedication());
-        in.setDosage(consultation.getDosage());
         try {
             entityManager.getTransaction().begin();
             entityManager.persist (in);
