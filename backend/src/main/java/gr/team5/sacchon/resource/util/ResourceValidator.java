@@ -30,6 +30,9 @@ public class ResourceValidator {
         if (patientRepresentation.getUsername() == null) {
             throw new BadEntityException("username of patient cannot be null");
         }
+        if (patientRepresentation.getPassword() == null) {
+            throw new BadEntityException("password of patient cannot be null");
+        }
     }
 
     /**
@@ -41,6 +44,9 @@ public class ResourceValidator {
     public static void validate(DoctorRepresentation doctorRepresentation) throws BadEntityException {
         if (doctorRepresentation.getUsername() == null) {
             throw new BadEntityException("username of doctor cannot be null");
+        }
+        if (doctorRepresentation.getPassword() == null) {
+            throw new BadEntityException("password of doctor cannot be null");
         }
     }
 

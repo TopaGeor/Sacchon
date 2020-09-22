@@ -13,23 +13,23 @@ public class DoctorRepository {
 
     private EntityManager entityManager;
 
-    //constructor
+    // Constructor
     public DoctorRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
-    //find doctor by primary key id
+    // Find doctor by primary key id
     public Optional<Doctor> findById(Long id) {
         Doctor doctor = entityManager.find(Doctor.class, id);
         return doctor != null ? Optional.of(doctor) : Optional.empty();
     }
 
-    //find all doctors
+    // Find all doctors
     public List<Doctor> findAll() {
         return entityManager.createQuery("from Doctor").getResultList();
     }
 
-    //save a new doctor
+    // Save a new doctor
     public Optional<Doctor> save(Doctor doctor){
         try {
             entityManager.getTransaction().begin();
@@ -42,7 +42,7 @@ public class DoctorRepository {
         return Optional.empty();
     }
 
-    //update username & password
+    // Update username & password
     public Optional<Doctor> update(Doctor doctor) {
         Doctor in = entityManager.find(Doctor.class, doctor.getId());
         in.setUsername(doctor.getUsername());
@@ -58,7 +58,7 @@ public class DoctorRepository {
         return Optional.empty();
     }
 
-    //delete account
+    // Delete account
     public boolean delete(Long id){
         Optional<Doctor> tempDoctor = findById(id);
         if (tempDoctor.isPresent()){

@@ -65,8 +65,8 @@ public class PatientDataResourceImpl extends ServerResource implements PatientDa
 
         LOGGER.info("Retrieve patient data");
 
-        // Checking authorization
-        ResourceUtils.checkRole(this, Shield.ROLE_DOCTOR);
+        // Checking authorization, if role is patient not allowed
+        ResourceUtils.checkRole(this, Shield.ROLE_PATIENT);
 
         // Initialize persistence layer
         PatientDataRepository patientDataRepository = new PatientDataRepository(entityManager);
@@ -105,7 +105,10 @@ public class PatientDataResourceImpl extends ServerResource implements PatientDa
 
         LOGGER.finer("Removal of patient data.");
 
+        // Checking authorization, if role is doctor or chief, not allowed
         ResourceUtils.checkRole(this, Shield.ROLE_DOCTOR);
+        ResourceUtils.checkRole(this, Shield.ROLE_CHIEF);
+
         LOGGER.finer("User allowed to remove patient data.");
 
         try {
@@ -136,7 +139,10 @@ public class PatientDataResourceImpl extends ServerResource implements PatientDa
 
         LOGGER.finer("Update patient data.");
 
+        // Checking authorization, if role is doctor or chief, not allowed
         ResourceUtils.checkRole(this, Shield.ROLE_DOCTOR);
+        ResourceUtils.checkRole(this, Shield.ROLE_CHIEF);
+
         LOGGER.finer("User allowed to update patient data.");
 
         // Check given entity
@@ -178,10 +184,5 @@ public class PatientDataResourceImpl extends ServerResource implements PatientDa
         } catch (Exception e) {
             throw new ResourceException(e);
         }
-    }
-
-    @Override
-    public PatientDataRepresentation add(PatientDataRepresentation patientDataIn) throws BadEntityException {
-        return null;
     }
 }
