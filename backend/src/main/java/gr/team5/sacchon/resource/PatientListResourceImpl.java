@@ -6,8 +6,10 @@ import gr.team5.sacchon.model.Patient;
 import gr.team5.sacchon.repository.PatientRepository;
 import gr.team5.sacchon.repository.util.JpaUtil;
 import gr.team5.sacchon.representation.PatientRepresentation;
+import gr.team5.sacchon.resource.util.ResourceValidator;
 import gr.team5.sacchon.security.ResourceUtils;
 import gr.team5.sacchon.security.Shield;
+import org.restlet.data.Status;
 import org.restlet.engine.Engine;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
@@ -62,30 +64,44 @@ public class PatientListResourceImpl extends ServerResource implements PatientLi
 
         LOGGER.finer("Add new patient.");
 
-        // Check authorization
-        ResourceUtils.checkRole(this, Shield.ROLE_PATIENT);
+        // Checking authorization, if role is chief or doctor, not allowed
+        ResourceUtils.checkRole(this, Shield.ROLE_CHIEF);
+        ResourceUtils.checkRole(this, Shield.ROLE_DOCTOR);
+
         LOGGER.finer("User allowed to add a patient.");
 
         // Check entity
-
-        if (patientReprIn == null) throw new BadEntityException("Bad entity");
+        ResourceValidator.notNull(patientReprIn);
+        ResourceValidator.validate(patientReprIn);
 
         LOGGER.finer("patient checked");
 
         try {
 
             // Convert PatientRepresentation to Patient
-            Patient patient = patientReprIn.createPatient();
+            Patient patientIn = new Patient();
+            patientIn.setUsername(patientReprIn.getUsername());
+            patientIn.setPassword(patientReprIn.getPassword());
+            patientIn.setHasNotification(patientReprIn.isHasNotification());
 
-            Optional<Patient> patientOptOut = patientRepository.save(patient);
+            Optional<Patient> patientOptOut = patientRepository.save(patientIn);
 
-            Patient patientOut;
+            Patient patient = null;
             if (patientOptOut.isPresent())
-                patientOut = patientOptOut.get();
+                patient = patientOptOut.get();
             else
                 throw new BadEntityException("Patient has not been created");
 
-            PatientRepresentation result = new PatientRepresentation(patientOut);
+            PatientRepresentation result = new PatientRepresentation(patient);
+
+            result.setUsername(patient.getUsername());
+            result.setPassword(patient.getPassword());
+            result.setHasNotification(patient.isHasNotification());
+            result.setUri("http://localhost:9000/patient/" + patient.getId());
+
+            getResponse().setLocationRef(
+                    "http://localhost:9000/patient/" + patient.getId());
+            getResponse().setStatus(Status.SUCCESS_CREATED);
 
             LOGGER.finer("Patient successfully added.");
 
@@ -105,8 +121,9 @@ public class PatientListResourceImpl extends ServerResource implements PatientLi
     public List<PatientRepresentation> getPatients() throws NotFoundException {
 
         LOGGER.finer("Select all patients.");
-        // Check authorization
-        ResourceUtils.checkRole(this, Shield.ROLE_DOCTOR);
+
+        // Checking authorization,if role is patient not allowed
+        ResourceUtils.checkRole(this, Shield.ROLE_PATIENT);
 
         try {
 

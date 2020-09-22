@@ -63,7 +63,7 @@ public class PatientResourceImpl extends ServerResource implements PatientResour
 
         LOGGER.info("Retrieve a patient");
 
-        // Checking authorization
+        // Checking authorization,if role is patient, not allowed
         ResourceUtils.checkRole(this, Shield.ROLE_PATIENT);
 
         // Initialize persistence layer
@@ -103,7 +103,10 @@ public class PatientResourceImpl extends ServerResource implements PatientResour
 
         LOGGER.finer("Removal of patient.");
 
-        ResourceUtils.checkRole(this, Shield.ROLE_PATIENT);
+        // Checking authorization, if role is chief or doctor, not allowed
+        ResourceUtils.checkRole(this, Shield.ROLE_CHIEF);
+        ResourceUtils.checkRole(this, Shield.ROLE_DOCTOR);
+
         LOGGER.finer("User allowed to remove a patient.");
 
         try {
@@ -134,7 +137,10 @@ public class PatientResourceImpl extends ServerResource implements PatientResour
 
         LOGGER.finer("Update a patient.");
 
-        ResourceUtils.checkRole(this, Shield.ROLE_PATIENT);
+        // Checking authorization,if role is chief or doctor, not allowed
+        ResourceUtils.checkRole(this, Shield.ROLE_CHIEF);
+        ResourceUtils.checkRole(this, Shield.ROLE_DOCTOR);
+
         LOGGER.finer("User allowed to update a patient.");
 
         // Check given entity

@@ -14,23 +14,23 @@ public class ConsultationRepository {
 
     private EntityManager entityManager;
 
-    //constructor
+    // Constructor
     public ConsultationRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
-    //find a consultation by id
+    // Find a consultation by id
     public Optional<Consultation> findById(Long id) {
         Consultation consultation = entityManager.find(Consultation.class, id);
         return consultation != null ? Optional.of(consultation) : Optional.empty();
     }
 
-    //find all consultations
+    // Find all consultations
     public List<Consultation> findAll() {
         return entityManager.createQuery("from Consultation").getResultList();
     }
 
-    //save a new consultation
+    // Save a new consultation
     public Optional<Consultation> save(Consultation consultation){
         try {
             entityManager.getTransaction().begin();
@@ -43,7 +43,7 @@ public class ConsultationRepository {
         return Optional.empty();
     }
 
-    //modify a consultation to a patient
+    // Modify a consultation to a patient
     public Optional<Consultation> update(Consultation consultation) {
         Consultation in = entityManager.find(Consultation.class, consultation.getId());
         in.setAdvice(consultation.getAdvice());
@@ -58,6 +58,6 @@ public class ConsultationRepository {
         return Optional.empty();
     }
 
-    //consultations cannot be deleted
+    // Consultations cannot be deleted
 
 }

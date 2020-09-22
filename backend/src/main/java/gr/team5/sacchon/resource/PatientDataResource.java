@@ -18,7 +18,4 @@ public interface PatientDataResource {
     @Put("json")
     public PatientDataRepresentation store(PatientDataRepresentation patientDataRepresentation)
         throws NotFoundException, BadEntityException;
-
-    @Post("json")
-    public PatientDataRepresentation add(PatientDataRepresentation patientDataIn) throws BadEntityException;
 }

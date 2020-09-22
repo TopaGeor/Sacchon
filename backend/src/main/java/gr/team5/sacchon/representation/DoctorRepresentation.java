@@ -16,15 +16,23 @@ public class DoctorRepresentation {
      */
     private String uri;
 
-    //constructor
+    /**
+     * Constructor
+     * @param doctor will be represent the resource
+     */
     public DoctorRepresentation(
             Doctor doctor) {
         if (doctor != null) {
             username = doctor.getUsername();
+            password = doctor.getPassword();
             uri = "http://localhost:9000/doctor/" + doctor.getId();
         }
     }
 
+    /**
+     *
+     * @return an instance of doctor
+     */
     public Doctor createDoctor() {
         Doctor doctor = new Doctor();
         doctor.setUsername(username);

@@ -17,7 +17,7 @@ public class ResourceUtils {
      */
     public static void checkRole (ServerResource serverResource, String role)
             throws ResourceException {
-        if(!serverResource.isInRole(role)){
+        if(serverResource.isInRole(role)){
             throw new ResourceException(
                     Status.CLIENT_ERROR_FORBIDDEN,
                     "You are not authorized for that resource"

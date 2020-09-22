@@ -1,5 +1,6 @@
 package gr.team5.sacchon;
 
+import gr.team5.sacchon.model.Patient;
 import gr.team5.sacchon.repository.util.JpaUtil;
 import gr.team5.sacchon.router.CustomRouter;
 import gr.team5.sacchon.security.Shield;
@@ -23,9 +24,8 @@ public class ApiMain extends Application {
         LOGGER.info("Application starting...");
 
         //Enforce Table Creation
-        EntityManager m = JpaUtil.getEntityManager();
-
-        m.close();
+        //EntityManager m = JpaUtil.getEntityManager();
+        //m.close();
 
         Component component = new Component();
         component.getServers().add(Protocol.HTTP, 9000);

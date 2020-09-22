@@ -17,6 +17,10 @@ public class ConsultationRepresentation {
      */
     private String uri;
 
+    /**
+     * Constructor
+     * @param consultation will be represent the resource
+     */
     public ConsultationRepresentation(
             Consultation consultation) {
         if (consultation != null) {
@@ -26,6 +30,10 @@ public class ConsultationRepresentation {
         }
     }
 
+    /**
+     *
+     * @return an instance of consultation
+     */
     public Consultation createConsultation() {
         Consultation consultation = new Consultation();
         consultation.setAdvice(advice);

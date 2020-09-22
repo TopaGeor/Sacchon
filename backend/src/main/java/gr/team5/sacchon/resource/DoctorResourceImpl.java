@@ -67,6 +67,7 @@ public class DoctorResourceImpl extends ServerResource implements DoctorResource
 
         // Checking authorization
         ResourceUtils.checkRole(this, Shield.ROLE_DOCTOR);
+        ResourceUtils.checkRole(this, Shield.ROLE_PATIENT);
 
         // Initialize persistence layer
         DoctorRepository doctorRepository = new DoctorRepository(entityManager);
