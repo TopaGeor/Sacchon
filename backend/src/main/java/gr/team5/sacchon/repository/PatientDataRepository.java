@@ -47,7 +47,7 @@ public class PatientDataRepository {
     // Save new patient data
     public Optional<PatientData> save(PatientData patientData){
         //set date automatically
-        patientData.setDate(new Date());
+        //patientData.setDate(new Date());
         try {
             entityManager.getTransaction().begin();
             entityManager.persist (patientData);

@@ -5,6 +5,7 @@ import gr.team5.sacchon.exception.NotFoundException;
 import gr.team5.sacchon.model.Patient;
 import gr.team5.sacchon.model.PatientData;
 import gr.team5.sacchon.repository.PatientDataRepository;
+import gr.team5.sacchon.repository.PatientRepository;
 import gr.team5.sacchon.repository.util.JpaUtil;
 import gr.team5.sacchon.representation.PatientDataRepresentation;
 import gr.team5.sacchon.representation.PatientRepresentation;
@@ -25,6 +26,7 @@ public class PatientDataResourceImpl extends ServerResource implements PatientDa
     public static final Logger LOGGER = Engine.getLogger(ConsultationResourceImpl.class);
 
     private long id;
+    private long patientId;
     private PatientDataRepository patientDataRepository;
     private EntityManager entityManager;
 
@@ -48,6 +50,7 @@ public class PatientDataResourceImpl extends ServerResource implements PatientDa
             entityManager = JpaUtil.getEntityManager();
             patientDataRepository = new PatientDataRepository(entityManager);
             id = Long.parseLong(getAttribute("id"));
+            patientId = Long.parseLong(getAttribute("patient_id"));
         } catch (Exception e) {
             throw new ResourceException(e);
         }
@@ -72,17 +75,27 @@ public class PatientDataResourceImpl extends ServerResource implements PatientDa
         PatientDataRepository patientDataRepository = new PatientDataRepository(entityManager);
         PatientData patientData;
 
+        PatientRepository patientRepository = new PatientRepository(entityManager);
+
         try {
             Optional<PatientData> oPatientData = patientDataRepository.findById(id);
-
             setExisting(oPatientData.isPresent());
-            if (!isExisting()) {
 
+            if (!isExisting()) {
                 LOGGER.config("patient data id does not exist: " + id);
                 throw new NotFoundException("No patient data with id: " + id);
             } else {
 
+                Optional<Patient> oPatient = patientRepository.findById(patientId);
+
+                setExisting(oPatient.isPresent());
+                if (!isExisting()) {
+                    LOGGER.config("patient does not exist: " + patientId);
+                    throw new NotFoundException("No patient data with id: " + patientId);
+                }
+
                 patientData = oPatientData.get();
+
                 LOGGER.finer("User allowed to retrieve patient data.");
                 PatientDataRepresentation result = new PatientDataRepresentation(patientData);
 

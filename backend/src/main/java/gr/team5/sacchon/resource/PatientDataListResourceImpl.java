@@ -2,8 +2,10 @@ package gr.team5.sacchon.resource;
 
 import gr.team5.sacchon.exception.BadEntityException;
 import gr.team5.sacchon.exception.NotFoundException;
+import gr.team5.sacchon.model.Patient;
 import gr.team5.sacchon.model.PatientData;
 import gr.team5.sacchon.repository.PatientDataRepository;
+import gr.team5.sacchon.repository.PatientRepository;
 import gr.team5.sacchon.repository.util.JpaUtil;
 import gr.team5.sacchon.representation.PatientDataRepresentation;
 import gr.team5.sacchon.resource.util.ResourceValidator;
@@ -78,6 +80,8 @@ public class PatientDataListResourceImpl extends ServerResource implements Patie
 
         LOGGER.finer("patient data checked");
 
+        PatientRepository patientRepository = new PatientRepository(entityManager);
+
         try {
 
             // Convert PatientDataRepresentation to PatientData
@@ -85,7 +89,13 @@ public class PatientDataListResourceImpl extends ServerResource implements Patie
             patientDataIn.setBloodGlucose(patientDataReprIn.getBloodGlucose());
             patientDataIn.setCarbIntake(patientDataReprIn.getCarbIntake());
             patientDataIn.setDate(patientDataReprIn.getDate());
-            patientDataIn.setId(patientDataReprIn.getPatientId());
+            //patientDataIn.setId(patientDataReprIn.getPatientId());
+
+
+
+            Optional<Patient> oPatient = patientRepository.findById(id);
+            patientDataIn.setPatient(oPatient.get());
+
 
             Optional<PatientData> patientDataOptOut = patientDataRepository.save(patientDataIn);
 
