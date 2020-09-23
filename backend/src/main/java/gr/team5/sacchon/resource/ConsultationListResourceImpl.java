@@ -3,14 +3,13 @@ package gr.team5.sacchon.resource;
 import gr.team5.sacchon.exception.BadEntityException;
 import gr.team5.sacchon.exception.NotFoundException;
 import gr.team5.sacchon.model.Consultation;
-import gr.team5.sacchon.model.Doctor;
 import gr.team5.sacchon.repository.ConsultationRepository;
-import gr.team5.sacchon.repository.DoctorRepository;
 import gr.team5.sacchon.repository.util.JpaUtil;
 import gr.team5.sacchon.representation.ConsultationRepresentation;
-import gr.team5.sacchon.representation.DoctorRepresentation;
+import gr.team5.sacchon.resource.util.ResourceValidator;
 import gr.team5.sacchon.security.ResourceUtils;
 import gr.team5.sacchon.security.Shield;
+import org.restlet.data.Status;
 import org.restlet.engine.Engine;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
@@ -63,32 +62,46 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
     @Override
     public ConsultationRepresentation add(ConsultationRepresentation consultationReprIn) throws BadEntityException {
 
-        LOGGER.finer("Add new doctor.");
+        LOGGER.finer("Add new consultation.");
 
         // Check authorization
         ResourceUtils.checkRole(this, Shield.ROLE_PATIENT);
+        ResourceUtils.checkRole(this, Shield.ROLE_CHIEF);
         LOGGER.finer("User allowed to add a consultation.");
 
         // Check entity
-
-        if (consultationReprIn == null) throw new BadEntityException("Bad entity");
+        ResourceValidator.notNull(consultationReprIn);
+        ResourceValidator.validate(consultationReprIn);
 
         LOGGER.finer("consultation checked");
 
         try {
 
             // Convert ConsultationRepresentation to Consultation
-            Consultation consultation = consultationReprIn.createConsultation();
+            Consultation consultationIn = new Consultation();
+            consultationIn.setAdvice(consultationReprIn.getAdvice());
+            consultationIn.setDateCreated(consultationReprIn.getDateCreated());
+            consultationIn.setId(consultationReprIn.getPatientId());
 
-            Optional<Consultation> consultationOptOut = consultationRepository.save(consultation);
+            Optional<Consultation> consultationOptOut = consultationRepository.save(consultationIn);
 
-            Consultation consultationOut;
+            Consultation consultation = null;
             if (consultationOptOut.isPresent())
-                consultationOut = consultationOptOut.get();
+                consultation = consultationOptOut.get();
             else
                 throw new BadEntityException("Consultation has not been created");
 
-            ConsultationRepresentation result = new ConsultationRepresentation(consultationOut);
+            ConsultationRepresentation result = new ConsultationRepresentation(consultation);
+
+            result.setAdvice(consultation.getAdvice());
+            result.setDateCreated(consultation.getDateCreated());
+            //result.setPatientId(consultation.getPatient().getId());
+            result.setUri("http://localhost:9000/patient/" +
+                    consultation.getPatient().getId() + "/consultation/" + consultation.getId());
+
+            getResponse().setLocationRef("http://localhost:9000/patient/" +
+                    consultation.getPatient().getId() + "/consultation/" + consultation.getId());
+            getResponse().setStatus(Status.SUCCESS_CREATED);
 
             LOGGER.finer("Consultation successfully added.");
 
@@ -109,7 +122,7 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
 
         LOGGER.finer("Select all consultations.");
         // Check authorization
-        ResourceUtils.checkRole(this, Shield.ROLE_DOCTOR);
+        ResourceUtils.checkRole(this, Shield.ROLE_PATIENT);
 
         try {
 

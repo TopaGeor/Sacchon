@@ -15,23 +15,36 @@ public class PatientDataRepository {
 
     private EntityManager entityManager;
 
-    //constructor
+    // Constructor
     public PatientDataRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
-    //find patient data by primary key id
+    // Find patient data by primary key id
     public Optional<PatientData> findById(Long id) {
         PatientData patientData = entityManager.find(PatientData.class, id);
         return patientData != null ? Optional.of(patientData) : Optional.empty();
     }
 
-    //find all patients data
+    // Find all patients data
     public List<PatientData> findAll() {
         return entityManager.createQuery("from PatientData").getResultList();
     }
 
-    //save new patient data
+
+    public List<PatientData> findDataById(long id) {
+        List<PatientData> pd = entityManager.createQuery("SELECT pd" +
+                " FROM PatientData pd" +
+                " INNER JOIN Patient p" +
+                " ON pd.patient = p" +
+                " WHERE p.id = :id")
+            .setParameter("id", id)
+            .getResultList();
+
+        return pd;
+    }
+
+    // Save new patient data
     public Optional<PatientData> save(PatientData patientData){
         //set date automatically
         patientData.setDate(new Date());
@@ -46,11 +59,12 @@ public class PatientDataRepository {
         return Optional.empty();
     }
 
-    //modify incorrect submitted data
+    // Modify incorrect submitted data
     public Optional<PatientData> update(PatientData patientData) {
         PatientData in = entityManager.find(PatientData.class, patientData.getId());
         in.setBloodGlucose(patientData.getBloodGlucose());
         in.setCarbIntake(patientData.getCarbIntake());
+        in.setDate(patientData.getDate());
         try {
             entityManager.getTransaction().begin();
             entityManager.persist (in);
@@ -62,7 +76,7 @@ public class PatientDataRepository {
         return Optional.empty();
     }
 
-    //delete incorrect submitted data
+    // Delete incorrect submitted data
     public boolean delete(Long id){
         Optional<PatientData> tempData = findById(id);
         if (tempData.isPresent()){

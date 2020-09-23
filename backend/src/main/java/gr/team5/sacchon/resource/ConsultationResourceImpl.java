@@ -1,13 +1,12 @@
 package gr.team5.sacchon.resource;
 
+import gr.team5.sacchon.exception.BadEntityException;
 import gr.team5.sacchon.exception.NotFoundException;
 import gr.team5.sacchon.model.Consultation;
-import gr.team5.sacchon.model.Doctor;
 import gr.team5.sacchon.repository.ConsultationRepository;
-import gr.team5.sacchon.repository.DoctorRepository;
 import gr.team5.sacchon.repository.util.JpaUtil;
 import gr.team5.sacchon.representation.ConsultationRepresentation;
-import gr.team5.sacchon.representation.DoctorRepresentation;
+import gr.team5.sacchon.resource.util.ResourceValidator;
 import gr.team5.sacchon.security.ResourceUtils;
 import gr.team5.sacchon.security.Shield;
 import org.restlet.engine.Engine;
@@ -88,6 +87,58 @@ public class ConsultationResourceImpl extends ServerResource implements Consulta
 
                 return result;
             }
+        } catch (Exception e) {
+            throw new ResourceException(e);
+        }
+    }
+
+    @Override
+    public ConsultationRepresentation store(ConsultationRepresentation consultationReprIn) throws NotFoundException, BadEntityException {
+
+        LOGGER.finer("Update consultation.");
+
+        // Checking authorization, if role is patient or chief, not allowed
+        ResourceUtils.checkRole(this, Shield.ROLE_PATIENT);
+        ResourceUtils.checkRole(this, Shield.ROLE_CHIEF);
+
+        LOGGER.finer("User allowed to update consultation.");
+
+        // Check given entity
+        ResourceValidator.notNull(consultationReprIn);
+        ResourceValidator.validate(consultationReprIn);
+        LOGGER.finer("Consultation checked");
+
+        try {
+            Consultation consultationIn = consultationReprIn.createConsultation();
+            consultationIn.setId(id);
+
+            Optional<Consultation> consultationOut;
+            Optional<Consultation> oConsultation = consultationRepository.findById(id);
+            setExisting(oConsultation.isPresent());
+
+            // if patient data exists, update him
+            if (isExisting()) {
+
+                LOGGER.finer("Update consultation.");
+
+                // update patient data in DB and retrieve them
+                consultationOut = consultationRepository.update(consultationIn);
+
+                // Check if retrieved patient data is not null
+                // if null it means the id is wrong.
+                if (!consultationOut.isPresent()) {
+
+                    LOGGER.fine("Consultation does not exist.");
+                    throw new NotFoundException("Consultation with the following id does not exist: " + id);
+                }
+            } else {
+
+                LOGGER.finer("Resource does not exist.");
+                throw new NotFoundException("Consultation with the following id does not exist: " + id);
+            }
+
+            LOGGER.finer("Consultation successfully updated.");
+            return new ConsultationRepresentation(consultationOut.get());
         } catch (Exception e) {
             throw new ResourceException(e);
         }

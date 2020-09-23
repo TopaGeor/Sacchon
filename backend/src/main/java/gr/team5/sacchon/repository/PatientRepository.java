@@ -13,23 +13,23 @@ public class PatientRepository {
 
     private EntityManager entityManager;
 
-    //constructor
+    // Constructor
     public PatientRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
-    //find patient by primary key id
+    // Find patient by primary key id
     public Optional<Patient> findById(Long id) {
         Patient patient = entityManager.find(Patient.class, id);
         return patient != null ? Optional.of(patient) : Optional.empty();
     }
 
-    //find all patients
+    // Find all patients
     public List<Patient> findAll() {
         return entityManager.createQuery("from Patient").getResultList();
     }
 
-    //save a new patient
+    // Save a new patient
     public Optional<Patient> save(Patient patient){
         try {
             entityManager.getTransaction().begin();
@@ -42,11 +42,15 @@ public class PatientRepository {
         return Optional.empty();
     }
 
-    //update username & password
+    // Update username & password
     public Optional<Patient> update(Patient patient) {
         Patient in = entityManager.find(Patient.class, patient.getId());
         in.setUsername(patient.getUsername());
+        in.setHasNotification(patient.isHasNotification());
+
+        System.out.println(patient.getPassword());
         in.setPassword(patient.getPassword());
+        System.out.println(in.getPassword());
         try {
             entityManager.getTransaction().begin();
             entityManager.persist (in);
@@ -58,7 +62,7 @@ public class PatientRepository {
         return Optional.empty();
     }
 
-    //delete account
+    // Delete account
     public boolean delete(Long id){
         Optional<Patient> tempPatient = findById(id);
         if (tempPatient.isPresent()){
