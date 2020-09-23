@@ -31,7 +31,7 @@ public class PatientDataRepresentation {
             carbIntake = patientData.getCarbIntake();
             date = patientData.getDate();
             patientId = patientData.getPatient().getId();
-            uri = "http://localhost:9000/patient/"+ patientId + "/data/" + patientData.getId();
+            uri = "http://localhost:9000/patient/" + patientId + "/data/" + patientData.getId();
         }
     }
 
