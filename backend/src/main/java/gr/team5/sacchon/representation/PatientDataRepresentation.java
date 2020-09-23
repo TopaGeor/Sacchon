@@ -1,6 +1,5 @@
 package gr.team5.sacchon.representation;
 
-import gr.team5.sacchon.model.Patient;
 import gr.team5.sacchon.model.PatientData;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +12,7 @@ public class PatientDataRepresentation {
     private Double bloodGlucose;
     private Double carbIntake;
     private Date date;
+    private long patientId;
 
     /**
      * The URL of this resource which is:
@@ -30,7 +30,8 @@ public class PatientDataRepresentation {
             bloodGlucose = patientData.getBloodGlucose();
             carbIntake = patientData.getCarbIntake();
             date = patientData.getDate();
-            uri = "http://localhost:9000/patient/"+ patientData.getPatient().getId()+"/data/" + patientData.getId();
+            patientId = patientData.getPatient().getId();
+            uri = "http://localhost:9000/patient/"+ patientId + "/data/" + patientData.getId();
         }
     }
 
@@ -43,6 +44,7 @@ public class PatientDataRepresentation {
         patientData.setBloodGlucose(bloodGlucose);
         patientData.setCarbIntake(carbIntake);
         patientData.setDate(date);
+        //patientData.setId(patientId);
 
         return patientData;
     }
