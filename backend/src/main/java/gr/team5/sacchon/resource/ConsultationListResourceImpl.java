@@ -25,6 +25,7 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
 
     public static  final Logger LOGGER = Engine.getLogger(ConsultationResourceImpl.class);
 
+    private long id;
     private ConsultationRepository consultationRepository;
     private EntityManager entityManager;
 
@@ -46,6 +47,7 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
         try {
             entityManager = JpaUtil.getEntityManager();
             consultationRepository = new ConsultationRepository(entityManager);
+            id = Long.parseLong(getAttribute("id"));
         } catch (Exception e) {
             throw new ResourceException(e);
         }
@@ -126,7 +128,7 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
 
         try {
 
-            List<Consultation> consultations = consultationRepository.findAll();
+            List<Consultation> consultations = consultationRepository.findConsultationById(id);
             List<ConsultationRepresentation> result = new ArrayList<>();
 
             consultations.forEach(consultation -> result.add(new ConsultationRepresentation(consultation)));
