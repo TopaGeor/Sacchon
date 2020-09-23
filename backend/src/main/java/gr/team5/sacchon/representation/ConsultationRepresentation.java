@@ -11,6 +11,8 @@ import java.util.Date;
 public class ConsultationRepresentation {
     private String advice;
     private Date dateCreated;
+    private long patientId;
+
     /**
      * The URL of this resource which is:
      * http://localhost:9000/patient/{id}/consultations
@@ -26,7 +28,8 @@ public class ConsultationRepresentation {
         if (consultation != null) {
             advice = consultation.getAdvice();
             dateCreated = consultation.getDateCreated();
-            uri = "http://localhost:9000/patient/{id}/consultations/" + consultation.getId();
+            patientId = consultation.getPatient().getId();
+            uri = "http://localhost:9000/patient/" + patientId + "/consultation/" + consultation.getId();
         }
     }
 

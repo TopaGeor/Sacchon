@@ -2,7 +2,6 @@ package gr.team5.sacchon.resource;
 
 import gr.team5.sacchon.exception.BadEntityException;
 import gr.team5.sacchon.exception.NotFoundException;
-import gr.team5.sacchon.model.Patient;
 import gr.team5.sacchon.model.PatientData;
 import gr.team5.sacchon.repository.PatientDataRepository;
 import gr.team5.sacchon.repository.util.JpaUtil;
@@ -10,12 +9,12 @@ import gr.team5.sacchon.representation.PatientDataRepresentation;
 import gr.team5.sacchon.resource.util.ResourceValidator;
 import gr.team5.sacchon.security.ResourceUtils;
 import gr.team5.sacchon.security.Shield;
+import org.restlet.data.Status;
 import org.restlet.engine.Engine;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
 
 import javax.persistence.EntityManager;
-import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -86,6 +85,7 @@ public class PatientDataListResourceImpl extends ServerResource implements Patie
             patientDataIn.setBloodGlucose(patientDataReprIn.getBloodGlucose());
             patientDataIn.setCarbIntake(patientDataReprIn.getCarbIntake());
             patientDataIn.setDate(patientDataReprIn.getDate());
+            patientDataIn.setId(patientDataReprIn.getPatientId());
 
             Optional<PatientData> patientDataOptOut = patientDataRepository.save(patientDataIn);
 
@@ -100,8 +100,13 @@ public class PatientDataListResourceImpl extends ServerResource implements Patie
             result.setBloodGlucose(patientData.getBloodGlucose());
             result.setCarbIntake(patientData.getCarbIntake());
             result.setDate(patientData.getDate());
+            //result.setPatientId(patientData.getPatient().getId());
             result.setUri("http://localhost:9000/patient/" +
-                    patientData.getPatient().getId()+"/data/"+ patientData.getId());
+                    patientData.getPatient().getId() + "/data/" + patientData.getId());
+
+            getResponse().setLocationRef("http://localhost:9000/patient/" +
+                    patientData.getPatient().getId() + "/data/" + patientData.getId());
+            getResponse().setStatus(Status.SUCCESS_CREATED);
 
             LOGGER.finer("Patient data successfully added.");
 

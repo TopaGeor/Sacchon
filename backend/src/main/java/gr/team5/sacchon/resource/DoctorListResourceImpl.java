@@ -3,12 +3,13 @@ package gr.team5.sacchon.resource;
 import gr.team5.sacchon.exception.BadEntityException;
 import gr.team5.sacchon.exception.NotFoundException;
 import gr.team5.sacchon.model.Doctor;
-import gr.team5.sacchon.model.Patient;
 import gr.team5.sacchon.repository.DoctorRepository;
 import gr.team5.sacchon.repository.util.JpaUtil;
 import gr.team5.sacchon.representation.DoctorRepresentation;
+import gr.team5.sacchon.resource.util.ResourceValidator;
 import gr.team5.sacchon.security.ResourceUtils;
 import gr.team5.sacchon.security.Shield;
+import org.restlet.data.Status;
 import org.restlet.engine.Engine;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
@@ -64,29 +65,39 @@ public class DoctorListResourceImpl extends ServerResource implements DoctorList
         LOGGER.finer("Add new doctor.");
 
         // Check authorization
-        ResourceUtils.checkRole(this, Shield.ROLE_DOCTOR);
+        ResourceUtils.checkRole(this, Shield.ROLE_PATIENT);
+        ResourceUtils.checkRole(this, Shield.ROLE_CHIEF);
         LOGGER.finer("User allowed to add a doctor.");
 
         // Check entity
-
-        if (doctorReprIn == null) throw new BadEntityException("Bad entity");
+        ResourceValidator.notNull(doctorReprIn);
+        ResourceValidator.validate(doctorReprIn);
 
         LOGGER.finer("doctor checked");
 
         try {
 
             // Convert DoctorRepresentation to Doctor
-            Doctor doctor = doctorReprIn.createDoctor();
+            Doctor doctorIn = new Doctor();
+            doctorIn.setUsername(doctorReprIn.getUsername());
+            doctorIn.setPassword(doctorReprIn.getPassword());
 
-            Optional<Doctor> doctorOptOut = doctorRepository.save(doctor);
+            Optional<Doctor> doctorOptOut = doctorRepository.save(doctorIn);
 
-            Doctor doctorOut;
+            Doctor doctor = null;
             if (doctorOptOut.isPresent())
-                doctorOut = doctorOptOut.get();
+                doctor = doctorOptOut.get();
             else
                 throw new BadEntityException("Doctor has not been created");
 
-            DoctorRepresentation result = new DoctorRepresentation(doctorOut);
+            DoctorRepresentation result = new DoctorRepresentation(doctor);
+
+            result.setUsername(doctor.getUsername());
+            result.setPassword(doctor.getPassword());
+            result.setUri("http://localhost:9000/doctor/" + doctor.getId());
+            getResponse().setLocationRef("http://localhost:9000/doctor/" + doctor.getId());
+
+            getResponse().setStatus(Status.SUCCESS_CREATED);
 
             LOGGER.finer("Doctor successfully added.");
 
@@ -107,6 +118,7 @@ public class DoctorListResourceImpl extends ServerResource implements DoctorList
 
         LOGGER.finer("Select all doctors.");
         // Check authorization
+        ResourceUtils.checkRole(this, Shield.ROLE_PATIENT);
         ResourceUtils.checkRole(this, Shield.ROLE_DOCTOR);
 
         try {
