@@ -3,7 +3,11 @@ package gr.team5.sacchon.resource;
 import gr.team5.sacchon.exception.BadEntityException;
 import gr.team5.sacchon.exception.NotFoundException;
 import gr.team5.sacchon.model.Consultation;
+import gr.team5.sacchon.model.Doctor;
+import gr.team5.sacchon.model.Patient;
 import gr.team5.sacchon.repository.ConsultationRepository;
+import gr.team5.sacchon.repository.DoctorRepository;
+import gr.team5.sacchon.repository.PatientRepository;
 import gr.team5.sacchon.repository.util.JpaUtil;
 import gr.team5.sacchon.representation.ConsultationRepresentation;
 import gr.team5.sacchon.resource.util.ResourceValidator;
@@ -25,6 +29,8 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
 
     public static  final Logger LOGGER = Engine.getLogger(ConsultationResourceImpl.class);
 
+    private long id;
+    private long doctorId;
     private ConsultationRepository consultationRepository;
     private EntityManager entityManager;
 
@@ -46,6 +52,8 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
         try {
             entityManager = JpaUtil.getEntityManager();
             consultationRepository = new ConsultationRepository(entityManager);
+            id = Long.parseLong(getAttribute("patient_id"));
+            doctorId = Long.parseLong(getAttribute("doctor_id"));
         } catch (Exception e) {
             throw new ResourceException(e);
         }
@@ -75,13 +83,22 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
 
         LOGGER.finer("consultation checked");
 
+        PatientRepository patientRepository = new PatientRepository(entityManager);
+        DoctorRepository doctorRepository = new DoctorRepository(entityManager);
+
         try {
 
             // Convert ConsultationRepresentation to Consultation
             Consultation consultationIn = new Consultation();
             consultationIn.setAdvice(consultationReprIn.getAdvice());
             consultationIn.setDateCreated(consultationReprIn.getDateCreated());
-            consultationIn.setId(consultationReprIn.getPatientId());
+            //consultationIn.setId(consultationReprIn.getPatientId());
+
+            Optional<Patient> oPatient = patientRepository.findById(id);
+            consultationIn.setPatient(oPatient.get());
+
+            Optional<Doctor> oDoctor = doctorRepository.findById(doctorId);
+            consultationIn.setDoctor(oDoctor.get());
 
             Optional<Consultation> consultationOptOut = consultationRepository.save(consultationIn);
 
@@ -96,10 +113,10 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
             result.setAdvice(consultation.getAdvice());
             result.setDateCreated(consultation.getDateCreated());
             //result.setPatientId(consultation.getPatient().getId());
-            result.setUri("http://localhost:9000/patient/" +
+            result.setUri("http://localhost:9000/doctor/" + consultation.getDoctor().getId() + "/patient/" +
                     consultation.getPatient().getId() + "/consultation/" + consultation.getId());
 
-            getResponse().setLocationRef("http://localhost:9000/patient/" +
+            getResponse().setLocationRef("http://localhost:9000/doctor/" + consultation.getDoctor().getId() + "/patient/" +
                     consultation.getPatient().getId() + "/consultation/" + consultation.getId());
             getResponse().setStatus(Status.SUCCESS_CREATED);
 
@@ -126,7 +143,7 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
 
         try {
 
-            List<Consultation> consultations = consultationRepository.findAll();
+            List<Consultation> consultations = consultationRepository.findConsultationById(id);
             List<ConsultationRepresentation> result = new ArrayList<>();
 
             consultations.forEach(consultation -> result.add(new ConsultationRepresentation(consultation)));

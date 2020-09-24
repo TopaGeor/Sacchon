@@ -87,8 +87,8 @@ public class PatientDataResourceImpl extends ServerResource implements PatientDa
             } else {
 
                 Optional<Patient> oPatient = patientRepository.findById(patientId);
-
                 setExisting(oPatient.isPresent());
+
                 if (!isExisting()) {
                     LOGGER.config("patient does not exist: " + patientId);
                     throw new NotFoundException("No patient data with id: " + patientId);
@@ -96,7 +96,6 @@ public class PatientDataResourceImpl extends ServerResource implements PatientDa
 
                 patientData = oPatientData.get();
 
-                LOGGER.finer("User allowed to retrieve patient data.");
                 PatientDataRepresentation result = new PatientDataRepresentation(patientData);
 
                 LOGGER.finer("Patient data successfully retrieved.");

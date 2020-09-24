@@ -24,8 +24,8 @@ public class ApiMain extends Application {
         LOGGER.info("Application starting...");
 
         // Enforce Table Creation
-        EntityManager m = JpaUtil.getEntityManager();
-        m.close();
+//        EntityManager m = JpaUtil.getEntityManager();
+//        m.close();
 
         Component component = new Component();
         component.getServers().add(Protocol.HTTP, 9000);

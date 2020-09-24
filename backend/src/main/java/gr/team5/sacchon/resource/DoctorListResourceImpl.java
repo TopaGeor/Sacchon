@@ -3,9 +3,12 @@ package gr.team5.sacchon.resource;
 import gr.team5.sacchon.exception.BadEntityException;
 import gr.team5.sacchon.exception.NotFoundException;
 import gr.team5.sacchon.model.Doctor;
+import gr.team5.sacchon.model.Patient;
 import gr.team5.sacchon.repository.DoctorRepository;
+import gr.team5.sacchon.repository.PatientRepository;
 import gr.team5.sacchon.repository.util.JpaUtil;
 import gr.team5.sacchon.representation.DoctorRepresentation;
+import gr.team5.sacchon.representation.PatientRepresentation;
 import gr.team5.sacchon.resource.util.ResourceValidator;
 import gr.team5.sacchon.security.ResourceUtils;
 import gr.team5.sacchon.security.Shield;
@@ -26,6 +29,7 @@ public class DoctorListResourceImpl extends ServerResource implements DoctorList
     public static  final Logger LOGGER = Engine.getLogger(DoctorResourceImpl.class);
 
     private DoctorRepository doctorRepository;
+    private PatientRepository patientRepository;
     private EntityManager entityManager;
 
     /**

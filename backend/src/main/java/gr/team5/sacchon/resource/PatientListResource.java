@@ -9,7 +9,6 @@ import org.restlet.resource.Post;
 import java.util.List;
 
 public interface PatientListResource {
-
     @Post("json")
     public PatientRepresentation add(PatientRepresentation patientReprIn) throws BadEntityException;
 
