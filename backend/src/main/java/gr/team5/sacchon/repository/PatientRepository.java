@@ -1,6 +1,8 @@
 package gr.team5.sacchon.repository;
 
 import gr.team5.sacchon.model.Patient;
+import org.restlet.resource.ServerResource;
+
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
@@ -9,7 +11,7 @@ import java.util.Optional;
  * PatientRepository uses EntityManager from JpaUtil
  * to get/delete/update a patient & save a new one
  */
-public class PatientRepository {
+public class PatientRepository extends ServerResource {
 
     private EntityManager entityManager;
 

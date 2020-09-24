@@ -1,6 +1,7 @@
 package gr.team5.sacchon.resource.util;
 
 import gr.team5.sacchon.exception.BadEntityException;
+import gr.team5.sacchon.representation.ConsultationRepresentation;
 import gr.team5.sacchon.representation.DoctorRepresentation;
 import gr.team5.sacchon.representation.PatientDataRepresentation;
 import gr.team5.sacchon.representation.PatientRepresentation;
@@ -51,14 +52,26 @@ public class ResourceValidator {
     }
 
     /**
-     * Checks that the given doctor is valid.
+     * Checks that the given patient data is valid.
      *
      * @param patientDataRepresentation
      * @throws BadEntityException
      */
     public static void validate(PatientDataRepresentation patientDataRepresentation) throws BadEntityException {
-        if (patientDataRepresentation.getUri() == null) {
-            throw new BadEntityException("uri of patient data cannot be null");
+        if (patientDataRepresentation.getDate() == null) {
+            throw new BadEntityException("date of patient data cannot be null");
+        }
+    }
+
+    /**
+     * Checks that the given consultation is valid.
+     *
+     * @param consultationRepresentation
+     * @throws BadEntityException
+     */
+    public static void validate(ConsultationRepresentation consultationRepresentation) throws BadEntityException {
+        if (consultationRepresentation.getAdvice() == null) {
+            throw new BadEntityException("consultation cannot be null");
         }
     }
 }
