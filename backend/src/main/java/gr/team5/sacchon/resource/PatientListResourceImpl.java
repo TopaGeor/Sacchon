@@ -137,4 +137,23 @@ public class PatientListResourceImpl extends ServerResource implements PatientLi
             throw new NotFoundException("patients not found");
         }
     }
+
+    @Override
+    public List<PatientRepresentation> getFreePatients() throws NotFoundException {
+        LOGGER.finer("Select all free patients.");
+        // Check authorization
+        ResourceUtils.checkRole(this, Shield.ROLE_PATIENT);
+
+        try {
+
+            List<Patient> patients  = patientRepository.findPatientWithDoctorIdNull();
+            List<PatientRepresentation> result = new ArrayList<>();
+
+            patients.forEach(patient -> result.add(new PatientRepresentation(patient)));
+
+            return result;
+        } catch (Exception e) {
+            throw new NotFoundException("patients not found");
+        }
+    }
 }

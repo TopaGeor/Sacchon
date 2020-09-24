@@ -91,11 +91,8 @@ public class PatientDataListResourceImpl extends ServerResource implements Patie
             patientDataIn.setDate(patientDataReprIn.getDate());
             //patientDataIn.setId(patientDataReprIn.getPatientId());
 
-
-
             Optional<Patient> oPatient = patientRepository.findById(id);
             patientDataIn.setPatient(oPatient.get());
-
 
             Optional<PatientData> patientDataOptOut = patientDataRepository.save(patientDataIn);
 

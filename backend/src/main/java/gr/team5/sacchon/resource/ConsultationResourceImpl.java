@@ -3,7 +3,9 @@ package gr.team5.sacchon.resource;
 import gr.team5.sacchon.exception.BadEntityException;
 import gr.team5.sacchon.exception.NotFoundException;
 import gr.team5.sacchon.model.Consultation;
+import gr.team5.sacchon.model.Patient;
 import gr.team5.sacchon.repository.ConsultationRepository;
+import gr.team5.sacchon.repository.PatientRepository;
 import gr.team5.sacchon.repository.util.JpaUtil;
 import gr.team5.sacchon.representation.ConsultationRepresentation;
 import gr.team5.sacchon.resource.util.ResourceValidator;
@@ -22,6 +24,7 @@ public class ConsultationResourceImpl extends ServerResource implements Consulta
     public static final Logger LOGGER = Engine.getLogger(ConsultationResourceImpl.class);
 
     private long id;
+    private long patientId;
     private ConsultationRepository consultationRepository;
     private EntityManager entityManager;
 
@@ -45,6 +48,7 @@ public class ConsultationResourceImpl extends ServerResource implements Consulta
             entityManager = JpaUtil.getEntityManager();
             consultationRepository = new ConsultationRepository(entityManager);
             id = Long.parseLong(getAttribute("id"));
+            patientId = Long.parseLong(getAttribute("patient_id"));
         } catch (Exception e) {
             throw  new ResourceException(e);
         }
@@ -69,18 +73,29 @@ public class ConsultationResourceImpl extends ServerResource implements Consulta
         ConsultationRepository consultationRepository = new ConsultationRepository(entityManager);
         Consultation consultation;
 
+        PatientRepository patientRepository = new PatientRepository(entityManager);
+
         try {
             Optional<Consultation> oConsultation = consultationRepository.findById(id);
-
             setExisting(oConsultation.isPresent());
+
             if (!isExisting()) {
 
                 LOGGER.config("consultation id does not exist: " + id);
                 throw new NotFoundException("No consultation with id: " + id);
             } else {
 
+                Optional<Patient> oPatient = patientRepository.findById(patientId);
+                setExisting(oPatient.isPresent());
+
+                if (!isExisting()) {
+
+                    LOGGER.config("patient id does not exist: " + patientId);
+                    throw new NotFoundException("No patient with id: " + patientId);
+                }
+
                 consultation = oConsultation.get();
-                LOGGER.finer("User allowed to retrieve a consultation.");
+
                 ConsultationRepresentation result = new ConsultationRepresentation(consultation);
 
                 LOGGER.finer("Consultation successfully retrieved.");

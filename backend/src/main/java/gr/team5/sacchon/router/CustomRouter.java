@@ -23,6 +23,7 @@ public class CustomRouter {
         Router router = new Router(app.getContext());
 
         router.attach("/patient", PatientListResourceImpl.class);
+        router.attach("/patient_null", PatientListResourceImpl.class);
         router.attach("/patient/login", PatientDataResourceImpl.class);
         router.attach("/patient/{id}", PatientResourceImpl.class);
 
@@ -30,16 +31,17 @@ public class CustomRouter {
         router.attach("/patient/{patient_id}/data/{id}", PatientDataResourceImpl.class);
 
         router.attach("/patient/{id}/consultation", ConsultationListResourceImpl.class);
-        router.attach("/patient/{id}/consultation/{id}", ConsultationResourceImpl.class);
+        router.attach("/patient/{patient_id}/consultation/{id}", ConsultationResourceImpl.class);
         router.attach("/patient/{id}/data/average", PatientDataResourceImpl.class);
 
         router.attach("/doctor", DoctorListResourceImpl.class);
         router.attach("/doctor/login", DoctorResourceImpl.class);
         router.attach("/doctor/{id}", DoctorResourceImpl.class);
 
-        router.attach("/doctor/{id}/patient/{id}", PatientDataResourceImpl.class);
-        router.attach("/doctor/{id}/patient/{id}/consultation", ConsultationListResourceImpl.class);
-        router.attach("/doctor/{id}/patient/{id}/consultation/{id}", ConsultationResourceImpl.class);
+        router.attach("/doctor/{doctor_id}/patient", DoctorListResourceImpl.class);
+        router.attach("/doctor/{doctor_id}/patient/{id}", PatientListResourceImpl.class);
+        router.attach("/doctor/{doctor_id}/patient/{patient_id}/consultation", ConsultationListResourceImpl.class);
+        router.attach("/doctor/{doctor_id}/patient/{patient_id}/consultation/{id}", ConsultationResourceImpl.class);
 
         return router;
     }

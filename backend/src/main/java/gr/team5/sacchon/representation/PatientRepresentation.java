@@ -31,8 +31,12 @@ public class PatientRepresentation {
             username = patient.getUsername();
             password = patient.getPassword();
             hasNotification = patient.isHasNotification();
+            if (patient.getDoctor().getId() == null) {
+                uri = "http://localhost:9000/patient_null/" + patient.getId();
+            }
             uri = "http://localhost:9000/patient/" + patient.getId();
         }
+
     }
 
     /**

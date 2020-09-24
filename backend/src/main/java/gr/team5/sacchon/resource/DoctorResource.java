@@ -8,12 +8,12 @@ import org.restlet.resource.Get;
 import org.restlet.resource.Put;
 
 public interface DoctorResource {
-    @Get
+    @Get("json")
     public DoctorRepresentation getDoctor() throws NotFoundException;
 
     @Delete
     public void remove() throws NotFoundException;
 
-    @Put
+    @Put("json")
     public DoctorRepresentation store(DoctorRepresentation doctorRepresentation) throws NotFoundException, BadEntityException;
 }
