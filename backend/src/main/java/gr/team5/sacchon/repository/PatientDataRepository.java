@@ -32,6 +32,7 @@ public class PatientDataRepository {
     }
 
 
+    // Find data for a specific patient id
     public List<PatientData> findDataById(long id) {
         List<PatientData> pd = entityManager.createQuery("SELECT pd" +
                 " FROM PatientData pd" +
@@ -40,6 +41,34 @@ public class PatientDataRepository {
                 " WHERE p.id = :id")
             .setParameter("id", id)
             .getResultList();
+
+        return pd;
+    }
+
+    //
+    public List<Double> findBloodGlucoseFromTo(long id, Date from, Date to){
+        List<Double> pd = entityManager.createQuery(
+                "SELECT AVG(pd.bloodGlucose) AS avgBloodGlucose" +
+                " FROM PatientData pd" +
+                " WHERE patient_id = :id AND date >= :from AND date <= :to")
+                .setParameter("id", id)
+                .setParameter("from", from)
+                .setParameter("to", to)
+                .getResultList();
+
+        return pd;
+    }
+
+    //
+    public List<Double> findCarbIntakeFromTo(long id, Date from, Date to){
+        List<Double> pd = entityManager.createQuery(
+                "SELECT AVG(pd.carbIntake) AS avgCarbIntake" +
+                        " FROM PatientData pd" +
+                        " WHERE patient_id = :id AND date >= :from AND date <= :to")
+                .setParameter("id", id)
+                .setParameter("from", from)
+                .setParameter("to", to)
+                .getResultList();
 
         return pd;
     }
