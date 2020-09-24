@@ -18,6 +18,7 @@ import org.restlet.resource.ServerResource;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -31,6 +32,8 @@ public class PatientDataListResourceImpl extends ServerResource implements Patie
     private PatientDataRepository patientDataRepository;
     private EntityManager entityManager;
 
+    private Date dateFrom;
+    private Date dateTo;
 
     /**
      * This release method closes the entityManager
@@ -51,10 +54,26 @@ public class PatientDataListResourceImpl extends ServerResource implements Patie
             entityManager = JpaUtil.getEntityManager();
             patientDataRepository = new PatientDataRepository(entityManager);
             id = Long.parseLong(getAttribute("id"));
+
+            try {
+                String startDateString = getQueryValue("from");
+                String   endDateString = getQueryValue("to");
+                String[] words = startDateString.split("-");
+
+                dateFrom = new Date(Integer.parseInt(words[0])-1900,
+                        Integer.parseInt(words[1]) - 1, Integer.parseInt(words[2])  );
+
+                words = endDateString.split("-");
+                dateTo = new Date(Integer.parseInt(words[0])-1900,
+                        Integer.parseInt(words[1]) - 1, Integer.parseInt(words[2]) + 1 );
+
+            } catch(Exception e) {
+                dateFrom = null;
+                dateTo = null;
+            }
         } catch (Exception e) {
             throw new ResourceException(e);
         }
-
         LOGGER.info("Initializing patient data list resource ends");
     }
 
@@ -89,7 +108,6 @@ public class PatientDataListResourceImpl extends ServerResource implements Patie
             patientDataIn.setBloodGlucose(patientDataReprIn.getBloodGlucose());
             patientDataIn.setCarbIntake(patientDataReprIn.getCarbIntake());
             patientDataIn.setDate(patientDataReprIn.getDate());
-            //patientDataIn.setId(patientDataReprIn.getPatientId());
 
             Optional<Patient> oPatient = patientRepository.findById(id);
             patientDataIn.setPatient(oPatient.get());
@@ -107,7 +125,7 @@ public class PatientDataListResourceImpl extends ServerResource implements Patie
             result.setBloodGlucose(patientData.getBloodGlucose());
             result.setCarbIntake(patientData.getCarbIntake());
             result.setDate(patientData.getDate());
-            //result.setPatientId(patientData.getPatient().getId());
+
             result.setUri("http://localhost:9000/patient/" +
                     patientData.getPatient().getId() + "/data/" + patientData.getId());
 
@@ -133,15 +151,31 @@ public class PatientDataListResourceImpl extends ServerResource implements Patie
     public List<PatientDataRepresentation> getPatientsData() throws NotFoundException {
 
         LOGGER.finer("Select all patients data.");
-        // Check authorization
-        ResourceUtils.checkRole(this, Shield.ROLE_DOCTOR);
+
+        // Do not check authorization, everyone has access to these data
+        //ResourceUtils.checkRole(this, Shield.ROLE_DOCTOR);
 
         try {
 
-            List<PatientData> patientsData = patientDataRepository.findDataById(id);
+            List<PatientData> patientsData;
+            List<Double>  bloodGlucoseAvg;
+            List<Double> carbIntakeAvg;
             List<PatientDataRepresentation> result = new ArrayList<>();
-            patientsData.forEach( patientData -> result.add(new PatientDataRepresentation(patientData)));
 
+            if (dateFrom == null || dateTo == null) {
+                patientsData   = patientDataRepository.findDataById(id);
+                patientsData.forEach(patientData -> result.add(new PatientDataRepresentation(patientData)));
+            } else {
+                bloodGlucoseAvg = patientDataRepository.findBloodGlucoseFromTo(id, dateFrom, dateTo);
+                carbIntakeAvg = patientDataRepository.findCarbIntakeFromTo(id, dateFrom, dateTo);
+                for(int i = 0; i < bloodGlucoseAvg.size(); i++){
+                    result.add(
+                            new PatientDataRepresentation(
+                                    bloodGlucoseAvg.get(i),
+                                    carbIntakeAvg.get(i))
+                    );
+                }
+            }
             return result;
         } catch (Exception e) {
             throw new NotFoundException(e.getMessage());
