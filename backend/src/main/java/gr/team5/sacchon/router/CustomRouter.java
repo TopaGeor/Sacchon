@@ -23,7 +23,7 @@ public class CustomRouter {
         Router router = new Router(app.getContext());
 
         router.attach("/patient", PatientListResourceImpl.class);
-        router.attach("/patient_null", PatientListResourceImpl.class);
+        router.attach("/patient_null", PatientNullListResourceImpl.class);
         router.attach("/patient/login", PatientDataResourceImpl.class);
         router.attach("/patient/{id}", PatientResourceImpl.class);
 

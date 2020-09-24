@@ -1,6 +1,5 @@
 package gr.team5.sacchon.representation;
 
-import gr.team5.sacchon.model.Doctor;
 import gr.team5.sacchon.model.Patient;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,18 +24,17 @@ public class PatientRepresentation {
      * Constructor
      * @param patient will be represent the resource
      */
-    public PatientRepresentation(
-            Patient patient) {
+    public PatientRepresentation(Patient patient) {
         if (patient != null) {
             username = patient.getUsername();
             password = patient.getPassword();
             hasNotification = patient.isHasNotification();
-            if (patient.getDoctor().getId() == null) {
-                uri = "http://localhost:9000/patient_null/" + patient.getId();
-            }
             uri = "http://localhost:9000/patient/" + patient.getId();
         }
 
+        if (patient.getDoctor() == null) {
+            uri = "http://localhost:9000/patient_null/" + patient.getId();
+        }
     }
 
     /**

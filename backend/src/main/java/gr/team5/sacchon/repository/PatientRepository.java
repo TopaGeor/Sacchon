@@ -31,10 +31,11 @@ public class PatientRepository extends ServerResource {
         return entityManager.createQuery("from Patient").getResultList();
     }
 
+    // Find patients with doctor id that is null
     public List<Patient> findPatientWithDoctorIdNull() {
         List<Patient> patientList = entityManager
                 .createQuery("SELECT p FROM Patient p" +
-                        " WHERE p.doctor_id IS NULL;")
+                        " WHERE doctor_id IS NULL", Patient.class)
                 .getResultList();
 
         return patientList;
