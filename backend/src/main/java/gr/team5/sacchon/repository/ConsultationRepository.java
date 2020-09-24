@@ -30,6 +30,19 @@ public class ConsultationRepository {
         return entityManager.createQuery("from Consultation").getResultList();
     }
 
+    // Find Consultations by id
+    public List<Consultation> findConsultationById(long id) {
+        List<Consultation> c = entityManager.createQuery("SELECT c" +
+                " FROM Consultation c" +
+                " INNER JOIN Patient p" +
+                " ON c.patient = p" +
+                " WHERE p.id = :id")
+                .setParameter("id", id)
+                .getResultList();
+
+        return c;
+    }
+
     // Save a new consultation
     public Optional<Consultation> save(Consultation consultation){
         try {

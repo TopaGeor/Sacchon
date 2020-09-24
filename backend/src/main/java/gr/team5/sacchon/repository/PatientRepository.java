@@ -31,6 +31,16 @@ public class PatientRepository extends ServerResource {
         return entityManager.createQuery("from Patient").getResultList();
     }
 
+    // Find patients with doctor id that is null
+    public List<Patient> findPatientWithDoctorIdNull() {
+        List<Patient> patientList = entityManager
+                .createQuery("SELECT p FROM Patient p" +
+                        " WHERE doctor_id IS NULL", Patient.class)
+                .getResultList();
+
+        return patientList;
+    }
+
     // Save a new patient
     public Optional<Patient> save(Patient patient){
         try {
