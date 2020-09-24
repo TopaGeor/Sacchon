@@ -3,6 +3,8 @@ package gr.team5.sacchon.representation;
 import gr.team5.sacchon.model.PatientData;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Data
@@ -35,6 +37,12 @@ public class PatientDataRepresentation {
         }
     }
 
+    public PatientDataRepresentation(
+            double bloodAvg, double carbAvg){
+        bloodGlucose = bloodAvg;
+        carbIntake = carbAvg;
+    }
+
     /**
      *
      * @return an instance of a patientData
@@ -44,7 +52,6 @@ public class PatientDataRepresentation {
         patientData.setBloodGlucose(bloodGlucose);
         patientData.setCarbIntake(carbIntake);
         patientData.setDate(date);
-        //patientData.setId(patientId);
 
         return patientData;
     }

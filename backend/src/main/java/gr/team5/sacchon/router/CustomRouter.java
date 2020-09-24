@@ -28,11 +28,11 @@ public class CustomRouter {
         router.attach("/patient/{id}", PatientResourceImpl.class);
 
         router.attach("/patient/{id}/data", PatientDataListResourceImpl.class);
+        router.attach("/patient/{id}/data/average", PatientDataListResourceImpl.class);
         router.attach("/patient/{patient_id}/data/{id}", PatientDataResourceImpl.class);
 
         router.attach("/patient/{id}/consultation", ConsultationListResourceImpl.class);
         router.attach("/patient/{patient_id}/consultation/{id}", ConsultationResourceImpl.class);
-        router.attach("/patient/{id}/data/average", PatientDataResourceImpl.class);
 
         router.attach("/doctor", DoctorListResourceImpl.class);
         router.attach("/doctor/login", DoctorResourceImpl.class);
