@@ -2,7 +2,9 @@ package gr.team5.sacchon.resource;
 
 import gr.team5.sacchon.exception.BadEntityException;
 import gr.team5.sacchon.exception.NotFoundException;
+import gr.team5.sacchon.model.Doctor;
 import gr.team5.sacchon.model.Patient;
+import gr.team5.sacchon.repository.DoctorRepository;
 import gr.team5.sacchon.repository.PatientRepository;
 import gr.team5.sacchon.repository.util.JpaUtil;
 import gr.team5.sacchon.representation.PatientRepresentation;
@@ -23,7 +25,9 @@ public class PatientResourceImpl extends ServerResource implements PatientResour
     public static final Logger LOGGER = Engine.getLogger(PatientResourceImpl.class);
 
     private long id;
+    private Long doctorId;
     private PatientRepository patientRepository;
+    private DoctorRepository doctorRepository;
     private EntityManager entityManager;
 
     /**
@@ -46,10 +50,15 @@ public class PatientResourceImpl extends ServerResource implements PatientResour
             entityManager = JpaUtil.getEntityManager();
             patientRepository = new PatientRepository(entityManager);
             id = Long.parseLong(getAttribute("id"));
+            try{
+                doctorRepository = new DoctorRepository(entityManager);
+                doctorId = Long.parseLong(getAttribute("doctor_id"));
+            } catch (Exception e) {
+                doctorId = null;
+            }
         } catch (Exception e) {
             throw new ResourceException(e);
         }
-
         LOGGER.info("Initializing patient resource ends");
     }
 
@@ -139,7 +148,6 @@ public class PatientResourceImpl extends ServerResource implements PatientResour
 
         // Checking authorization,if role is chief or doctor, not allowed
         ResourceUtils.checkRole(this, Shield.ROLE_CHIEF);
-        ResourceUtils.checkRole(this, Shield.ROLE_DOCTOR);
 
         LOGGER.finer("User allowed to update a patient.");
 
@@ -161,6 +169,12 @@ public class PatientResourceImpl extends ServerResource implements PatientResour
 
                 LOGGER.finer("Update patient.");
 
+                if(doctorId != null){
+                    //patientRepository.setDoctorToPatient(id, doctorId);
+                    Optional<Doctor> oDoctor = doctorRepository.findById(doctorId);
+                    patientIn.setDoctor(oDoctor.get());
+                }
+
                 // update patient in DB and retrieve the new
                 patientOut = patientRepository.update(patientIn);
 
@@ -172,7 +186,6 @@ public class PatientResourceImpl extends ServerResource implements PatientResour
                     throw new NotFoundException("Patient with the following id does not exist: " + id);
                 }
             } else {
-
                 LOGGER.finer("Resource does not exist.");
                 throw new NotFoundException("Patient with the following id does not exist: " + id);
             }

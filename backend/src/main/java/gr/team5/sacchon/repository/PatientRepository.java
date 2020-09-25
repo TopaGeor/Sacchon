@@ -41,6 +41,24 @@ public class PatientRepository extends ServerResource {
         return patientList;
     }
 
+    // Find patients for specific doctor id
+    public List<Patient> findPatientWithDoctorId(Long id) {
+        List<Patient> patientList = entityManager
+                .createQuery("SELECT p FROM Patient p" +
+                        " WHERE doctor_id = :id", Patient.class)
+                .setParameter("id",id)
+                .getResultList();
+
+        return patientList;
+    }
+
+    // Update doctor_id in patient, when doctor delete account
+    public void setPatientNullDoctor(long doctorId){
+        entityManager.createQuery("UPDATE patient SET doctor_id = NULL " +
+                "WHERE doctor_id = :doctorId")
+                .setParameter("doctorId", doctorId);
+    }
+
     // Save a new patient
     public Optional<Patient> save(Patient patient){
         try {
@@ -55,23 +73,42 @@ public class PatientRepository extends ServerResource {
     }
 
     // Update username & password
-    public Optional<Patient> update(Patient patient) {
+    public Optional<Patient> update(Patient patient){
         Patient in = entityManager.find(Patient.class, patient.getId());
         in.setUsername(patient.getUsername());
         in.setHasNotification(patient.isHasNotification());
-
-        System.out.println(patient.getPassword());
         in.setPassword(patient.getPassword());
-        System.out.println(in.getPassword());
+        in.setDoctor(patient.getDoctor());
         try {
             entityManager.getTransaction().begin();
-            entityManager.persist (in);
+            entityManager.persist(in);
             entityManager.getTransaction().commit();
             return Optional.of(in);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return Optional.empty();
+    }
+
+    // Update notification for a new consultation
+    public void updateHasNotification(long id){
+        Patient patientIn = entityManager.find(Patient.class, id);
+        patientIn.setHasNotification(true);
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(patientIn);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Set doctor to a patient
+    public void setDoctorToPatient(long patientId, long doctorId){
+        entityManager.createQuery("UPDATE patient SET doctor_id = :doctorId " +
+                "WHERE id = :patientId")
+                .setParameter("doctorId", doctorId)
+                .setParameter("patientId", patientId);
     }
 
     // Delete account

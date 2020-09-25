@@ -45,7 +45,7 @@ public class PatientDataRepository {
         return pd;
     }
 
-    //
+    // Find average for bloodglucose for date from-to
     public List<Double> findBloodGlucoseFromTo(long id, Date from, Date to){
         List<Double> pd = entityManager.createQuery(
                 "SELECT AVG(pd.bloodGlucose) AS avgBloodGlucose" +
@@ -59,7 +59,7 @@ public class PatientDataRepository {
         return pd;
     }
 
-    //
+    // Find average for carbintake for date from-to
     public List<Double> findCarbIntakeFromTo(long id, Date from, Date to){
         List<Double> pd = entityManager.createQuery(
                 "SELECT AVG(pd.carbIntake) AS avgCarbIntake" +

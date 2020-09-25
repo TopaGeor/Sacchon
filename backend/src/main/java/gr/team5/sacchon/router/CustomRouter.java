@@ -31,15 +31,17 @@ public class CustomRouter {
         router.attach("/patient/{id}/data/average", PatientDataListResourceImpl.class);
         router.attach("/patient/{patient_id}/data/{id}", PatientDataResourceImpl.class);
 
-        router.attach("/patient/{id}/consultation", ConsultationListResourceImpl.class);
+        router.attach("/patient/{id}/{doctor_id}", PatientResourceImpl.class);
+
+        router.attach("/patient/{patient_id}/consultation", ConsultationListResourceImpl.class);
         router.attach("/patient/{patient_id}/consultation/{id}", ConsultationResourceImpl.class);
 
         router.attach("/doctor", DoctorListResourceImpl.class);
         router.attach("/doctor/login", DoctorResourceImpl.class);
         router.attach("/doctor/{id}", DoctorResourceImpl.class);
+        router.attach("/doctor/{id}/patient", PatientListResourceImpl.class);
+        router.attach("/doctor/{doctor_id}/patient/{id}", PatientResourceImpl.class);
 
-        router.attach("/doctor/{doctor_id}/patient", DoctorListResourceImpl.class);
-        router.attach("/doctor/{doctor_id}/patient/{id}", PatientListResourceImpl.class);
         router.attach("/doctor/{doctor_id}/patient/{patient_id}/consultation", ConsultationListResourceImpl.class);
         router.attach("/doctor/{doctor_id}/patient/{patient_id}/consultation/{id}", ConsultationResourceImpl.class);
 
