@@ -115,10 +115,12 @@ public class PatientDataListResourceImpl extends ServerResource implements Patie
             Optional<PatientData> patientDataOptOut = patientDataRepository.save(patientDataIn);
 
             PatientData patientData = null;
-            if (patientDataOptOut.isPresent())
+            if (patientDataOptOut.isPresent()) {
                 patientData = patientDataOptOut.get();
-            else
+            }
+            else {
                 throw new BadEntityException("Patient data has not been created");
+            }
 
             PatientDataRepresentation result = new PatientDataRepresentation(patientData);
 

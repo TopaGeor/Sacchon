@@ -27,6 +27,7 @@ public class PatientListResourceImpl extends ServerResource implements PatientLi
 
     private PatientRepository patientRepository;
     private EntityManager entityManager;
+    private Long id;
 
     /**
      * This release method closes the entityManager
@@ -46,10 +47,12 @@ public class PatientListResourceImpl extends ServerResource implements PatientLi
         try {
             entityManager = JpaUtil.getEntityManager();
             patientRepository = new PatientRepository(entityManager);
+            if ( getAttribute("id") != null) {
+                id = Long.parseLong(getAttribute("id"));
+            }
         } catch (Exception e) {
             throw new ResourceException(e);
         }
-
         LOGGER.info("Initializing patient list resource ends");
     }
 
@@ -126,10 +129,16 @@ public class PatientListResourceImpl extends ServerResource implements PatientLi
         ResourceUtils.checkRole(this, Shield.ROLE_PATIENT);
 
         try {
+            List<Patient> patients;
 
-            List<Patient> patients = patientRepository.findAll();
+            if(id == null){
+                patients = patientRepository.findAll();
+            }
+            else{
+                patients = patientRepository.findPatientWithDoctorId(id);
+            }
+
             List<PatientRepresentation> result = new ArrayList<>();
-
             patients.forEach(patient -> result.add(new PatientRepresentation(patient)));
 
             return result;

@@ -8,6 +8,7 @@ import gr.team5.sacchon.repository.ConsultationRepository;
 import gr.team5.sacchon.repository.PatientRepository;
 import gr.team5.sacchon.repository.util.JpaUtil;
 import gr.team5.sacchon.representation.ConsultationRepresentation;
+import gr.team5.sacchon.representation.PatientRepresentation;
 import gr.team5.sacchon.resource.util.ResourceValidator;
 import gr.team5.sacchon.security.ResourceUtils;
 import gr.team5.sacchon.security.Shield;
@@ -27,6 +28,7 @@ public class ConsultationResourceImpl extends ServerResource implements Consulta
     private long patientId;
     private ConsultationRepository consultationRepository;
     private EntityManager entityManager;
+    private PatientRepository patientRepository;
 
     /**
      * This release method closes the entityManager
@@ -47,8 +49,11 @@ public class ConsultationResourceImpl extends ServerResource implements Consulta
         try {
             entityManager = JpaUtil.getEntityManager();
             consultationRepository = new ConsultationRepository(entityManager);
+            patientRepository = new PatientRepository(entityManager);
+
             id = Long.parseLong(getAttribute("id"));
             patientId = Long.parseLong(getAttribute("patient_id"));
+
         } catch (Exception e) {
             throw  new ResourceException(e);
         }
@@ -107,6 +112,13 @@ public class ConsultationResourceImpl extends ServerResource implements Consulta
         }
     }
 
+    /**
+     * Update
+     * @param consultationReprIn
+     * @return
+     * @throws NotFoundException
+     * @throws BadEntityException
+     */
     @Override
     public ConsultationRepresentation store(ConsultationRepresentation consultationReprIn) throws NotFoundException, BadEntityException {
 
@@ -131,13 +143,21 @@ public class ConsultationResourceImpl extends ServerResource implements Consulta
             Optional<Consultation> oConsultation = consultationRepository.findById(id);
             setExisting(oConsultation.isPresent());
 
-            // if patient data exists, update him
+            // if patient consultation exists, update him
             if (isExisting()) {
 
                 LOGGER.finer("Update consultation.");
 
-                // update patient data in DB and retrieve them
+                // update patient consultation in DB and retrieve them
                 consultationOut = consultationRepository.update(consultationIn);
+
+                //patientRepository.updateNotification(patientId);
+                Optional <Patient> oPatient = patientRepository.findById(patientId);
+                setExisting(oPatient.isPresent());
+
+                if(isExisting()){
+                    patientRepository.updateHasNotification(patientId);
+                }
 
                 // Check if retrieved patient data is not null
                 // if null it means the id is wrong.
