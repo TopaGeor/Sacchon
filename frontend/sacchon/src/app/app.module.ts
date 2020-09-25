@@ -4,10 +4,12 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuthPageComponent } from './auth/auth-page/auth-page.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AuthPageComponent
   ],
   imports: [
     BrowserModule,
