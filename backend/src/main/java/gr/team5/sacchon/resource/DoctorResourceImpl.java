@@ -5,6 +5,7 @@ import gr.team5.sacchon.exception.NotFoundException;
 import gr.team5.sacchon.model.Doctor;
 import gr.team5.sacchon.model.Patient;
 import gr.team5.sacchon.repository.DoctorRepository;
+import gr.team5.sacchon.repository.PatientRepository;
 import gr.team5.sacchon.repository.util.JpaUtil;
 import gr.team5.sacchon.representation.DoctorRepresentation;
 import gr.team5.sacchon.representation.PatientRepresentation;
@@ -27,6 +28,7 @@ public class DoctorResourceImpl extends ServerResource implements DoctorResource
     private long id;
     private DoctorRepository doctorRepository;
     private EntityManager entityManager;
+    private PatientRepository patientRepository;
 
     /**
      * This release method closes the entityManager
@@ -47,6 +49,7 @@ public class DoctorResourceImpl extends ServerResource implements DoctorResource
         try {
             entityManager = JpaUtil.getEntityManager();
             doctorRepository = new DoctorRepository(entityManager);
+            patientRepository = new PatientRepository(entityManager);
             id = Long.parseLong(getAttribute("id"));
         } catch (Exception e) {
             throw new ResourceException(e);
@@ -115,11 +118,11 @@ public class DoctorResourceImpl extends ServerResource implements DoctorResource
             Boolean isDeleted = doctorRepository.delete(id);
 
             if (!isDeleted) {
-
                 LOGGER.config("Doctor id does not exist");
                 throw new NotFoundException("Doctor with following id does not exist: " + id);
             }
 
+            patientRepository.setPatientNullDoctor(id);
             LOGGER.finer("Doctor successfully removed.");
         } catch (Exception e) {
             LOGGER.log(Level.WARNING, "Error when removing a doctor ", e);
