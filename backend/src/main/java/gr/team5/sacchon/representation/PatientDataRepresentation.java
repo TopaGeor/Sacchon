@@ -37,6 +37,11 @@ public class PatientDataRepresentation {
         }
     }
 
+    /**
+     *
+     * @param bloodAvg uses to get the bloodglucose average
+     * @param carbAvg uses to get the carbintake average
+     */
     public PatientDataRepresentation(
             double bloodAvg, double carbAvg){
         bloodGlucose = bloodAvg;

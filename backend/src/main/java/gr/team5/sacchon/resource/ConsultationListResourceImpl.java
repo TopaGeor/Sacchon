@@ -53,7 +53,9 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
             entityManager = JpaUtil.getEntityManager();
             consultationRepository = new ConsultationRepository(entityManager);
             id = Long.parseLong(getAttribute("patient_id"));
-            doctorId = Long.parseLong(getAttribute("doctor_id"));
+            if (getAttribute("doctor_id") != null){
+                doctorId = Long.parseLong(getAttribute("doctor_id"));
+            }
         } catch (Exception e) {
             throw new ResourceException(e);
         }
@@ -72,9 +74,10 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
 
         LOGGER.finer("Add new consultation.");
 
-        // Check authorization
+        // Check authorization, if role is patient or chief, not allowed
         ResourceUtils.checkRole(this, Shield.ROLE_PATIENT);
         ResourceUtils.checkRole(this, Shield.ROLE_CHIEF);
+
         LOGGER.finer("User allowed to add a consultation.");
 
         // Check entity
@@ -138,14 +141,14 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
     public List<ConsultationRepresentation> getConsultations() throws NotFoundException {
 
         LOGGER.finer("Select all consultations.");
-        // Check authorization
+
+        // Check authorization, if role is patient, not allowed
         ResourceUtils.checkRole(this, Shield.ROLE_PATIENT);
 
         try {
 
             List<Consultation> consultations = consultationRepository.findConsultationById(id);
             List<ConsultationRepresentation> result = new ArrayList<>();
-
             consultations.forEach(consultation -> result.add(new ConsultationRepresentation(consultation)));
 
             return result;
