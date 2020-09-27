@@ -45,9 +45,8 @@ public class PatientRepresentation {
         Patient patient = new Patient();
         patient.setUsername(username);
         patient.setPassword(password);
-        //patient.setHasNotification(hasNotification);
 
-        //initially a new patient on the system has not have a doctor, hasNotification=false
+        //initially a new patient on the system do not have a doctor, hasNotification=false
         patient.setHasNotification(false);
 
         return patient;
