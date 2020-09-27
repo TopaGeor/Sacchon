@@ -65,7 +65,6 @@ public class PatientNullListResourceImpl extends ServerResource implements Patie
 
             List<Patient> patients  = patientRepository.findPatientWithDoctorIdNull();
             List<PatientRepresentation> result = new ArrayList<>();
-
             patients.forEach(patient -> result.add(new PatientRepresentation(patient)));
 
             return result;

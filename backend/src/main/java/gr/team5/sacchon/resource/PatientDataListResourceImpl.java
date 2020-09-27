@@ -154,8 +154,7 @@ public class PatientDataListResourceImpl extends ServerResource implements Patie
 
         LOGGER.finer("Select all patients data.");
 
-        // Do not check authorization, everyone has access to these data
-        //ResourceUtils.checkRole(this, Shield.ROLE_DOCTOR);
+        // Everyone has access to these data
 
         try {
 
