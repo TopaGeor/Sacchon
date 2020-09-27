@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Patient } from '../../shared/patient';
 import { PatientService } from '../patient.service';
 
 @Component({
@@ -7,12 +8,15 @@ import { PatientService } from '../patient.service';
   styleUrls: ['./patient.component.scss']
 })
 export class PatientComponent implements OnInit {
-  patientData: any;
+  patients: Patient[];
 
   constructor(private service: PatientService) { }
 
   ngOnInit(): void {
-    this.service.getPatient().subscribe(x => this.patientData = x);
+    this.service.getPatient().subscribe(
+      patients => {this.patients = patients;
+      console.log(patients);
+    })
   }
 
 }
