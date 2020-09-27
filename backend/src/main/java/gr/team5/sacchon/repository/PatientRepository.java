@@ -31,7 +31,7 @@ public class PatientRepository extends ServerResource {
         return entityManager.createQuery("from Patient").getResultList();
     }
 
-    // Find patients with doctor id that is null
+    // Find patients with doctor id  null
     public List<Patient> findPatientWithDoctorIdNull() {
         List<Patient> patientList = entityManager
                 .createQuery("SELECT p FROM Patient p" +
@@ -50,13 +50,6 @@ public class PatientRepository extends ServerResource {
                 .getResultList();
 
         return patientList;
-    }
-
-    // Update doctor_id in patient, when doctor delete account
-    public void setPatientNullDoctor(long doctorId){
-        entityManager.createQuery("UPDATE patient SET doctor_id = NULL " +
-                "WHERE doctor_id = :doctorId")
-                .setParameter("doctorId", doctorId);
     }
 
     // Save a new patient
@@ -91,9 +84,9 @@ public class PatientRepository extends ServerResource {
     }
 
     // Update notification for a new consultation
-    public void updateHasNotification(long id){
+    public void updateHasNotification(long id, boolean notification){
         Patient patientIn = entityManager.find(Patient.class, id);
-        patientIn.setHasNotification(true);
+        patientIn.setHasNotification(notification);
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(patientIn);
@@ -101,14 +94,6 @@ public class PatientRepository extends ServerResource {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    // Set doctor to a patient
-    public void setDoctorToPatient(long patientId, long doctorId){
-        entityManager.createQuery("UPDATE patient SET doctor_id = :doctorId " +
-                "WHERE id = :patientId")
-                .setParameter("doctorId", doctorId)
-                .setParameter("patientId", patientId);
     }
 
     // Delete account
