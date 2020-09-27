@@ -18,11 +18,8 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let patient of patients">
-                    <td>{{patient.id}}</td>
-                    <td>{{patient.hasNotification}}</td>
-                    <td>{{patient.username}}</td>
-                    <td>{{patient.doctor_id}}</td>
+                  <tr *ngIf="patientDetail">
+                    <td>{{patientDetail.username}}</td>
                   </tr>
                 </tbody>
               </table>
