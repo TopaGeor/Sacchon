@@ -32,6 +32,7 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
     private long id;
     private long doctorId;
     private ConsultationRepository consultationRepository;
+    private PatientRepository patientRepository;
     private EntityManager entityManager;
 
     /**
@@ -52,6 +53,7 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
         try {
             entityManager = JpaUtil.getEntityManager();
             consultationRepository = new ConsultationRepository(entityManager);
+            patientRepository = new PatientRepository(entityManager);
             id = Long.parseLong(getAttribute("patient_id"));
             if (getAttribute("doctor_id") != null){
                 doctorId = Long.parseLong(getAttribute("doctor_id"));
@@ -86,7 +88,6 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
 
         LOGGER.finer("consultation checked");
 
-        PatientRepository patientRepository = new PatientRepository(entityManager);
         DoctorRepository doctorRepository = new DoctorRepository(entityManager);
 
         try {
@@ -95,7 +96,6 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
             Consultation consultationIn = new Consultation();
             consultationIn.setAdvice(consultationReprIn.getAdvice());
             consultationIn.setDateCreated(consultationReprIn.getDateCreated());
-            //consultationIn.setId(consultationReprIn.getPatientId());
 
             Optional<Patient> oPatient = patientRepository.findById(id);
             consultationIn.setPatient(oPatient.get());
@@ -106,16 +106,17 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
             Optional<Consultation> consultationOptOut = consultationRepository.save(consultationIn);
 
             Consultation consultation = null;
-            if (consultationOptOut.isPresent())
+            if (consultationOptOut.isPresent()) {
                 consultation = consultationOptOut.get();
-            else
+            } else {
                 throw new BadEntityException("Consultation has not been created");
+            }
 
+            patientRepository.updateHasNotification(id, true);
             ConsultationRepresentation result = new ConsultationRepresentation(consultation);
 
             result.setAdvice(consultation.getAdvice());
             result.setDateCreated(consultation.getDateCreated());
-            //result.setPatientId(consultation.getPatient().getId());
             result.setUri("http://localhost:9000/doctor/" + consultation.getDoctor().getId() + "/patient/" +
                     consultation.getPatient().getId() + "/consultation/" + consultation.getId());
 
@@ -142,14 +143,19 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
 
         LOGGER.finer("Select all consultations.");
 
-        // Check authorization, if role is patient, not allowed
-        ResourceUtils.checkRole(this, Shield.ROLE_PATIENT);
+//        // Check authorization, if role is patient, not allowed
+//        ResourceUtils.checkRole(this, Shield.ROLE_PATIENT);
 
         try {
 
-            List<Consultation> consultations = consultationRepository.findConsultationById(id);
+            List<Consultation> consultations = consultationRepository.findConsultationByPatientId(id);
             List<ConsultationRepresentation> result = new ArrayList<>();
             consultations.forEach(consultation -> result.add(new ConsultationRepresentation(consultation)));
+
+            // if patient read all consultations, notification=false
+            if(this.isInRole(Shield.ROLE_PATIENT)){
+                patientRepository.updateHasNotification(id, false);
+            }
 
             return result;
         } catch (Exception e) {

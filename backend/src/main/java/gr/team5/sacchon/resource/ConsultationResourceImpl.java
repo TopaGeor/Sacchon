@@ -71,9 +71,6 @@ public class ConsultationResourceImpl extends ServerResource implements Consulta
 
         LOGGER.info("Retrieve a consultation");
 
-        // Checking authorization
-        ResourceUtils.checkRole(this, Shield.ROLE_DOCTOR);
-
         // Initialize persistence layer
         ConsultationRepository consultationRepository = new ConsultationRepository(entityManager);
         Consultation consultation;
@@ -100,10 +97,14 @@ public class ConsultationResourceImpl extends ServerResource implements Consulta
                 }
 
                 consultation = oConsultation.get();
-
                 ConsultationRepresentation result = new ConsultationRepresentation(consultation);
 
                 LOGGER.finer("Consultation successfully retrieved.");
+
+                // if patient read consultation, notification=false
+                if(this.isInRole(Shield.ROLE_PATIENT)){
+                    patientRepository.updateHasNotification(patientId, false);
+                }
 
                 return result;
             }
@@ -156,7 +157,7 @@ public class ConsultationResourceImpl extends ServerResource implements Consulta
                 setExisting(oPatient.isPresent());
 
                 if(isExisting()){
-                    patientRepository.updateHasNotification(patientId);
+                    patientRepository.updateHasNotification(patientId, true);
                 }
 
                 // Check if retrieved patient data is not null
