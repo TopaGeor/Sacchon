@@ -14,7 +14,7 @@ export class PatientDetailsComponent implements OnInit {
   constructor(
     private service: PatientService,
     private route: ActivatedRoute
-    ) {}
+  ) {}
     
   ngOnInit() {
     this.service.getPatientsDetails(this.id).subscribe(

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Patient } from '../../shared/patient';
 import { PatientService } from '../patient.service';
 
@@ -12,7 +12,7 @@ export class PatientComponent implements OnInit {
 
   constructor(private service: PatientService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.service.getPatient().subscribe(
       patients => {this.patients = patients;
       console.log(patients);
