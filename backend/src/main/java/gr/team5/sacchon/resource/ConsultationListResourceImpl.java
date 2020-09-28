@@ -55,19 +55,18 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
         try {
             entityManager = JpaUtil.getEntityManager();
             consultationRepository = new ConsultationRepository(entityManager);
-            patientId = Long.parseLong(getAttribute("patient_id"));
 
-            if (getAttribute("doctor_id") != null){
-                doctorId = Long.parseLong(getAttribute("doctor_id"));
+            try {
+                doctorId = Long.parseLong((getQueryValue("doctor_id")));
                 doctorRepository = new DoctorRepository(entityManager);
-            } else {
+            } catch (Exception e) {
                 doctorId = null;
             }
 
-            if (getAttribute("patient_id") == null){
-                patientId = Long.parseLong(getAttribute("patient_id"));
+            try {
+                patientId = Long.parseLong(getQueryValue("patient_id"));
                 patientRepository = new PatientRepository(entityManager);
-            } else {
+            } catch (Exception e) {
                 patientId = null;
             }
 
