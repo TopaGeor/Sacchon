@@ -31,16 +31,31 @@ public class CustomRouter {
         router.attach("/patient/{id}/data/average", PatientDataListResourceImpl.class);
         router.attach("/patient/{patient_id}/data/{id}", PatientDataResourceImpl.class);
 
+        // set doctor to a patient
         router.attach("/patient/{id}/{doctor_id}", PatientResourceImpl.class);
 
         router.attach("/doctor", DoctorListResourceImpl.class);
         router.attach("/doctor/login", DoctorResourceImpl.class);
         router.attach("/doctor/{id}", DoctorResourceImpl.class);
         router.attach("/doctor/{id}/patient", PatientListResourceImpl.class);
+
+        // update/get specific patient of a doctor
         router.attach("/doctor/{doctor_id}/patient/{id}", PatientResourceImpl.class);
 
-        router.attach("/doctor/{doctor_id}/patient/{patient_id}/consultation", ConsultationListResourceImpl.class);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        // update & delete
         router.attach("/doctor/{doctor_id}/patient/{patient_id}/consultation/{id}", ConsultationResourceImpl.class);
+
+        // find patients with no consultation
+        router.attach("/doctor/{doctor_id}/patientNoCons", PatientNeedConsListResourceImpl.class);
+
+        // insert consultations
+        router.attach("/doctor/{doctor_id}/patient/{patient_id}/consultation", ConsultationListResourceImpl.class);
+
+        // get all for specific doctor/patient
+        router.attach("/doctor/{doctor_id}/consultation", ConsultationListResourceImpl.class);
+        router.attach("/patient/{patient_id}/consultation", PatientNeedConsListResourceImpl.class);
 
         return router;
     }

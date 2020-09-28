@@ -100,9 +100,12 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
             Optional<Patient> oPatient = patientRepository.findById(id);
             consultationIn.setPatient(oPatient.get());
 
+            if ( oPatient.get().getDoctor().getId() != doctorId ){
+                throw new BadEntityException("You do not have access to this patient");
+            }
+
             Optional<Doctor> oDoctor = doctorRepository.findById(doctorId);
             consultationIn.setDoctor(oDoctor.get());
-
             Optional<Consultation> consultationOptOut = consultationRepository.save(consultationIn);
 
             Consultation consultation = null;
@@ -147,15 +150,20 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
 //        ResourceUtils.checkRole(this, Shield.ROLE_PATIENT);
 
         try {
-
-            List<Consultation> consultations = consultationRepository.findConsultationByPatientId(id);
+            List<Consultation> consultations;
             List<ConsultationRepresentation> result = new ArrayList<>();
-            consultations.forEach(consultation -> result.add(new ConsultationRepresentation(consultation)));
 
-            // if patient read all consultations, notification=false
-            if(this.isInRole(Shield.ROLE_PATIENT)){
+            if ( this.isInRole(Shield.ROLE_PATIENT) ){
+                consultations = consultationRepository.findAllConsultationByPatientId(id);
+
+                // if patient read all consultations, notification=false
                 patientRepository.updateHasNotification(id, false);
+            } else if ( this.isInRole(Shield.ROLE_DOCTOR)) {
+                consultations = consultationRepository.findConsultationByDoctorId(doctorId);
+            } else{ // chief doctor
+                consultations = consultationRepository.findAll();
             }
+            consultations.forEach(consultation -> result.add(new ConsultationRepresentation(consultation)));
 
             return result;
         } catch (Exception e) {
