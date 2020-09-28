@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 
 public class PatientNullListResourceImpl extends ServerResource implements PatientNullListResource {
 
-    public static  final Logger LOGGER = Engine.getLogger(PatientResourceImpl.class);
+    public static  final Logger LOGGER = Engine.getLogger(PatientNullListResourceImpl.class);
 
     private PatientRepository patientRepository;
     private EntityManager entityManager;
