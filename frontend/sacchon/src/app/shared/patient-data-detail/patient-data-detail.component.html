@@ -4,7 +4,7 @@
       <div class=" col-lg-6 col-md-12">
         <div class="card">
           <div class=" card-header">
-            <h4 class=" card-title">Patients Consultations</h4>
+            <h4 class=" card-title">Patients Data</h4>
           </div>
           <div class=" card-body">
             <div class=" table-responsive">
@@ -13,14 +13,14 @@
                   <tr>
                     <th>id</th>
                     <th>hasNotification</th>
-                    <th>username</th>
+                    <th>n</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let pc of patientConsultation">
-                    <td>{{pc.id}}</td>
-                    <td>{{pc.advice}}</td>
-                    <td>{{pc.username}}</td>
+                  <tr *ngIf="patientDataDetail">
+                    <td>{{ patientDataDetail.date |  date:'dd-MM-yy' }}</td>
+                    <td>{{patientDataDetail.bloodGlucose}}</td>
+                    <td>{{patientDataDetail.carbIntake}}</td>
                   </tr>
                 </tbody>
               </table>

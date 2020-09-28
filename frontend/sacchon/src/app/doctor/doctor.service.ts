@@ -8,6 +8,7 @@ import { Doctor } from '../shared/doctor';
 })
 export class DoctorService {
 
+<<<<<<< HEAD
   readonly app = "http://localhost:9000/";
 
   username = "chief";
@@ -20,5 +21,19 @@ export class DoctorService {
       this.app + 'doctor',
       {headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' +this.password)})}
     );
+=======
+  constructor(private http: HttpClient) {}
+
+  readonly app = "http://localhost:9000/";
+
+  username = "dimitris";
+  password = "1234";
+
+  getDoctor(): Observable<Doctor[]> {
+    return this.http.get<Doctor[]>(
+      this.app+'doctor',
+      {headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' +this.password)})}
+    )
+>>>>>>> origin/master
   }
 }
