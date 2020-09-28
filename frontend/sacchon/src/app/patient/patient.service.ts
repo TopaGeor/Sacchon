@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Consultations } from '../shared/consultations/consultations';
 import { Patient } from '../shared/patient';
 import { PatientData } from '../shared/patient-data';
-import { PatientDataDetailComponent } from '../shared/patient-data-detail/patient-data-detail.component';
+// import { PatientDataDetailComponent } from '../shared/patient-data-detail/patient-data-detail.component';
 
 @Injectable({
   providedIn: 'root'

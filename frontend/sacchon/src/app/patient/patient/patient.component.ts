@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Patient } from '../../shared/patient';
 import { PatientService } from '../patient.service';
 
