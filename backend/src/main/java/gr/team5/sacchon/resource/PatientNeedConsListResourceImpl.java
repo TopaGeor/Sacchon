@@ -52,19 +52,18 @@ public class PatientNeedConsListResourceImpl extends ServerResource implements P
 
         // Check authorization, if role is patient, not allowed
         ResourceUtils.checkRole(this, Shield.ROLE_PATIENT);
-        PatientRepository patientRepository = new PatientRepository(entityManager);
 
-//        try {
-//            List<Patient> patients  = patientRepository.findPatientsNeedsCons(doctorId);
+        try {
+//            List<Patient> patients  = doctorRepository.findPatientsNeedsCons(doctorId);
 //            return patients;
+
 //
-////
-////            List<PatientRepresentation> result = new ArrayList<>();
-////            patients.forEach(patient -> result.add(new PatientRepresentation(patient)));
-//
-//        } catch (Exception e) {
-//            throw new NotFoundException("patient list not found");
-//        }
+//            List<PatientRepresentation> result = new ArrayList<>();
+//            patients.forEach(patient -> result.add(new PatientRepresentation(patient)));
+
+        } catch (Exception e) {
+            throw new NotFoundException("patient list not found");
+        }
         return null;
     }
 }
