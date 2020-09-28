@@ -51,15 +51,6 @@ const routes: Routes = [
         component: PatientNullComponent,
       }
     ]
-  },
-  {
-    path: 'post-patient-data',
-    children: [
-      {
-        path: '',
-        component: PostPatientDataComponent,
-      }
-    ]
   }
 ];
 
