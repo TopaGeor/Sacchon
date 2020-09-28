@@ -4,7 +4,7 @@
       <div class=" col-lg-6 col-md-12">
         <div class="card">
           <div class=" card-header">
-            <h4 class=" card-title">Patients List</h4>
+            <h4 class=" card-title">Patient Details</h4>
           </div>
           <div class=" card-body">
             <div class=" table-responsive">
@@ -19,7 +19,10 @@
                 </thead>
                 <tbody>
                   <tr *ngIf="patientDetail">
+                    <td>{{patientDetail.id}}</td>
+                    <td>{{patientDetail.hasNotification}}</td>
                     <td>{{patientDetail.username}}</td>
+                    <td>{{patientDetail.doctor_id}}</td>
                   </tr>
                 </tbody>
               </table>

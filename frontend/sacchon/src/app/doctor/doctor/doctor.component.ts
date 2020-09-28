@@ -12,12 +12,11 @@ export class DoctorComponent implements OnInit {
 
   constructor(private service: DoctorService) { }
 
-  ngOnInit(): void {
-    this.service.getDoctor().subscribe(
+  ngOnInit() {
+    this.service.getDoctors().subscribe(
       doctors => {this.doctors = doctors;
       console.log(doctors);
       }
-    )
+    );
   }
-
 }
