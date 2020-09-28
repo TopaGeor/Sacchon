@@ -1,1 +1,33 @@
-<p>consultations works!</p>
+
+<div class=" content">
+    <div class=" row">
+      <div class=" col-lg-6 col-md-12">
+        <div class="card">
+          <div class=" card-header">
+            <h4 class=" card-title">Patients Consultations</h4>
+          </div>
+          <div class=" card-body">
+            <div class=" table-responsive">
+              <table class=" table tablesorter" id="">
+                <thead class=" text-primary">
+                  <tr>
+                    <th>id</th>
+                    <th>hasNotification</th>
+                    <th>username</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let pc of patientConsultation">
+                    <td>{{pc.id}}</td>
+                    <td>{{pc.advice}}</td>
+                    <td>{{pc.username}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

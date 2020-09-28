@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { PatientModule } from './patient/patient.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
     RouterModule,
     AppRoutingModule,
     ComponentsModule,
+    PatientModule,
     HttpClientModule,
     ToastrModule.forRoot()
   ],
