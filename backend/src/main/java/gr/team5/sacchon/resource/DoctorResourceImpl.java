@@ -2,13 +2,14 @@ package gr.team5.sacchon.resource;
 
 import gr.team5.sacchon.exception.BadEntityException;
 import gr.team5.sacchon.exception.NotFoundException;
+import gr.team5.sacchon.model.Consultation;
 import gr.team5.sacchon.model.Doctor;
 import gr.team5.sacchon.model.Patient;
+import gr.team5.sacchon.repository.ConsultationRepository;
 import gr.team5.sacchon.repository.DoctorRepository;
 import gr.team5.sacchon.repository.PatientRepository;
 import gr.team5.sacchon.repository.util.JpaUtil;
 import gr.team5.sacchon.representation.DoctorRepresentation;
-import gr.team5.sacchon.representation.PatientRepresentation;
 import gr.team5.sacchon.resource.util.ResourceValidator;
 import gr.team5.sacchon.security.ResourceUtils;
 import gr.team5.sacchon.security.Shield;
@@ -17,6 +18,7 @@ import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,6 +31,7 @@ public class DoctorResourceImpl extends ServerResource implements DoctorResource
     private DoctorRepository doctorRepository;
     private EntityManager entityManager;
     private PatientRepository patientRepository;
+    private ConsultationRepository consultationRepository;
 
     /**
      * This release method closes the entityManager
@@ -50,6 +53,7 @@ public class DoctorResourceImpl extends ServerResource implements DoctorResource
             entityManager = JpaUtil.getEntityManager();
             doctorRepository = new DoctorRepository(entityManager);
             patientRepository = new PatientRepository(entityManager);
+            consultationRepository = new ConsultationRepository(entityManager);
             id = Long.parseLong(getAttribute("id"));
         } catch (Exception e) {
             throw new ResourceException(e);
@@ -115,6 +119,21 @@ public class DoctorResourceImpl extends ServerResource implements DoctorResource
         LOGGER.finer("User allowed to remove a doctor.");
 
         try {
+            // Remove doctor from foreign key of patients
+            List<Patient> listOfPatient = patientRepository.findPatientWithDoctorId(id);
+            listOfPatient.forEach(patient -> {
+                patient.setDoctor(null);
+                patientRepository.update(patient);
+            });
+
+            // Replace doctor from foreign key of consultations
+            List<Consultation> listOfConsultation = consultationRepository.findConsultationByDoctorId(id);
+            Optional <Doctor> placeHolderDoc = doctorRepository.findById(Long.parseLong("8"));
+            listOfConsultation.forEach(patientCons -> {
+                patientCons.setDoctor(placeHolderDoc.get());
+                consultationRepository.update(patientCons);
+            });
+
             Boolean isDeleted = doctorRepository.delete(id);
 
             if (!isDeleted) {
@@ -122,7 +141,7 @@ public class DoctorResourceImpl extends ServerResource implements DoctorResource
                 throw new NotFoundException("Doctor with following id does not exist: " + id);
             }
 
-            patientRepository.setPatientNullDoctor(id);
+
             LOGGER.finer("Doctor successfully removed.");
         } catch (Exception e) {
             LOGGER.log(Level.WARNING, "Error when removing a doctor ", e);

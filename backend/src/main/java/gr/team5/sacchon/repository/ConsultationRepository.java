@@ -30,12 +30,25 @@ public class ConsultationRepository {
         return entityManager.createQuery("from Consultation").getResultList();
     }
 
-    // Find Consultations by id
-    public List<Consultation> findConsultationById(long id) {
+    // Find Consultations by patient id
+    public List<Consultation> findConsultationByPatientId(long id) {
         List<Consultation> c = entityManager.createQuery("SELECT c" +
                 " FROM Consultation c" +
                 " INNER JOIN Patient p" +
                 " ON c.patient = p" +
+                " WHERE p.id = :id")
+                .setParameter("id", id)
+                .getResultList();
+
+        return c;
+    }
+
+    // Find Consultations by doctor id
+    public List<Consultation> findConsultationByDoctorId(long id) {
+        List<Consultation> c = entityManager.createQuery("SELECT c" +
+                " FROM Consultation c" +
+                " INNER JOIN Doctor p" +
+                " ON c.doctor = p" +
                 " WHERE p.id = :id")
                 .setParameter("id", id)
                 .getResultList();
