@@ -1,5 +1,6 @@
 package gr.team5.sacchon.repository;
 
+import gr.team5.sacchon.model.Consultation;
 import gr.team5.sacchon.model.Doctor;
 import gr.team5.sacchon.model.Patient;
 import gr.team5.sacchon.model.PatientData;
