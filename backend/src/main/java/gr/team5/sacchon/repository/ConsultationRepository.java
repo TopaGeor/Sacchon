@@ -29,7 +29,10 @@ public class ConsultationRepository {
 
     // Find all consultations
     public List<Consultation> findAll() {
-        List<Consultation> cons = entityManager.createQuery("from Consultation").getResultList();
+        List<Consultation> cons = entityManager.createQuery(
+                " FROM Consultation" +
+                " WHERE patient_id IS NOT NULL", Consultation.class)
+                .getResultList();
         return cons;
     }
 
@@ -54,6 +57,20 @@ public class ConsultationRepository {
                 .setParameter("id", id)
                 .getResultList();
 
+        return c;
+    }
+
+    public List<Consultation> findConsultationByPatientAndDoctor(
+            long patientId,
+            long doctorId ){
+
+        List<Consultation> c = entityManager.createQuery("SELECT c" +
+                " From Consultation c" +
+                " WHERE patient_id = :patientId AND" +
+                " doctor_id = :doctorId")
+                .setParameter("patientId", patientId)
+                .setParameter("doctorId", doctorId)
+                .getResultList();
         return c;
     }
 
@@ -99,5 +116,4 @@ public class ConsultationRepository {
     }
 
     // Consultations cannot be deleted
-
 }
