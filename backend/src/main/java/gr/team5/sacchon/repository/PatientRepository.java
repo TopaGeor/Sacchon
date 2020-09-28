@@ -53,18 +53,6 @@ public class PatientRepository extends ServerResource {
         return patientList;
     }
 
-//    // Find patient from specific doctor id, which needs consultation
-//    public List<Patient> findPatientsNeedsCons(long id){
-//        List<Patient> patients = entityManager.createQuery("SELECT  p"+
-//                " FROM Consultation c"+
-//                "INNER JOIN c.doctor_id p" +
-//                " WHERE doctor_id = :id")
-//                .setParameter("id", id)
-//                .getResultList();
-//
-//        return patients;
-//    }
-
     // Save a new patient
     public Optional<Patient> save(Patient patient){
         try {
