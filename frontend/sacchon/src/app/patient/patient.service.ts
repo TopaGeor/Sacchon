@@ -4,7 +4,10 @@ import { Observable } from 'rxjs';
 import { Consultations } from '../shared/consultations/consultations';
 import { Patient } from '../shared/patient';
 import { PatientData } from '../shared/patient-data';
+<<<<<<< HEAD
 // import { PatientDataDetailComponent } from '../shared/patient-data-detail/patient-data-detail.component';
+=======
+>>>>>>> origin/master
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +19,8 @@ export class PatientService {
   readonly app = "http://localhost:9000/";
 
 
-  username = "chief";
-  password = "chief";
+  username = "patient";
+  password = "patient";
 
   
   getPatient(): Observable<Patient[]> {
@@ -67,14 +70,14 @@ export class PatientService {
     );
   }
 
-  postPatientData(values): Observable<any>{
+  postPatientData(id, values): Observable<PatientData[]>{
     console.log(values);
-    return this.http.post(
-      this.app+"patient",
+    return this.http.post<PatientData[]>(
+      this.app+"patient/"+`${id}`+"/data",
       {
         'bloodGlucose':values.get('bloodGlucose').value,
         'carbIntake':values.get('carbIntake').value,
-        'date':values.get(Date.now).value
+        'date': new Date()
       },
       {
         headers:new HttpHeaders({'Authorization': 'Basic ' + btoa(this.username + ':' + this.password)})

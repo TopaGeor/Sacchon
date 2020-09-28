@@ -4,8 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import { DoctorComponent } from './doctor/doctor/doctor.component';
 
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { AuthPageComponent } from './layouts/auth-page/auth-page.component';
 import { PatientDataDetailComponent } from './shared/patient-data-detail/patient-data-detail.component';
 import { PatientDetailsComponent } from './patient/patient-details/patient-details.component';
 import { PatientNullComponent } from './patient/patient-null/patient-null.component';
@@ -16,57 +14,32 @@ import { PostPatientDataComponent } from './patient/post-patient-data/post-patie
 
 const routes: Routes = [
   {
-    path: "",
-    redirectTo: "dashboard",
-    pathMatch: "full"
-  },
-  {
-    path: '',
-    component: AdminLayoutComponent,
-    children: [
-      {
-        path: '',
-        loadChildren:
-          () => import('./layouts/admin-layout/admin-layout.module').then(m => m.AdminLayoutModule)
-      }
-    ]
-  }, {
-    path: '',
-    component: AuthPageComponent,
-    children: [
-      {
-        path: '',
-        loadChildren: () => import('./layouts/auth-page/auth.module').then(m => m.AuthModule)
-      }
-    ]
-  },
-  {
     path: 'patient',
     children: [
       {
         path: '',
         component: PatientComponent,
-        loadChildren: () => import('./patient/patient.module').then(m => m.PatientModule)
       },
       {
         path: ':id',
         component: PatientDetailsComponent,
-        loadChildren: () => import('./patient/patient.module').then(m => m.PatientModule)
       },
       {
         path: ':id/data',
         component: PatientDataComponent,
-        loadChildren: () => import('./patient/patient.module').then(m => m.PatientModule)
+
+      },
+      {
+        path: ':id/data/post',
+        component: PostPatientDataComponent,
       },
       {
         path: ':patientId/data/:dataId',
         component: PatientDataDetailComponent,
-        loadChildren: () => import('./patient/patient.module').then(m => m.PatientModule)
       },
       {
         path: ':patientId/:doctorId/consultation',
         component: ConsultationsComponent,
-        loadChildren: () => import('./patient/patient.module').then(m => m.PatientModule)
       }
     ]
   },
@@ -76,9 +49,9 @@ const routes: Routes = [
       {
         path: '',
         component: PatientNullComponent,
-        loadChildren: () => import('./patient/patient.module').then(m => m.PatientModule)
       }
     ]
+<<<<<<< HEAD
   },
   {
     path: 'post-patient-data',
@@ -108,6 +81,8 @@ const routes: Routes = [
   {
     path: "**",
     redirectTo: "dashboard"
+=======
+>>>>>>> origin/master
   }
 ];
 
@@ -115,9 +90,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     BrowserModule,
-    RouterModule.forRoot(routes, {
-      useHash: true
-    })
+    RouterModule.forRoot(routes)
   ],
   exports: [RouterModule]
 })
