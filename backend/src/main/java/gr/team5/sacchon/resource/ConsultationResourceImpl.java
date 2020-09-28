@@ -25,7 +25,6 @@ public class ConsultationResourceImpl extends ServerResource implements Consulta
     public static final Logger LOGGER = Engine.getLogger(ConsultationResourceImpl.class);
 
     private long id;
-    private long doctorId;
     private long patientId;
     private ConsultationRepository consultationRepository;
     private EntityManager entityManager;
@@ -53,7 +52,6 @@ public class ConsultationResourceImpl extends ServerResource implements Consulta
             patientRepository = new PatientRepository(entityManager);
 
             id = Long.parseLong(getAttribute("id"));
-            doctorId = Long.parseLong(getAttribute("doctor_id"));
             patientId = Long.parseLong(getAttribute("patient_id"));
 
         } catch (Exception e) {
@@ -84,6 +82,7 @@ public class ConsultationResourceImpl extends ServerResource implements Consulta
             setExisting(oConsultation.isPresent());
 
             if (!isExisting()) {
+
                 LOGGER.config("consultation id does not exist: " + id);
                 throw new NotFoundException("No consultation with id: " + id);
             } else {
@@ -92,18 +91,9 @@ public class ConsultationResourceImpl extends ServerResource implements Consulta
                 setExisting(oPatient.isPresent());
 
                 if (!isExisting()) {
+
                     LOGGER.config("patient id does not exist: " + patientId);
                     throw new NotFoundException("No patient with id: " + patientId);
-                }
-
-                // Checking if doctor and patient are correct
-                if ( oConsultation.get().getDoctor().getId() != doctorId){
-                    LOGGER.config("This doctor has not access to this consultation: " + doctorId);
-                    throw new NotFoundException("No consultation with id: " + doctorId);
-                }
-                if ( oConsultation.get().getPatient().getId() != patientId){
-                    LOGGER.config("This patient has not access to this consultation: " + patientId);
-                    throw new NotFoundException("No consultation with id: " + patientId);
                 }
 
                 consultation = oConsultation.get();
@@ -159,23 +149,13 @@ public class ConsultationResourceImpl extends ServerResource implements Consulta
 
                 LOGGER.finer("Update consultation.");
 
-                // Checking if doctor and patient are correct
-                if ( oConsultation.get().getDoctor().getId() != doctorId){
-                    LOGGER.config("This doctor has not access to this consultation: " + doctorId);
-                    throw new NotFoundException("No consultation with id: " + doctorId);
-                }
-                if ( oConsultation.get().getPatient().getId() != patientId){
-                    LOGGER.config("This patient has not access to this consultation: " + patientId);
-                    throw new NotFoundException("No consultation with id: " + patientId);
-                }
-
-                // Update patient consultation in DB and retrieve them
+                // update patient consultation in DB and retrieve them
                 consultationOut = consultationRepository.update(consultationIn);
 
+                //patientRepository.updateNotification(patientId);
                 Optional <Patient> oPatient = patientRepository.findById(patientId);
                 setExisting(oPatient.isPresent());
 
-                // If consultation updated, notification -> true
                 if(isExisting()){
                     patientRepository.updateHasNotification(patientId, true);
                 }

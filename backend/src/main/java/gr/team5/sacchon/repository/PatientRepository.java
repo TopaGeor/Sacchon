@@ -1,7 +1,6 @@
 package gr.team5.sacchon.repository;
 
 import gr.team5.sacchon.model.Patient;
-import gr.team5.sacchon.representation.PatientRepresentation;
 import org.restlet.resource.ServerResource;
 
 import javax.persistence.EntityManager;

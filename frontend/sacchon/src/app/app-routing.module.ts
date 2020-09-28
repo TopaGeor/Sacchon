@@ -51,6 +51,35 @@ const routes: Routes = [
         component: PatientNullComponent,
       }
     ]
+  },
+  {
+    path: 'post-patient-data',
+    children: [
+      {
+        path: '',
+        component: PostPatientDataComponent,
+        loadChildren: () => import('./patient/patient.module').then(m => m.PatientModule)
+      }
+    ]
+  },
+  {
+    path: 'doctor',
+    children: [
+      {
+        path: '',
+        component: DoctorComponent,
+        loadChildren: () => import('./doctor/doctor.module').then(m => m.DoctorModule)
+      },
+      {
+        path: ':doctorId',
+        component: DoctorComponent,
+        loadChildren: () => import('./doctor/doctor.module').then(m => m.DoctorModule)
+      },
+    ]
+  },
+  {
+    path: "**",
+    redirectTo: "dashboard"
   }
 ];
 
