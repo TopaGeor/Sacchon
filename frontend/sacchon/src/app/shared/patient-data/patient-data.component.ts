@@ -24,9 +24,5 @@ export class PatientDataComponent implements OnInit {
       console.log(patientData);
     })
   }
-  
-  public clickOnSubmit() {
-    this.router.navigateByUrl('/post-patient-data');
-  };
 
 }

@@ -51,7 +51,6 @@ const routes: Routes = [
         component: PatientNullComponent,
       }
     ]
-<<<<<<< HEAD
   },
   {
     path: 'post-patient-data',
@@ -81,8 +80,6 @@ const routes: Routes = [
   {
     path: "**",
     redirectTo: "dashboard"
-=======
->>>>>>> origin/master
   }
 ];
 
