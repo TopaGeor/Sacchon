@@ -11,8 +11,18 @@ import { PatientComponent } from './patient/patient/patient.component';
 import { PatientDataComponent } from './shared/patient-data/patient-data.component';
 import { ConsultationsComponent } from './shared/consultations/consultations.component';
 import { PostPatientDataComponent } from './patient/post-patient-data/post-patient-data.component';
+import { PatientLoginComponent } from './login-layout/patient-login/patient-login.component';
 
 const routes: Routes = [
+  {
+    path: 'login',
+    children: [
+      {
+        path: 'patient',
+        component: PatientLoginComponent
+      }
+    ]
+  },
   {
     path: 'patient',
     children: [
