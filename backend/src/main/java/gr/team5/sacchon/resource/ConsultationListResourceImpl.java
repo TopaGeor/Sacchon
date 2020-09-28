@@ -174,16 +174,26 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
             List<Consultation> consultations;
             List<ConsultationRepresentation> result = new ArrayList<>();
 
-            if ( this.isInRole(Shield.ROLE_PATIENT) ){
+            if((patientId != null) && (doctorId != null)){
+                Optional<Patient> oPatient = patientRepository.findById(patientId);
+
+                if (oPatient.get().getDoctor().getId() != doctorId){
+                    throw new NotFoundException("This patient has different doctor");
+                }
+                consultations = consultationRepository
+                        .findConsultationByPatientAndDoctor(
+                                patientId, doctorId);
+
+            } else if ((patientId == null) && (doctorId != null)) {
+                consultations = consultationRepository.findConsultationByDoctorId(doctorId);
+
+            } else if ((patientId != null) && (doctorId == null)) {
                 consultations = consultationRepository.findAllConsultationByPatientId(patientId);
 
-                // if patient read all consultations, notification=false
-                patientRepository.updateHasNotification(patientId, false);
-            } else if ( this.isInRole(Shield.ROLE_DOCTOR)) {
-                consultations = consultationRepository.findConsultationByDoctorId(doctorId);
-            } else{ // chief doctor
+            } else {
                 consultations = consultationRepository.findAll();
             }
+
             consultations.forEach(consultation -> result.add(new ConsultationRepresentation(consultation)));
 
             return result;
