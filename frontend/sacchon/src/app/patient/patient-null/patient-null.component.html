@@ -14,15 +14,13 @@
                     <th>id</th>
                     <th>hasNotification</th>
                     <th>username</th>
-                    <th>doctor_id</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let patient of patients">
-                    <td>{{patient.id}}</td>
-                    <td>{{patient.hasNotification}}</td>
-                    <td>{{patient.username}}</td>
-                    <td>{{patient.doctor_id}}</td>
+                  <tr *ngFor="let pn of patientNull">
+                    <td>{{pn.id}}</td>
+                    <td>{{pn.hasNotification}}</td>
+                    <td>{{pn.username}}</td>
                   </tr>
                 </tbody>
               </table>

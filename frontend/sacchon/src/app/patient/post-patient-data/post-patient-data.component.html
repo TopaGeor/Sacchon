@@ -1,0 +1,17 @@
+<form [formGroup]="form">
+  <table align="center" border="1">
+
+    <tr>
+      <td>bloodGlucose </td>
+      <td><input type="text" id="bloodGlucose" name="bloodGlucose" formControlName="bloodGlucose"> </td>
+    </tr>
+    <tr>
+      <td>carbIntake </td>
+      <td> <input type="text" id="carbIntake" name="carbIntake" formControlName="carbIntake"> </td>
+    </tr>
+    <tr>
+      <td>
+        <button (click)="clickOnSubmit()">Submit </button>
+  </table>
+
+</form>

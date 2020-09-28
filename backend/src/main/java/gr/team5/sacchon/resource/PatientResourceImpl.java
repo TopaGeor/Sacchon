@@ -2,9 +2,13 @@ package gr.team5.sacchon.resource;
 
 import gr.team5.sacchon.exception.BadEntityException;
 import gr.team5.sacchon.exception.NotFoundException;
+import gr.team5.sacchon.model.Consultation;
 import gr.team5.sacchon.model.Doctor;
 import gr.team5.sacchon.model.Patient;
+import gr.team5.sacchon.model.PatientData;
+import gr.team5.sacchon.repository.ConsultationRepository;
 import gr.team5.sacchon.repository.DoctorRepository;
+import gr.team5.sacchon.repository.PatientDataRepository;
 import gr.team5.sacchon.repository.PatientRepository;
 import gr.team5.sacchon.repository.util.JpaUtil;
 import gr.team5.sacchon.representation.PatientRepresentation;
@@ -16,6 +20,7 @@ import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,7 +32,9 @@ public class PatientResourceImpl extends ServerResource implements PatientResour
     private long id;
     private Long doctorId;
     private PatientRepository patientRepository;
+    private PatientDataRepository patientDataRepository;
     private DoctorRepository doctorRepository;
+    private ConsultationRepository consultationRepository;
     private EntityManager entityManager;
 
     /**
@@ -49,6 +56,8 @@ public class PatientResourceImpl extends ServerResource implements PatientResour
         try {
             entityManager = JpaUtil.getEntityManager();
             patientRepository = new PatientRepository(entityManager);
+            patientDataRepository = new PatientDataRepository(entityManager);
+            consultationRepository = new ConsultationRepository(entityManager);
             id = Long.parseLong(getAttribute("id"));
             try{
                 doctorRepository = new DoctorRepository(entityManager);
@@ -81,18 +90,37 @@ public class PatientResourceImpl extends ServerResource implements PatientResour
 
         try {
             Optional<Patient> oPatient = patientRepository.findById(id);
-
             setExisting(oPatient.isPresent());
-            if (!isExisting()) {
 
+            if (!isExisting()) {
                 LOGGER.config("patient id does not exist: " + id);
                 throw new NotFoundException("No patient with id: " + id);
             } else {
 
+                if (doctorId != null){
+
+                    Optional<Doctor> oDoctor = doctorRepository.findById(doctorId);
+                    setExisting(oDoctor.isPresent());
+
+                    if (!isExisting()) {
+
+                        LOGGER.config("doctor id does not exist: " + doctorId);
+                        throw new NotFoundException("No doctor with id: " + doctorId);
+                    }
+                    if (oPatient.get().getDoctor() == null){
+                        LOGGER.config("this patient has no doctor");
+                        throw new NotFoundException("this patient has no doctor");
+                    }
+                    if (oPatient.get().getDoctor().getId() != oDoctor.get().getId()){
+                        LOGGER.config("this patient do not belong to doctor with id: " + doctorId);
+                        throw new NotFoundException("this patient do not belong to doctor with id: " + doctorId);
+                    }
+                }
+
                 patient = oPatient.get();
                 LOGGER.finer("User allowed to retrieve a patient.");
                 PatientRepresentation result = new PatientRepresentation(patient);
-
+                //result.setPassword("");
                 LOGGER.finer("Patient successfully retrieved.");
 
                 return result;
@@ -119,6 +147,20 @@ public class PatientResourceImpl extends ServerResource implements PatientResour
         LOGGER.finer("User allowed to remove a patient.");
 
         try {
+            // Remove patient from foreign key of consultations
+            List<Consultation> listOfPatientCons = consultationRepository.findConsultationByPatientId(id);
+            listOfPatientCons.forEach(patientCons -> {
+                patientCons.setPatient(null);
+                consultationRepository.update(patientCons);
+            });
+
+            // Remove patient from foreign key of patient data
+            List<PatientData> listOfPatientData = patientDataRepository.findDataById(id);
+            listOfPatientData.forEach(patientData -> {
+                patientData.setPatient(null);
+                patientDataRepository.update(patientData);
+            });
+
             Boolean isDeleted = patientRepository.delete(id);
 
             if (!isDeleted) {
@@ -169,8 +211,8 @@ public class PatientResourceImpl extends ServerResource implements PatientResour
 
                 LOGGER.finer("Update patient.");
 
+                // Set a doctor to a patient
                 if(doctorId != null){
-                    //patientRepository.setDoctorToPatient(id, doctorId);
                     Optional<Doctor> oDoctor = doctorRepository.findById(doctorId);
                     patientIn.setDoctor(oDoctor.get());
                 }
@@ -181,7 +223,6 @@ public class PatientResourceImpl extends ServerResource implements PatientResour
                 // Check if retrieved patient is not null
                 // if null it means the id is wrong.
                 if (!patientOut.isPresent()) {
-
                     LOGGER.fine("Patient does not exist.");
                     throw new NotFoundException("Patient with the following id does not exist: " + id);
                 }
