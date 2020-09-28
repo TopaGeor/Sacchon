@@ -92,12 +92,17 @@ const routes: Routes = [
   },
   {
     path: 'doctor',
-    component: DoctorComponent,
     children: [
       {
         path: '',
+        component: DoctorComponent,
         loadChildren: () => import('./doctor/doctor.module').then(m => m.DoctorModule)
-      }
+      },
+      {
+        path: ':doctorId',
+        component: DoctorComponent,
+        loadChildren: () => import('./doctor/doctor.module').then(m => m.DoctorModule)
+      },
     ]
   },
   {
