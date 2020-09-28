@@ -67,14 +67,14 @@ export class PatientService {
     );
   }
 
-  postPatientData(values): Observable<any>{
+  postPatientData(id, values): Observable<PatientData[]>{
     console.log(values);
-    return this.http.post(
-      this.app+"patient",
+    return this.http.post<PatientData[]>(
+      this.app+"patient/"+`${id}`+"/data",
       {
         'bloodGlucose':values.get('bloodGlucose').value,
         'carbIntake':values.get('carbIntake').value,
-        'date':values.get(Date.now).value
+        'date': new Date()
       },
       {
         headers:new HttpHeaders({'Authorization': 'Basic ' + btoa(this.username + ':' + this.password)})
