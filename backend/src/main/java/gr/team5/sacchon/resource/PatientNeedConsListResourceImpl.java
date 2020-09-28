@@ -2,6 +2,7 @@ package gr.team5.sacchon.resource;
 
 import gr.team5.sacchon.exception.NotFoundException;
 import gr.team5.sacchon.model.Patient;
+import gr.team5.sacchon.repository.DoctorRepository;
 import gr.team5.sacchon.repository.PatientRepository;
 import gr.team5.sacchon.repository.util.JpaUtil;
 import gr.team5.sacchon.representation.PatientRepresentation;
@@ -16,31 +17,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class PatientNullListResourceImpl extends ServerResource implements PatientNullListResource {
+public class PatientNeedConsListResourceImpl extends ServerResource implements PatientNeedConsListResource{
+    public static  final Logger LOGGER = Engine.getLogger(PatientNeedConsListResourceImpl.class);
 
-    public static  final Logger LOGGER = Engine.getLogger(PatientNullListResourceImpl.class);
-
-    private PatientRepository patientRepository;
+    private DoctorRepository doctorRepository;
+    private long doctorId;
     private EntityManager entityManager;
 
     /**
-     * This release method closes the entityManager
-     */
+     *  This release method closes the entityManager
+    **/
     @Override
     protected void doRelease() {
         entityManager.close();
     }
 
-    /**
-     * Initializes the patient repository
-     */
-    protected void doInit() {
+    protected void doInit(){
 
         LOGGER.info("Initializing patient list resource starts");
-
         try {
             entityManager = JpaUtil.getEntityManager();
-            patientRepository = new PatientRepository(entityManager);
+            doctorRepository = new DoctorRepository(entityManager);
+            doctorId = Long.parseLong(getAttribute("doctor_id"));
         } catch (Exception e) {
             throw new ResourceException(e);
         }
@@ -48,28 +46,24 @@ public class PatientNullListResourceImpl extends ServerResource implements Patie
         LOGGER.info("Initializing patient list resource ends");
     }
 
-    /**
-     *
-     * @return patients with doctor id null
-     * @throws NotFoundException
-     */
     @Override
-    public List<PatientRepresentation> getPatientsWithNullDoctorID() throws NotFoundException {
-
-        LOGGER.finer("Select all patients that their doctor id is null.");
+    public List<Patient> getPatientsWithNoCons() throws NotFoundException {
+        LOGGER.finer("Select all patients that they need consultation.");
 
         // Check authorization, if role is patient, not allowed
         ResourceUtils.checkRole(this, Shield.ROLE_PATIENT);
 
         try {
+//            List<Patient> patients  = doctorRepository.findPatientsNeedsCons(doctorId);
+//            return patients;
 
-            List<Patient> patients  = patientRepository.findPatientWithDoctorIdNull();
-            List<PatientRepresentation> result = new ArrayList<>();
-            patients.forEach(patient -> result.add(new PatientRepresentation(patient)));
+//
+//            List<PatientRepresentation> result = new ArrayList<>();
+//            patients.forEach(patient -> result.add(new PatientRepresentation(patient)));
 
-            return result;
         } catch (Exception e) {
             throw new NotFoundException("patient list not found");
         }
+        return null;
     }
 }
