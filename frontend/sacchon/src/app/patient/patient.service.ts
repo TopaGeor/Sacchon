@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { Consultations } from '../shared/consultations/consultations';
 import { Patient } from '../shared/patient';
 import { PatientData } from '../shared/patient-data';
-import { PatientDataDetailComponent } from '../shared/patient-data-detail/patient-data-detail.component';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +15,8 @@ export class PatientService {
   readonly app = "http://localhost:9000/";
 
 
-  username = "chief";
-  password = "chief";
+  username = "patient";
+  password = "patient";
 
   
   getPatient(): Observable<Patient[]> {
