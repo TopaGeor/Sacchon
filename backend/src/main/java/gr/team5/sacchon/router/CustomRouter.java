@@ -54,8 +54,8 @@ public class CustomRouter {
         router.attach("/doctor/{doctor_id}/patient/{patient_id}/consultation", ConsultationListResourceImpl.class);
 
         // get all for specific doctor/patient
-        router.attach("/doctor/{doctor_id}/consultation", ConsultationListResourceImpl.class);
-        router.attach("/patient/{patient_id}/consultation", PatientNeedConsListResourceImpl.class);
+//        router.attach("/doctor/{doctor_id}/consultation", ConsultationListResourceImpl.class);
+//        router.attach("/patient/{patient_id}/consultation", PatientNeedConsListResourceImpl.class);
 
         return router;
     }
