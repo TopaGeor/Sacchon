@@ -79,4 +79,11 @@ export class PatientService {
         headers:new HttpHeaders({'Authorization': 'Basic ' + btoa(this.username + ':' + this.password)})
       });
   }
+
+  // deletePatientData(patientId, dataId): Observable<PatientData[]>{
+  //   return this.http.delete<PatientData[]>(
+  //     this.app+"patient/"+`${patientId}`+"/data/"+`${dataId}`,
+  //     {headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' +this.password)})}
+  //   )
+  // }
 }

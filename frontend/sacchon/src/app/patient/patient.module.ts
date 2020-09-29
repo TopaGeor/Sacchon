@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { PatientComponent } from './patient/patient.component';
 import { PatientRoutingModule } from './patient-routing.module';
 
-import { PatientDetailsComponent } from './patient-details/patient-details.component';
 import { ConsultationsComponent } from '../shared/consultations/consultations.component';
 import { PatientNullComponent } from './patient-null/patient-null.component';
 import { PostPatientDataComponent } from './post-patient-data/post-patient-data.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PatientDetailsComponent } from './patient-details/patient-details.component';
 
 
 

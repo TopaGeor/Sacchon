@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PatientService } from 'src/app/patient/patient.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-patient-data',
@@ -10,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class PatientDataComponent implements OnInit {
   patientData;
-  id =  this.route.snapshot.paramMap.get("id"); 
+  patientId =  this.route.snapshot.paramMap.get("id"); 
 
   constructor(
     private service: PatientService,
@@ -19,10 +18,13 @@ export class PatientDataComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.service.getPatientsData(this.id).subscribe(
+    this.service.getPatientsData(this.patientId).subscribe(
       patientData => {this.patientData = patientData;
       console.log(patientData);
     })
   }
 
+  clickAndGo() {
+    this.router.navigateByUrl('./post');
+  }
 }

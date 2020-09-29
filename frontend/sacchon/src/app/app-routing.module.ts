@@ -1,34 +1,30 @@
-import { CommonModule } from '@angular/common';
+
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+
 import { Routes, RouterModule } from '@angular/router';
 import { DoctorComponent } from './doctor/doctor/doctor.component';
 
 import { PatientDataDetailComponent } from './shared/patient-data-detail/patient-data-detail.component';
-import { PatientDetailsComponent } from './patient/patient-details/patient-details.component';
+
 import { PatientNullComponent } from './patient/patient-null/patient-null.component';
 import { PatientComponent } from './patient/patient/patient.component';
 import { PatientDataComponent } from './shared/patient-data/patient-data.component';
 import { ConsultationsComponent } from './shared/consultations/consultations.component';
 import { PostPatientDataComponent } from './patient/post-patient-data/post-patient-data.component';
-import { PatientLoginComponent } from './login-layout/patient-login/patient-login.component';
+import { PatientDetailsComponent } from './patient/patient-details/patient-details.component';
+import { LoginComponent } from './patient/login/login.component';
 
 const routes: Routes = [
-  {
-    path: 'login',
-    children: [
-      {
-        path: 'patient',
-        component: PatientLoginComponent
-      }
-    ]
-  },
   {
     path: 'patient',
     children: [
       {
         path: '',
         component: PatientComponent,
+      },
+      {
+        path: 'login',
+        component: LoginComponent
       },
       {
         path: ':id',
@@ -95,8 +91,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    CommonModule,
-    BrowserModule,
     RouterModule.forRoot(routes)
   ],
   exports: [RouterModule]
