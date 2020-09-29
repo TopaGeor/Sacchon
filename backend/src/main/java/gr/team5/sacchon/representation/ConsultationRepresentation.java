@@ -12,6 +12,8 @@ public class ConsultationRepresentation {
     private String advice;
     private Date dateCreated;
     private long patientId;
+    private long doctorId;
+    private long consultationId;
 
     /**
      * The URL of this resource which is:
@@ -29,6 +31,8 @@ public class ConsultationRepresentation {
             advice = consultation.getAdvice();
             dateCreated = consultation.getDateCreated();
             patientId = consultation.getPatient().getId();
+            doctorId = consultation.getDoctor().getId();
+            consultationId = consultation.getId();
             uri = "http://localhost:9000/patient/" + patientId + "/consultation/" + consultation.getId();
         }
     }
