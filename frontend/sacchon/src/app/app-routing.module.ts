@@ -15,6 +15,7 @@ import { PatientLoginComponent } from './login-layout/patient-login/patient-logi
 import { DoctorLoginComponent } from './login-layout/doctor-login/doctor-login.component';
 import { ChiefDoctorLoginComponent } from './login-layout/chief-doctor-login/chief-doctor-login.component';
 import { DoctorDetailsComponent } from './doctor/doctor-details/doctor-details.component';
+import { PostConsultationComponent } from './doctor/post-consultation/post-consultation.component';
 
 const routes: Routes = [
   {
@@ -91,9 +92,17 @@ const routes: Routes = [
       },
       {
         path: ':doctorId',
-        component: DoctorDetailsComponent,
-        loadChildren: () => import('./doctor/doctor.module').then(m => m.DoctorModule)
+        component: DoctorDetailsComponent
       },
+    ]
+  },
+  {
+    path: 'consultation',
+    children: [
+      {
+        path: '?doctor_id=:doctorId&?patient_id=:patientId',
+        component: PostConsultationComponent,
+      }
     ]
   },
   {
