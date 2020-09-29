@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PatientService } from 'src/app/patient/patient.service';
 import { Router } from '@angular/router';
+import { PatientData } from 'src/app/shared/patient-data';
 
 @Component({
   selector: 'app-patient-data',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./patient-data.component.scss']
 })
 export class PatientDataComponent implements OnInit {
-  patientData;
+  patientData: PatientData[];
   id =  this.route.snapshot.paramMap.get("id"); 
 
   constructor(
