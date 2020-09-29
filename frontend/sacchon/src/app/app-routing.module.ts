@@ -13,6 +13,7 @@ import { ConsultationsComponent } from './shared/consultations/consultations.com
 import { PostPatientDataComponent } from './patient/post-patient-data/post-patient-data.component';
 import { PatientLoginComponent } from './login-layout/patient-login/patient-login.component';
 import { DoctorLoginComponent } from './login-layout/doctor-login/doctor-login.component';
+import { ChiefDoctorLoginComponent } from './login-layout/chief-doctor-login/chief-doctor-login.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,10 @@ const routes: Routes = [
       {
         path: 'doctor',
         component: DoctorLoginComponent
+      },
+      {
+        path: 'chief_doctor',
+        component: ChiefDoctorLoginComponent
       }
     ]
   },
