@@ -15,6 +15,7 @@ public class PatientDataRepresentation {
     private Double carbIntake;
     private Date date;
     private long patientId;
+    private long dataId;
 
     /**
      * The URL of this resource which is:
@@ -33,6 +34,7 @@ public class PatientDataRepresentation {
             carbIntake = patientData.getCarbIntake();
             date = patientData.getDate();
             patientId = patientData.getPatient().getId();
+            dataId = patientData.getId();
             uri = "http://localhost:9000/patient/" + patientId + "/data/" + patientData.getId();
         }
     }
