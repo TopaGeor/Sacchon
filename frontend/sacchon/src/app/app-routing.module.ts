@@ -12,6 +12,7 @@ import { PatientDataComponent } from './shared/patient-data/patient-data.compone
 import { ConsultationsComponent } from './shared/consultations/consultations.component';
 import { PostPatientDataComponent } from './patient/post-patient-data/post-patient-data.component';
 import { PatientLoginComponent } from './login-layout/patient-login/patient-login.component';
+import { DoctorLoginComponent } from './login-layout/doctor-login/doctor-login.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
       {
         path: 'patient',
         component: PatientLoginComponent
+      },
+      {
+        path: 'doctor',
+        component: DoctorLoginComponent
       }
     ]
   },
