@@ -44,4 +44,11 @@ export class DoctorService {
       }
     );
   }
+
+  deleteDoctor(doctorId): Observable<any>{
+    return this.http.delete<any>(
+      this.app+"patient/" + doctorId,
+      {headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' + this.password)})}
+    )
+  }
 }
