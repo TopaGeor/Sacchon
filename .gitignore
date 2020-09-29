@@ -1,2 +1,5 @@
 backend/notes.txt
 backend/myApp.log
+backend/target/
+backend/shelf/
+backend/workspace.xml
