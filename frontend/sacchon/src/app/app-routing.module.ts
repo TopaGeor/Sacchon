@@ -12,19 +12,29 @@ import { PatientDataComponent } from './shared/patient-data/patient-data.compone
 import { ConsultationsComponent } from './shared/consultations/consultations.component';
 import { PostPatientDataComponent } from './patient/post-patient-data/post-patient-data.component';
 import { PatientDetailsComponent } from './patient/patient-details/patient-details.component';
-import { LoginComponent } from './patient/login/login.component';
+import { PatientLoginComponent } from './login-layout/patient-login/patient-login.component';
+import { DoctorLoginComponent } from './login-layout/doctor-login/doctor-login.component';
 
 const routes: Routes = [
+  {
+    path: 'login',
+    children: [
+      {
+        path: 'patient',
+        component: PatientLoginComponent
+      },
+      {
+        path: 'doctor',
+        component: DoctorLoginComponent
+      }
+    ]
+  },
   {
     path: 'patient',
     children: [
       {
         path: '',
         component: PatientComponent,
-      },
-      {
-        path: 'login',
-        component: LoginComponent
       },
       {
         path: ':id',
