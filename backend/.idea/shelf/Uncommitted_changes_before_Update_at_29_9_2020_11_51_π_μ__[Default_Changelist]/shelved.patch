@@ -1,0 +1,18 @@
+Index: target/classes/META-INF/persistence.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<persistence xmlns=\"http://xmlns.jcp.org/xml/ns/persistence\"\r\n             xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n             xsi:schemaLocation=\"http://xmlns.jcp.org/xml/ns/persistence\r\n             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd\"\r\n             version=\"2.1\">\r\n\r\n    <persistence-unit name=\"PERSISTENCE\">\r\n        <description> Hibernate JPA Configuration Example</description>\r\n        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>\r\n\r\n        <properties>\r\n            <property name=\"javax.persistence.jdbc.driver\" value=\"com.microsoft.sqlserver.jdbc.SQLServerDriver\" />\r\n            <property name=\"javax.persistence.jdbc.url\"    value=\"jdbc:sqlserver://localhost;databaseName=sacchonDB\" />\r\n            <property name=\"javax.persistence.jdbc.user\" value=\"sa\" />\r\n            <property name=\"javax.persistence.jdbc.password\" value=\"passw0rd\" />\r\n<!--            <property name=\"javax.persistence.jdbc.password\" value=\"QWE123!@#\" />-->\r\n\r\n\r\n            <property name=\"hibernate.dialect\" value=\"org.hibernate.dialect.SQLServer2012Dialect\"/>\r\n            <property name=\"hibernate.hbm2ddl.auto\" value=\"update\" />\r\n            <property name=\"hibernate.show_sql\" value=\"true\"/>\r\n        </properties>\r\n\r\n    </persistence-unit>\r\n\r\n</persistence>\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- target/classes/META-INF/persistence.xml	(revision bd7770497da32423fbc99813ef56eaa66a5c1d0c)
++++ target/classes/META-INF/persistence.xml	(date 1601367462730)
+@@ -14,7 +14,7 @@
+             <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+             <property name="javax.persistence.jdbc.url"    value="jdbc:sqlserver://localhost;databaseName=sacchonDB" />
+             <property name="javax.persistence.jdbc.user" value="sa" />
+-            <property name="javax.persistence.jdbc.password" value="passw0rd" />
++            <property name="javax.persistence.jdbc.password" value="admin1" />
+ <!--            <property name="javax.persistence.jdbc.password" value="QWE123!@#" />-->
+ 
+ 
