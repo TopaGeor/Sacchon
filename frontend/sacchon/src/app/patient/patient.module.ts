@@ -13,6 +13,8 @@ import { PatientDataDetailComponent } from './patient-data-detail/patient-data-d
 import { PutPatientDataComponent } from './put-patient-data/put-patient-data.component';
 import { DeletePatientDataComponent } from './delete-patient-data/delete-patient-data.component';
 import { PostPatientDataComponent } from './post-patient-data/post-patient-data.component';
+import { DeletePatientComponent } from './delete-patient/delete-patient.component';
+import { AverageComponent } from './average/average.component';
 
 
 
@@ -26,7 +28,9 @@ import { PostPatientDataComponent } from './post-patient-data/post-patient-data.
     PatientDataComponent,
     PatientDataDetailComponent,
     PutPatientDataComponent,
-    DeletePatientDataComponent
+    DeletePatientDataComponent,
+    DeletePatientComponent,
+    AverageComponent
   ],
   imports: [
     CommonModule,
