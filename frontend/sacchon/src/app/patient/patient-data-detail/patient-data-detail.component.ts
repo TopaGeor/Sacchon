@@ -9,8 +9,8 @@ import { PatientService } from '../../patient/patient.service';
 })
 export class PatientDataDetailComponent implements OnInit {
   patientDataDetail;
-  patient_id = this.route.snapshot.paramMap.get("patient_id");
-  id = this.route.snapshot.paramMap.get("id");
+  patientId = this.route.snapshot.paramMap.get("patientId");
+  dataId = this.route.snapshot.paramMap.get("dataId");
   
 
   constructor(
@@ -19,7 +19,7 @@ export class PatientDataDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.service.getPatientsDataDetail(this.patient_id, this.id).subscribe(
+    this.service.getPatientsDataDetail(this.patientId, this.dataId).subscribe(
       patientDataDetail => { this.patientDataDetail = patientDataDetail;
       console.log(patientDataDetail);
       })

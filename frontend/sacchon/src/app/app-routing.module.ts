@@ -16,6 +16,8 @@ import { DoctorLoginComponent } from './login-layout/doctor-login/doctor-login.c
 import { ChiefDoctorLoginComponent } from './login-layout/chief-doctor-login/chief-doctor-login.component';
 import { DoctorDetailsComponent } from './doctor/doctor-details/doctor-details.component';
 import { PostConsultationComponent } from './doctor/post-consultation/post-consultation.component';
+import { PutPatientDataComponent } from './patient/put-patient-data/put-patient-data.component';
+import { DeletePatientDataComponent } from './patient/delete-patient-data/delete-patient-data.component';
 
 const routes: Routes = [
   {
@@ -58,6 +60,14 @@ const routes: Routes = [
       {
         path: ':patientId/data/:dataId',
         component: PatientDataDetailComponent,
+      },
+      {
+        path: ':patientId/data/:dataId/edit',
+        component: PutPatientDataComponent,
+      },
+      {
+        path: ':patientId/data/:dataId/delete',
+        component: DeletePatientDataComponent,
       },
       {
         path: ':patientId/:doctorId/consultation',
