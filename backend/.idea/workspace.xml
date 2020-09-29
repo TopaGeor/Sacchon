@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b392d9dc-3999-45a8-965e-8ae59f709060" name="Default Changelist" comment="fix it ?" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="chous-branch" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.2.1\plugins\maven\lib\maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1hvHMBR8oqAy4hXbJSgpJKFWYrO" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunManager">
+    <configuration name="ApiMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="gr.team5.sacchon.ApiMain" />
+      <module name="backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="gr.team5.sacchon.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ApiMain" />
+        <item itemvalue="Application.ApiMain" />
+        <item itemvalue="Application.ApiMain" />
+        <item itemvalue="Application.ApiMain" />
+        <item itemvalue="Application.ApiMain" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b392d9dc-3999-45a8-965e-8ae59f709060" name="Default Changelist" comment="" />
+      <created>1600884595386</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1600884595386</updated>
+    </task>
+    <task id="LOCAL-00001" summary="fix one issues 10 more emerge">
+      <created>1600889677076</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1600889677076</updated>
+    </task>
+    <task id="LOCAL-00002" summary="avg for blood and carb">
+      <created>1600979271219</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1600979271219</updated>
+    </task>
+    <task id="LOCAL-00003" summary="assing doctor to patient, create query for deleting doctors">
+      <created>1601059843239</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1601059843239</updated>
+    </task>
+    <task id="LOCAL-00004" summary="modify user notification when read consultation/s and when he has a new one, delete comments, add some brackets">
+      <created>1601203419998</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1601203419998</updated>
+    </task>
+    <task id="LOCAL-00005" summary="-">
+      <created>1601203479111</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1601203479111</updated>
+    </task>
+    <task id="LOCAL-00006" summary="delete useless URI's">
+      <created>1601203549518</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1601203549518</updated>
+    </task>
+    <task id="LOCAL-00007" summary="if doctor id is available, check if patient belongs to doctor.&#10;When remove a patient, unleash dependency of foreign key in patient data and consultation">
+      <created>1601203834193</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1601203834193</updated>
+    </task>
+    <task id="LOCAL-00008" summary="remove comments">
+      <created>1601203876508</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1601203876508</updated>
+    </task>
+    <task id="LOCAL-00009" summary="delete useless functions and change update has notification">
+      <created>1601203995856</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1601203995856</updated>
+    </task>
+    <task id="LOCAL-00010" summary="remove empty line">
+      <created>1601204040516</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1601204040516</updated>
+    </task>
+    <task id="LOCAL-00011" summary="authorization change">
+      <created>1601204350217</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1601204350217</updated>
+    </task>
+    <task id="LOCAL-00012" summary="When a doctor leaves the system, their patients become available again for other doctors to consult. Past consultations of these patients continue to refer to a placeholder doctor.">
+      <created>1601204546476</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1601204546476</updated>
+    </task>
+    <task id="LOCAL-00013" summary="change name of the function findConsultationById to findConsultationByPatientId and create function findConsultationByDoctorId">
+      <created>1601204662188</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1601204662188</updated>
+    </task>
+    <task id="LOCAL-00014" summary="commit last night changes">
+      <created>1601304325593</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1601304325593</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Change how to add consultation">
+      <created>1601313398012</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1601313398012</updated>
+    </task>
+    <task id="LOCAL-00016" summary="remove a useless function">
+      <created>1601319573507</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1601319573507</updated>
+    </task>
+    <task id="LOCAL-00017" summary="commit classes">
+      <created>1601323239053</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1601323239053</updated>
+    </task>
+    <task id="LOCAL-00018" summary="no changes">
+      <created>1601323268217</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1601323268217</updated>
+    </task>
+    <task id="LOCAL-00019" summary="no changes">
+      <created>1601323322276</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1601323322276</updated>
+    </task>
+    <task id="LOCAL-00020" summary="minor change">
+      <created>1601323376658</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1601323376658</updated>
+    </task>
+    <task id="LOCAL-00021" summary="change uri for consultations">
+      <created>1601323461181</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1601323461181</updated>
+    </task>
+    <task id="LOCAL-00022" summary="fix find all and add function findConsultationByPatientAndDoctor">
+      <created>1601323532305</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1601323532305</updated>
+    </task>
+    <task id="LOCAL-00023" summary="fix get consultation">
+      <created>1601323592556</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1601323592556</updated>
+    </task>
+    <task id="LOCAL-00024" summary="fix it ?">
+      <created>1601369401077</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1601369401077</updated>
+    </task>
+    <task id="LOCAL-00025" summary="fix it ?">
+      <created>1601369636304</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1601369636304</updated>
+    </task>
+    <task id="LOCAL-00026" summary="fix it ?">
+      <created>1601370462909</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1601370462909</updated>
+    </task>
+    <task id="LOCAL-00027" summary="fix it ?">
+      <created>1601370540070</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1601370540070</updated>
+    </task>
+    <task id="LOCAL-00028" summary="fix it ?">
+      <created>1601370589035</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1601370589035</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fix one issues 10 more emerge" />
+    <MESSAGE value="avg for blood and carb" />
+    <MESSAGE value="assing doctor to patient, create query for deleting doctors" />
+    <MESSAGE value="modify user notification when read consultation/s and when he has a new one, delete comments, add some brackets" />
+    <MESSAGE value="-" />
+    <MESSAGE value="delete useless URI's" />
+    <MESSAGE value="if doctor id is available, check if patient belongs to doctor.&#10;When remove a patient, unleash dependency of foreign key in patient data and consultation" />
+    <MESSAGE value="remove comments" />
+    <MESSAGE value="delete useless functions and change update has notification" />
+    <MESSAGE value="remove empty line" />
+    <MESSAGE value="authorization change" />
+    <MESSAGE value="When a doctor leaves the system, their patients become available again for other doctors to consult. Past consultations of these patients continue to refer to a placeholder doctor." />
+    <MESSAGE value="change name of the function findConsultationById to findConsultationByPatientId and create function findConsultationByDoctorId" />
+    <MESSAGE value="commit last night changes" />
+    <MESSAGE value="Change how to add consultation" />
+    <MESSAGE value="remove a useless function" />
+    <MESSAGE value="commit classes" />
+    <MESSAGE value="no changes" />
+    <MESSAGE value="minor change" />
+    <MESSAGE value="change uri for consultations" />
+    <MESSAGE value="fix find all and add function findConsultationByPatientAndDoctor" />
+    <MESSAGE value="fix get consultation" />
+    <MESSAGE value="fix it ?" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix it ?" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="605" y="136" key="#com.intellij.ide.util.MemberChooser" timestamp="1601233140079">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="605" y="136" key="#com.intellij.ide.util.MemberChooser/0.0.1600.860@0.0.1600.860" timestamp="1601233140079" />
+    <state width="437" height="442" key="Diff.GoToChangePopup" timestamp="1601368874838">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="437" height="442" key="Diff.GoToChangePopup/0.0.1600.860@0.0.1600.860" timestamp="1601368874838" />
+    <state x="126" y="67" width="1416" height="676" maximized="true" key="DiffContextDialog" timestamp="1601370753654">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="126" y="67" width="1416" height="676" maximized="true" key="DiffContextDialog/0.0.1600.860@0.0.1600.860" timestamp="1601370753654" />
+    <state width="1557" height="318" key="GridCell.Tab.0.bottom" timestamp="1601323868711">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1557" height="318" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1601323868711" />
+    <state width="1557" height="318" key="GridCell.Tab.0.center" timestamp="1601323868711">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1557" height="318" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1601323868711" />
+    <state width="1557" height="318" key="GridCell.Tab.0.left" timestamp="1601323868711">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1557" height="318" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1601323868711" />
+    <state width="1557" height="318" key="GridCell.Tab.0.right" timestamp="1601323868711">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1557" height="318" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1601323868711" />
+    <state width="1557" height="318" key="GridCell.Tab.1.bottom" timestamp="1601323868711">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1557" height="318" key="GridCell.Tab.1.bottom/0.0.1600.860@0.0.1600.860" timestamp="1601323868711" />
+    <state width="1557" height="318" key="GridCell.Tab.1.center" timestamp="1601323868711">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1557" height="318" key="GridCell.Tab.1.center/0.0.1600.860@0.0.1600.860" timestamp="1601323868711" />
+    <state width="1557" height="318" key="GridCell.Tab.1.left" timestamp="1601323868711">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1557" height="318" key="GridCell.Tab.1.left/0.0.1600.860@0.0.1600.860" timestamp="1601323868711" />
+    <state width="1557" height="318" key="GridCell.Tab.1.right" timestamp="1601323868711">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1557" height="318" key="GridCell.Tab.1.right/0.0.1600.860@0.0.1600.860" timestamp="1601323868711" />
+    <state x="156" y="87" key="MergeDialog" timestamp="1601369793225">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="156" y="87" key="MergeDialog/0.0.1600.860@0.0.1600.860" timestamp="1601369793225" />
+    <state x="438" y="191" key="MultipleFileMergeDialog" timestamp="1601369793232">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="438" y="191" key="MultipleFileMergeDialog/0.0.1600.860@0.0.1600.860" timestamp="1601369793232" />
+    <state x="551" y="132" key="RollbackChangesDialog" timestamp="1601367700928">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="551" y="132" key="RollbackChangesDialog/0.0.1600.860@0.0.1600.860" timestamp="1601367700928" />
+    <state x="71" y="47" width="1416" height="676" key="ShowDiffWithBranchDialog" timestamp="1601370753654">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="71" y="47" width="1416" height="676" key="ShowDiffWithBranchDialog/0.0.1600.860@0.0.1600.860" timestamp="1601370753654" />
+    <state x="392" y="163" key="Vcs.Push.Dialog.v2" timestamp="1601370598807">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="392" y="163" key="Vcs.Push.Dialog.v2/0.0.1600.860@0.0.1600.860" timestamp="1601370598807" />
+    <state x="456" y="195" key="run.anything.popup" timestamp="1600886663269">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="456" y="195" key="run.anything.popup/0.0.1600.860@0.0.1600.860" timestamp="1600886663269" />
+    <state x="463" y="180" width="672" height="678" key="search.everywhere.popup" timestamp="1601315686729">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="463" y="180" width="672" height="678" key="search.everywhere.popup/0.0.1600.860@0.0.1600.860" timestamp="1601315686729" />
+  </component>
+</project>
