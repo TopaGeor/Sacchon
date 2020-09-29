@@ -1,9 +1,10 @@
+
 <div class=" content">
     <div class=" row">
       <div class=" col-lg-6 col-md-12">
         <div class="card">
           <div class=" card-header">
-            <h4 class=" card-title">Patients Data</h4>
+            <h4 class=" card-title">Doctor Details</h4>
           </div>
           <div class=" card-body">
             <div class=" table-responsive">
@@ -11,22 +12,19 @@
                 <thead class=" text-primary">
                   <tr>
                     <th>id</th>
-                    <th>hasNotification</th>
-                    <th>n</th>
+                    <th>username</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let pd of patientData">
-                    <td>{{ pd.date |  date:'dd-MM-yy' }}</td>
-                    <td>{{pd.bloodGlucose}}</td>
-                    <td>{{pd.carbIntake}}</td>
+                  <tr *ngIf="doctorDetails">
+                    <td>{{doctorDetails.id}}</td>
+                    <td>{{doctorDetails.username}}</td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
         </div>
-        <button type="button" class="btn btn-primary pull-right" routerLink="./post"><i class="fa fa-plus"></i> Add New Data</button>
       </div>
     </div>
   </div>

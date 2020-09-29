@@ -1,12 +1,7 @@
 package gr.team5.sacchon.repository;
 
 import gr.team5.sacchon.model.Doctor;
-import gr.team5.sacchon.model.Patient;
-import gr.team5.sacchon.model.PatientData;
-import gr.team5.sacchon.representation.PatientRepresentation;
-
 import javax.persistence.EntityManager;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 

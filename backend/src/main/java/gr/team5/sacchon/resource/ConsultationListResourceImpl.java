@@ -29,11 +29,10 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
 
     public static  final Logger LOGGER = Engine.getLogger(ConsultationResourceImpl.class);
 
-    private Long patientId;
-    private Long doctorId;
+    private long id;
+    private long doctorId;
     private ConsultationRepository consultationRepository;
     private PatientRepository patientRepository;
-    private DoctorRepository doctorRepository;
     private EntityManager entityManager;
 
     /**
@@ -47,7 +46,6 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
     /**
      * Initializes the consultation repository
      */
-    @Override
     protected void doInit() {
 
         LOGGER.info("Initializing consultation list resource starts");
@@ -55,22 +53,11 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
         try {
             entityManager = JpaUtil.getEntityManager();
             consultationRepository = new ConsultationRepository(entityManager);
-            patientId = Long.parseLong(getAttribute("patient_id"));
-
+            patientRepository = new PatientRepository(entityManager);
+            id = Long.parseLong(getAttribute("patient_id"));
             if (getAttribute("doctor_id") != null){
                 doctorId = Long.parseLong(getAttribute("doctor_id"));
-                doctorRepository = new DoctorRepository(entityManager);
-            } else {
-                doctorId = null;
             }
-
-            if (getAttribute("patient_id") == null){
-                patientId = Long.parseLong(getAttribute("patient_id"));
-                patientRepository = new PatientRepository(entityManager);
-            } else {
-                patientId = null;
-            }
-
         } catch (Exception e) {
             throw new ResourceException(e);
         }
@@ -90,7 +77,7 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
         LOGGER.finer("Add new consultation.");
 
         // Check authorization, if role is patient or chief, not allowed
-        //ResourceUtils.checkRole(this, Shield.ROLE_PATIENT);
+        ResourceUtils.checkRole(this, Shield.ROLE_PATIENT);
         ResourceUtils.checkRole(this, Shield.ROLE_CHIEF);
 
         LOGGER.finer("User allowed to add a consultation.");
@@ -101,6 +88,8 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
 
         LOGGER.finer("consultation checked");
 
+        DoctorRepository doctorRepository = new DoctorRepository(entityManager);
+
         try {
 
             // Convert ConsultationRepresentation to Consultation
@@ -108,23 +97,10 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
             consultationIn.setAdvice(consultationReprIn.getAdvice());
             consultationIn.setDateCreated(consultationReprIn.getDateCreated());
 
-            if (patientId == null){
-                throw new BadEntityException("Patient is null");
-            }
-
-            if (doctorId == null){
-                throw new BadEntityException("Doctor is null");
-            }
-
-            Optional<Patient> oPatient = patientRepository.findById(patientId);
-
-            if ( oPatient.get().getDoctor().getId() != doctorId ){
-                throw new BadEntityException("This patient has different doctor");
-            }
+            Optional<Patient> oPatient = patientRepository.findById(id);
+            consultationIn.setPatient(oPatient.get());
 
             Optional<Doctor> oDoctor = doctorRepository.findById(doctorId);
-
-            consultationIn.setPatient(oPatient.get());
             consultationIn.setDoctor(oDoctor.get());
 
             Optional<Consultation> consultationOptOut = consultationRepository.save(consultationIn);
@@ -136,8 +112,7 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
                 throw new BadEntityException("Consultation has not been created");
             }
 
-            patientRepository.updateHasNotification(patientId, true);
-
+            patientRepository.updateHasNotification(id, true);
             ConsultationRepresentation result = new ConsultationRepresentation(consultation);
 
             result.setAdvice(consultation.getAdvice());
@@ -172,20 +147,15 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
 //        ResourceUtils.checkRole(this, Shield.ROLE_PATIENT);
 
         try {
-            List<Consultation> consultations;
+
+            List<Consultation> consultations = consultationRepository.findConsultationByPatientId(id);
             List<ConsultationRepresentation> result = new ArrayList<>();
-
-            if ( this.isInRole(Shield.ROLE_PATIENT) ){
-                consultations = consultationRepository.findAllConsultationByPatientId(patientId);
-
-                // if patient read all consultations, notification=false
-                patientRepository.updateHasNotification(patientId, false);
-            } else if ( this.isInRole(Shield.ROLE_DOCTOR)) {
-                consultations = consultationRepository.findConsultationByDoctorId(doctorId);
-            } else{ // chief doctor
-                consultations = consultationRepository.findAll();
-            }
             consultations.forEach(consultation -> result.add(new ConsultationRepresentation(consultation)));
+
+            // if patient read all consultations, notification=false
+            if(this.isInRole(Shield.ROLE_PATIENT)){
+                patientRepository.updateHasNotification(id, false);
+            }
 
             return result;
         } catch (Exception e) {
