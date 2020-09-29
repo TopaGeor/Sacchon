@@ -1,2 +1,51 @@
 backend/notes.txt
 backend/myApp.log
+backend/target/
+backend/shelf/
+backend/workspace.xml
+
+
+# compiled output
+frontend/sacchon/dist
+frontend/sacchon/tmp
+frontend/sacchon/out-tsc
+# Only exists if Bazel was run
+frontend/sacchon/bazel-out
+
+# dependencies
+frontend/sacchon/node_modules
+
+# profiling files
+frontend/sacchon/chrome-profiler-events*.json
+frontend/sacchon/speed-measure-plugin*.json
+
+# IDEs and editors
+frontend/sacchon/.idea
+frontend/sacchon/.project
+frontend/sacchon/.classpath
+frontend/sacchon/.c9/
+frontend/sacchon/*.launchfrontend/sacchon/
+frontend/sacchon/.settings/
+frontend/sacchon/*.sublime-workspace
+
+# IDE - VSCode
+frontend/sacchon/.vscode/*
+frontend/sacchon/!.vscode/settings.json
+frontend/sacchon/!.vscode/tasks.json
+frontend/sacchon/!.vscode/launch.json
+frontend/sacchon/!.vscode/extensions.json
+frontend/sacchon/.history/*
+
+# misc
+frontend/sacchon/.sass-cache
+frontend/sacchon/connect.lock
+frontend/sacchon/coverage
+frontend/sacchon/libpeerconnection.log
+frontend/sacchon/npm-debug.log
+frontend/sacchon/yarn-error.log
+frontend/sacchon/testem.log
+frontend/sacchon/typings
+
+# System Files
+frontend/sacchon/.DS_Store
+frontend/sacchon/Thumbs.db

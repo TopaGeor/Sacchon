@@ -1,6 +1,8 @@
 package gr.team5.sacchon.repository;
 
 import gr.team5.sacchon.model.Consultation;
+import gr.team5.sacchon.model.Patient;
+
 import javax.persistence.EntityManager;
 import java.util.Optional;
 import java.util.List;
@@ -27,7 +29,11 @@ public class ConsultationRepository {
 
     // Find all consultations
     public List<Consultation> findAll() {
-        return entityManager.createQuery("from Consultation").getResultList();
+        List<Consultation> cons = entityManager.createQuery(
+                " FROM Consultation" +
+                " WHERE patient_id IS NOT NULL", Consultation.class)
+                .getResultList();
+        return cons;
     }
 
     // Find Consultations by patient id
@@ -40,6 +46,31 @@ public class ConsultationRepository {
                 .setParameter("id", id)
                 .getResultList();
 
+        return c;
+    }
+
+    // Find all consultations of a patient id
+    public List<Consultation> findAllConsultationByPatientId(long id) {
+        List<Consultation> c = entityManager.createQuery("SELECT c" +
+                " FROM Consultation c" +
+                " WHERE patient_id = :id", Consultation.class)
+                .setParameter("id", id)
+                .getResultList();
+
+        return c;
+    }
+
+    public List<Consultation> findConsultationByPatientAndDoctor(
+            long patientId,
+            long doctorId ){
+
+        List<Consultation> c = entityManager.createQuery("SELECT c" +
+                " From Consultation c" +
+                " WHERE patient_id = :patientId AND" +
+                " doctor_id = :doctorId")
+                .setParameter("patientId", patientId)
+                .setParameter("doctorId", doctorId)
+                .getResultList();
         return c;
     }
 
@@ -85,5 +116,4 @@ public class ConsultationRepository {
     }
 
     // Consultations cannot be deleted
-
 }
