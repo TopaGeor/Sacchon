@@ -20,8 +20,10 @@ import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
 
 import javax.persistence.EntityManager;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -81,9 +83,6 @@ public class PatientResourceImpl extends ServerResource implements PatientResour
 
         LOGGER.info("Retrieve a patient");
 
-        // Checking authorization,if role is patient, not allowed
-        ResourceUtils.checkRole(this, Shield.ROLE_PATIENT);
-
         // Initialize persistence layer
         PatientRepository patientRepository = new PatientRepository(entityManager);
         Patient patient;
@@ -112,8 +111,8 @@ public class PatientResourceImpl extends ServerResource implements PatientResour
                         throw new NotFoundException("this patient has no doctor");
                     }
                     if (oPatient.get().getDoctor().getId() != oDoctor.get().getId()){
-                        LOGGER.config("this patient do not belong to doctor with id: " + doctorId);
-                        throw new NotFoundException("this patient do not belong to doctor with id: " + doctorId);
+                        LOGGER.config("this patient does not belong to doctor with id: " + doctorId);
+                        throw new NotFoundException("this patient does not belong to doctor with id: " + doctorId);
                     }
                 }
 
@@ -155,7 +154,7 @@ public class PatientResourceImpl extends ServerResource implements PatientResour
             });
 
             // Remove patient from foreign key of patient data
-            List<PatientData> listOfPatientData = patientDataRepository.findDataById(id);
+            List<PatientData> listOfPatientData = patientDataRepository.findDataByPatientId(id);
             listOfPatientData.forEach(patientData -> {
                 patientData.setPatient(null);
                 patientDataRepository.update(patientData);
@@ -210,6 +209,30 @@ public class PatientResourceImpl extends ServerResource implements PatientResour
             if (isExisting()) {
 
                 LOGGER.finer("Update patient.");
+                List<PatientData> patientData =
+                        patientDataRepository.findDataByPatientId(id);
+
+                if(patientData.size() < 1){
+                    throw new NotFoundException("This patient has not enough data for consultation");
+                }
+
+                Calendar current = Calendar.getInstance();
+                Calendar creationDate = Calendar.getInstance();
+                final AtomicInteger t = new AtomicInteger(1);
+
+                patientData.forEach(patientData1 -> {
+                    creationDate.setTime(patientData1.getDate());
+                    creationDate.add(Calendar.MONTH, +1);
+                    creationDate.add(Calendar.DATE, -1);
+
+                    if(creationDate.compareTo(current) < 0){
+                        t.set(0);
+                    }
+                });
+
+                if (t.get() == 1){
+                    throw new NotFoundException("This patient is less than a month old");
+                }
 
                 // Set a doctor to a patient
                 if(doctorId != null){
@@ -224,11 +247,12 @@ public class PatientResourceImpl extends ServerResource implements PatientResour
                 // if null it means the id is wrong.
                 if (!patientOut.isPresent()) {
                     LOGGER.fine("Patient does not exist.");
-                    throw new NotFoundException("Patient with the following id does not exist: " + id);
+                    throw new NotFoundException(
+                            "Patient with the following id does not exist: " + patientOut.get().getId());
                 }
             } else {
                 LOGGER.finer("Resource does not exist.");
-                throw new NotFoundException("Patient with the following id does not exist: " + id);
+                throw new NotFoundException("Resource with the following id does not exist: " + id);
             }
 
             LOGGER.finer("Patient successfully updated.");
@@ -237,5 +261,4 @@ public class PatientResourceImpl extends ServerResource implements PatientResour
             throw new ResourceException(e);
         }
     }
-
 }

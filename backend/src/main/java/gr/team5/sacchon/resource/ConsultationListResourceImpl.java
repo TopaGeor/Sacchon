@@ -20,8 +20,10 @@ import org.restlet.resource.ServerResource;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -122,6 +124,27 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
             }
 
             Optional<Doctor> oDoctor = doctorRepository.findById(doctorId);
+
+            List<Consultation> consultations = consultationRepository
+                    .findConsultationByPatientAndDoctor(patientId, doctorId);
+
+            Calendar current = Calendar.getInstance();
+            final AtomicInteger t = new AtomicInteger(0);
+
+            consultations.forEach(consultation -> {
+                Calendar expirationDate = Calendar.getInstance();
+                expirationDate.setTime(consultation.getDateCreated());
+                expirationDate.add(Calendar.MONTH, +1);
+                expirationDate.add(Calendar.DATE, -1);
+
+                if(expirationDate.compareTo(current) >= 0){
+                    t.set(1);
+                }
+            });
+
+            if(t.get() == 1){
+                throw new BadEntityException("This patient has an active consultation");
+            }
 
             consultationIn.setPatient(oPatient.get());
             consultationIn.setDoctor(oDoctor.get());

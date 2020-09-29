@@ -19,23 +19,37 @@ public class DoctorRepository {
 
     private EntityManager entityManager;
 
-    // Constructor
+    /**
+     * DoctorRepository constructor
+     * @param entityManager
+     */
     public DoctorRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
-    // Find doctor by primary key id
+    /**
+     * Find doctor by primary key id
+     * @param id
+     * @return
+     */
     public Optional<Doctor> findById(Long id) {
         Doctor doctor = entityManager.find(Doctor.class, id);
         return doctor != null ? Optional.of(doctor) : Optional.empty();
     }
 
-    // Find all doctors
+    /**
+     * Find all doctors
+     * @return
+     */
     public List<Doctor> findAll() {
         return entityManager.createQuery("from Doctor").getResultList();
     }
 
-    // Save a new doctor
+    /**
+     * Save a new doctor
+     * @param doctor
+     * @return
+     */
     public Optional<Doctor> save(Doctor doctor){
         try {
             entityManager.getTransaction().begin();
@@ -48,7 +62,11 @@ public class DoctorRepository {
         return Optional.empty();
     }
 
-    // Update username & password
+    /**
+     * Update username & password
+     * @param doctor
+     * @return
+     */
     public Optional<Doctor> update(Doctor doctor) {
         Doctor in = entityManager.find(Doctor.class, doctor.getId());
         in.setUsername(doctor.getUsername());
@@ -64,7 +82,11 @@ public class DoctorRepository {
         return Optional.empty();
     }
 
-    // Delete account
+    /**
+     * Delete account
+     * @param id
+     * @return
+     */
     public boolean delete(Long id){
         Optional<Doctor> tempDoctor = findById(id);
         if (tempDoctor.isPresent()){
