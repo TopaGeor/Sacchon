@@ -50,8 +50,8 @@ export class PatientService {
       );
   }
 
-  getPatientsDataDetail(patient_id, id): Observable<PatientData[]> {
-    let url = this.app+"patient/"+patient_id+"/data/"+id
+  getPatientsDataDetail(patientId, dataId): Observable<PatientData[]> {
+    let url = this.app+"patient/"+patientId+"/data/"+dataId
     return this.http.get<PatientData[]>(
       url,
       {headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' +this.password)})}
