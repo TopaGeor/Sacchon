@@ -13,6 +13,7 @@ import { PatientModule } from './patient/patient.module';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './patient/login/login.component';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { LoginComponent } from './patient/login/login.component';
   ],
   imports: [
     RouterModule.forRoot([]),
+    CommonModule,
     BrowserAnimationsModule,
     FormsModule,
     NgbModule,

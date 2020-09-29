@@ -8,6 +8,8 @@ import { PatientNullComponent } from './patient-null/patient-null.component';
 import { PostPatientDataComponent } from './post-patient-data/post-patient-data.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PatientDetailsComponent } from './patient-details/patient-details.component';
+import { PatientDataComponent } from './patient-data/patient-data.component';
+import { PatientDataDetailComponent } from './patient-data-detail/patient-data-detail.component';
 
 
 
@@ -17,7 +19,9 @@ import { PatientDetailsComponent } from './patient-details/patient-details.compo
     PatientNullComponent,
     PatientDetailsComponent, 
     ConsultationsComponent, 
-    PostPatientDataComponent
+    PostPatientDataComponent,
+    PatientDataComponent,
+    PatientDataDetailComponent
   ],
   imports: [
     CommonModule,
