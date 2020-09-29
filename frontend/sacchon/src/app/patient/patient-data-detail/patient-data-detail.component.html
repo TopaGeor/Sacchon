@@ -8,17 +8,18 @@
               <table class=" table tablesorter" >
                 <thead class=" text-primary">
                   <tr>
-                    <th>id</th>
-                    <th>hasNotification</th>
-                    <th>n</th>
+                    <th>Date</th>
+                    <th>Glucose Level</th>
+                    <th>CarbInTake</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngIf="patientDataDetail">
+                  <tr *ngIf="patientDataDetail" (ngSubmit)="clickAndDelete()">
                     <td>{{ patientDataDetail.date |  date:'dd-MM-yy' }}</td>
                     <td>{{patientDataDetail.bloodGlucose}}</td>
                     <td>{{patientDataDetail.carbIntake}}</td>
-                    <!-- <button type="submit" class="btn btn-primary pull-right" (ngSubmit)="clickAndGo()"><i class="fa fa-plus"></i> Add New Data</button> -->
+                    <td><button type="button" class="btn btn-danger pull-right" routerLink="./delete">Remove Data</button></td>
                   </tr>
                 </tbody>
               </table>
