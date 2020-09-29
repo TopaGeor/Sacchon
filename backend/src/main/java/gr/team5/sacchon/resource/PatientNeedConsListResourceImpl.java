@@ -24,6 +24,7 @@ public class PatientNeedConsListResourceImpl extends ServerResource implements P
     private DoctorRepository doctorRepository;
     private long doctorId;
     private ConsultationRepository consultationRepository;
+    private PatientRepository patientRepository;
     private EntityManager entityManager;
 
     /**
@@ -41,6 +42,7 @@ public class PatientNeedConsListResourceImpl extends ServerResource implements P
             entityManager = JpaUtil.getEntityManager();
             doctorRepository = new DoctorRepository(entityManager);
             consultationRepository = new ConsultationRepository(entityManager);
+            patientRepository = new PatientRepository(entityManager);
             doctorId = Long.parseLong(getAttribute("doctor_id"));
         } catch (Exception e) {
             throw new ResourceException(e);
@@ -50,40 +52,37 @@ public class PatientNeedConsListResourceImpl extends ServerResource implements P
     }
 
     @Override
-    public List<Patient> getPatientsWithNoCons() throws NotFoundException {
+    public List<PatientRepresentation> getPatientsWithNoCons() throws NotFoundException {
         LOGGER.finer("Select all patients that they need consultation.");
 
         // Check authorization, if role is patient, not allowed
         ResourceUtils.checkRole(this, Shield.ROLE_PATIENT);
 
         try {
-//            List<Patient> patients  = doctorRepository.findPatientsNeedsCons(doctorId);
-//            return patients;
             List<Consultation> consultations = consultationRepository.findConsultationByDoctorId(doctorId);
-            Set<Integer> idSet;
-            Calendar current = Calendar.getInstance();
+            List<Patient> patients = patientRepository.findPatientWithDoctorId(doctorId);
 
+            Calendar current = Calendar.getInstance();
             consultations.forEach(consultation -> {
                 Calendar expirationDate = Calendar.getInstance();
                 expirationDate.setTime(consultation.getDateCreated());
                 expirationDate.add(Calendar.MONTH, +1);
                 expirationDate.add(Calendar.DATE, -1);
 
-                System.out.println(expirationDate.getTime());
-
-                if(expirationDate.compareTo(current) < 0){
-                    System.out.println("AAAAAA");
-
+                if(expirationDate.compareTo(current) >= 0){
+                    patients.remove(consultation.getPatient());
                 }
             });
 
-//
-//            List<PatientRepresentation> result = new ArrayList<>();
-//            patients.forEach(patient -> result.add(new PatientRepresentation(patient)));
+            List<PatientRepresentation> result = new ArrayList<>();
+            patients.forEach(patient -> result.add(
+                    new PatientRepresentation(patient)
+            ));
+
+            return result;
 
         } catch (Exception e) {
             throw new NotFoundException("patient list not found");
         }
-        return null;
     }
 }

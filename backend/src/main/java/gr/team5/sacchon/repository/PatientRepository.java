@@ -17,22 +17,37 @@ public class PatientRepository extends ServerResource {
     private EntityManager entityManager;
 
     // Constructor
+
+    /**
+     * PatientRepository constructor
+     * @param entityManager
+     */
     public PatientRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
-    // Find patient by primary key id
+    /**
+     * Find patient by primary key id
+     * @param id
+     * @return
+     */
     public Optional<Patient> findById(Long id) {
         Patient patient = entityManager.find(Patient.class, id);
         return patient != null ? Optional.of(patient) : Optional.empty();
     }
 
-    // Find all patients
+    /**
+     * Find all patients
+     * @return
+     */
     public List<Patient> findAll() {
         return entityManager.createQuery("from Patient").getResultList();
     }
 
-    // Find patients with doctor id  null
+    /**
+     * Find patients with doctor id  null
+     * @return
+     */
     public List<Patient> findPatientWithDoctorIdNull() {
         List<Patient> patientList = entityManager
                 .createQuery("SELECT p FROM Patient p" +
@@ -42,7 +57,11 @@ public class PatientRepository extends ServerResource {
         return patientList;
     }
 
-    // Find patients for specific doctor id
+    /**
+     * Find patients for specific doctor id
+     * @param id
+     * @return
+     */
     public List<Patient> findPatientWithDoctorId(Long id) {
         List<Patient> patientList = entityManager
                 .createQuery("SELECT p FROM Patient p" +
@@ -53,7 +72,11 @@ public class PatientRepository extends ServerResource {
         return patientList;
     }
 
-    // Save a new patient
+    /**
+     * Save a new patient
+     * @param patient
+     * @return
+     */
     public Optional<Patient> save(Patient patient){
         try {
             entityManager.getTransaction().begin();
@@ -66,7 +89,11 @@ public class PatientRepository extends ServerResource {
         return Optional.empty();
     }
 
-    // Update username & password
+    /**
+     * Update username & password
+     * @param patient
+     * @return
+     */
     public Optional<Patient> update(Patient patient){
         Patient in = entityManager.find(Patient.class, patient.getId());
         in.setUsername(patient.getUsername());
@@ -84,7 +111,11 @@ public class PatientRepository extends ServerResource {
         return Optional.empty();
     }
 
-    // Update notification for a new consultation
+    /**
+     * Update notification for a new consultation
+     * @param id
+     * @param notification
+     */
     public void updateHasNotification(long id, boolean notification){
         Patient patientIn = entityManager.find(Patient.class, id);
         patientIn.setHasNotification(notification);
@@ -97,7 +128,11 @@ public class PatientRepository extends ServerResource {
         }
     }
 
-    // Delete account
+    /**
+     * Delete account
+     * @param id
+     * @return
+     */
     public boolean delete(Long id){
         Optional<Patient> tempPatient = findById(id);
         if (tempPatient.isPresent()){

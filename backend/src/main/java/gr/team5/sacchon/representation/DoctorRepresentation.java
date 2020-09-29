@@ -10,6 +10,7 @@ public class DoctorRepresentation {
 
     private String username;
     private String password;
+    private long doctorId;
     /**
      * The URL of this resource which is:
      * http://localhost:9000/doctor/{id}
@@ -24,7 +25,8 @@ public class DoctorRepresentation {
             Doctor doctor) {
         if (doctor != null) {
             username = doctor.getUsername();
-            password = doctor.getPassword();
+            doctorId = doctor.getId();
+//            password = doctor.getPassword();
             uri = "http://localhost:9000/doctor/" + doctor.getId();
         }
     }

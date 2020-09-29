@@ -13,7 +13,11 @@ import { PostPatientDataComponent } from './patient/post-patient-data/post-patie
 import { PatientDetailsComponent } from './patient/patient-details/patient-details.component';
 import { PatientLoginComponent } from './login-layout/patient-login/patient-login.component';
 import { DoctorLoginComponent } from './login-layout/doctor-login/doctor-login.component';
+import { ChiefDoctorLoginComponent } from './login-layout/chief-doctor-login/chief-doctor-login.component';
 import { DoctorDetailsComponent } from './doctor/doctor-details/doctor-details.component';
+import { PostConsultationComponent } from './doctor/post-consultation/post-consultation.component';
+import { PutPatientDataComponent } from './patient/put-patient-data/put-patient-data.component';
+import { DeletePatientDataComponent } from './patient/delete-patient-data/delete-patient-data.component';
 
 const routes: Routes = [
   {
@@ -26,6 +30,10 @@ const routes: Routes = [
       {
         path: 'doctor',
         component: DoctorLoginComponent
+      },
+      {
+        path: 'chief_doctor',
+        component: ChiefDoctorLoginComponent
       }
     ]
   },
@@ -52,6 +60,14 @@ const routes: Routes = [
       {
         path: ':patientId/data/:dataId',
         component: PatientDataDetailComponent,
+      },
+      {
+        path: ':patientId/data/:dataId/edit',
+        component: PutPatientDataComponent,
+      },
+      {
+        path: ':patientId/data/:dataId/delete',
+        component: DeletePatientDataComponent,
       },
       {
         path: ':patientId/:doctorId/consultation',
@@ -86,9 +102,17 @@ const routes: Routes = [
       },
       {
         path: ':doctorId',
-        component: DoctorDetailsComponent,
-        loadChildren: () => import('./doctor/doctor.module').then(m => m.DoctorModule)
+        component: DoctorDetailsComponent
       },
+    ]
+  },
+  {
+    path: 'consultation',
+    children: [
+      {
+        path: '?doctor_id=:doctorId&?patient_id=:patientId',
+        component: PostConsultationComponent,
+      }
     ]
   },
   {

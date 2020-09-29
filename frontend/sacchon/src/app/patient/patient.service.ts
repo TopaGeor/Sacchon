@@ -51,7 +51,7 @@ export class PatientService {
   }
 
   getPatientsDataDetail(patientId, dataId): Observable<PatientData[]> {
-    let url = this.app+"patient/"+`${patientId}`+"/data/"+`${dataId}`
+    let url = this.app+"patient/"+patientId+"/data/"+dataId
     return this.http.get<PatientData[]>(
       url,
       {headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' +this.password)})}
@@ -80,10 +80,25 @@ export class PatientService {
       });
   }
 
-  // deletePatientData(patientId, dataId): Observable<PatientData[]>{
-  //   return this.http.delete<PatientData[]>(
-  //     this.app+"patient/"+`${patientId}`+"/data/"+`${dataId}`,
-  //     {headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' +this.password)})}
-  //   )
-  // }
+  putPatientData(patientId, dataId, values): Observable<PatientData[]>{
+    console.log(values);
+    return this.http.post<PatientData[]>(
+      this.app+"patient/"+patientId+"/data/"+dataId,
+      {
+        'bloodGlucose':values.get('bloodGlucose').value,
+        'carbIntake':values.get('carbIntake').value,
+        'date': new Date()
+      },
+      {
+        headers:new HttpHeaders({'Authorization': 'Basic ' + btoa(this.username + ':' + this.password)})
+      });
+  }
+
+  deletePatientData(patientId, dataId): Observable<any>{
+    return this.http.delete<any>(
+      this.app+"patient/"+patientId+"/data/"+dataId,
+      {headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' +this.password)})}
+    )
+  }
+
 }
