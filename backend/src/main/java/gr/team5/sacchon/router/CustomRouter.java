@@ -31,6 +31,8 @@ public class CustomRouter {
         router.attach("/patient/{id}/data/average", PatientDataListResourceImpl.class);
         router.attach("/patient/{patient_id}/data/{id}", PatientDataResourceImpl.class);
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         // set doctor to a patient
         router.attach("/patient/{id}/{doctor_id}", PatientResourceImpl.class);
 
@@ -39,13 +41,10 @@ public class CustomRouter {
         router.attach("/doctor/{id}", DoctorResourceImpl.class);
         router.attach("/doctor/{id}/patient", PatientListResourceImpl.class);
 
-        // find patients with no consultation
-        router.attach("/doctor/{doctor_id}/patientNoCons", PatientNeedConsListResourceImpl.class);
-
         // update/get specific patient of a doctor
         router.attach("/doctor/{doctor_id}/patient/{id}", PatientResourceImpl.class);
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // update & delete
         router.attach("/doctor/{doctor_id}/patient/{patient_id}/consultation/{id}", ConsultationResourceImpl.class);
@@ -53,7 +52,8 @@ public class CustomRouter {
         // add, get all for specific doctor/patient/all
         router.attach("/consultation", ConsultationListResourceImpl.class);
 
-//        /consultation?doctor_id=11&find="needsConsultation"
+        // find patients with no consultation
+        router.attach("/doctor/{doctor_id}/patientNoCons", PatientNeedConsListResourceImpl.class);
 
         return router;
     }
