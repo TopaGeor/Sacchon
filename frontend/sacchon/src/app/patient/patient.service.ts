@@ -100,4 +100,5 @@ export class PatientService {
       {headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' +this.password)})}
     )
   }
+
 }

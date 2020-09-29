@@ -25,6 +25,4 @@ export class PatientDataComponent implements OnInit {
       console.log(patientData);
     })
   }
-
-
 }

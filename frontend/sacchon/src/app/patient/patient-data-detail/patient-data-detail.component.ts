@@ -11,7 +11,6 @@ export class PatientDataDetailComponent implements OnInit {
   patientDataDetail;
   patientId = this.route.snapshot.paramMap.get("patientId");
   dataId = this.route.snapshot.paramMap.get("dataId");
-  
 
   constructor(
     private service: PatientService,
