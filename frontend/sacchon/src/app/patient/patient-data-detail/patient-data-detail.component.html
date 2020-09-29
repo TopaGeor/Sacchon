@@ -1,14 +1,11 @@
 
 <div class=" content">
-    <div class=" row">
-      <div class=" col-lg-6 col-md-12">
         <div class="card">
           <div class=" card-header">
             <h4 class=" card-title">Patients Data</h4>
           </div>
-          <div class=" card-body">
             <div class=" table-responsive">
-              <table class=" table tablesorter" id="">
+              <table class=" table tablesorter" >
                 <thead class=" text-primary">
                   <tr>
                     <th>id</th>
@@ -21,13 +18,10 @@
                     <td>{{ patientDataDetail.date |  date:'dd-MM-yy' }}</td>
                     <td>{{patientDataDetail.bloodGlucose}}</td>
                     <td>{{patientDataDetail.carbIntake}}</td>
+                    <!-- <button type="submit" class="btn btn-primary pull-right" (ngSubmit)="clickAndGo()"><i class="fa fa-plus"></i> Add New Data</button> -->
                   </tr>
                 </tbody>
               </table>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
   </div>
-  
