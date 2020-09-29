@@ -1,42 +1,39 @@
-import { CommonModule } from '@angular/common';
+
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+
 import { Routes, RouterModule } from '@angular/router';
 import { DoctorComponent } from './doctor/doctor/doctor.component';
 
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { AuthPageComponent } from './layouts/auth-page/auth-page.component';
-import { PatientDataDetailComponent } from './shared/patient-data-detail/patient-data-detail.component';
-import { PatientDetailsComponent } from './patient/patient-details/patient-details.component';
+import { PatientDataDetailComponent } from './patient/patient-data-detail/patient-data-detail.component';
 import { PatientNullComponent } from './patient/patient-null/patient-null.component';
 import { PatientComponent } from './patient/patient/patient.component';
-import { PatientDataComponent } from './shared/patient-data/patient-data.component';
+import { PatientDataComponent } from './patient/patient-data/patient-data.component';
 import { ConsultationsComponent } from './shared/consultations/consultations.component';
 import { PostPatientDataComponent } from './patient/post-patient-data/post-patient-data.component';
+import { PatientDetailsComponent } from './patient/patient-details/patient-details.component';
+import { PatientLoginComponent } from './login-layout/patient-login/patient-login.component';
+import { DoctorLoginComponent } from './login-layout/doctor-login/doctor-login.component';
+import { ChiefDoctorLoginComponent } from './login-layout/chief-doctor-login/chief-doctor-login.component';
+import { DoctorDetailsComponent } from './doctor/doctor-details/doctor-details.component';
+import { PostConsultationComponent } from './doctor/post-consultation/post-consultation.component';
+import { PutPatientDataComponent } from './patient/put-patient-data/put-patient-data.component';
+import { DeletePatientDataComponent } from './patient/delete-patient-data/delete-patient-data.component';
 
 const routes: Routes = [
   {
-    path: "",
-    redirectTo: "dashboard",
-    pathMatch: "full"
-  },
-  {
-    path: '',
-    component: AdminLayoutComponent,
+    path: 'login',
     children: [
       {
-        path: '',
-        loadChildren:
-          () => import('./layouts/admin-layout/admin-layout.module').then(m => m.AdminLayoutModule)
-      }
-    ]
-  }, {
-    path: '',
-    component: AuthPageComponent,
-    children: [
+        path: 'patient',
+        component: PatientLoginComponent
+      },
       {
-        path: '',
-        loadChildren: () => import('./layouts/auth-page/auth.module').then(m => m.AuthModule)
+        path: 'doctor',
+        component: DoctorLoginComponent
+      },
+      {
+        path: 'chief_doctor',
+        component: ChiefDoctorLoginComponent
       }
     ]
   },
@@ -46,27 +43,35 @@ const routes: Routes = [
       {
         path: '',
         component: PatientComponent,
-        loadChildren: () => import('./patient/patient.module').then(m => m.PatientModule)
       },
       {
         path: ':id',
         component: PatientDetailsComponent,
-        loadChildren: () => import('./patient/patient.module').then(m => m.PatientModule)
       },
       {
         path: ':id/data',
         component: PatientDataComponent,
-        loadChildren: () => import('./patient/patient.module').then(m => m.PatientModule)
+
+      },
+      {
+        path: ':id/data/post',
+        component: PostPatientDataComponent,
       },
       {
         path: ':patientId/data/:dataId',
         component: PatientDataDetailComponent,
-        loadChildren: () => import('./patient/patient.module').then(m => m.PatientModule)
+      },
+      {
+        path: ':patientId/data/:dataId/edit',
+        component: PutPatientDataComponent,
+      },
+      {
+        path: ':patientId/data/:dataId/delete',
+        component: DeletePatientDataComponent,
       },
       {
         path: ':patientId/:doctorId/consultation',
         component: ConsultationsComponent,
-        loadChildren: () => import('./patient/patient.module').then(m => m.PatientModule)
       }
     ]
   },
@@ -76,7 +81,6 @@ const routes: Routes = [
       {
         path: '',
         component: PatientNullComponent,
-        loadChildren: () => import('./patient/patient.module').then(m => m.PatientModule)
       }
     ]
   },
@@ -86,17 +90,28 @@ const routes: Routes = [
       {
         path: '',
         component: PostPatientDataComponent,
-        loadChildren: () => import('./patient/patient.module').then(m => m.PatientModule)
       }
     ]
   },
   {
     path: 'doctor',
-    component: DoctorComponent,
     children: [
       {
         path: '',
-        loadChildren: () => import('./doctor/doctor.module').then(m => m.DoctorModule)
+        component: DoctorComponent,
+      },
+      {
+        path: ':doctorId',
+        component: DoctorDetailsComponent
+      },
+    ]
+  },
+  {
+    path: 'consultation',
+    children: [
+      {
+        path: '?doctor_id=:doctorId&?patient_id=:patientId',
+        component: PostConsultationComponent,
       }
     ]
   },
@@ -108,11 +123,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    CommonModule,
-    BrowserModule,
-    RouterModule.forRoot(routes, {
-      useHash: true
-    })
+    RouterModule.forRoot(routes)
   ],
   exports: [RouterModule]
 })

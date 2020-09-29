@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { PatientService } from '../patient.service';
 
 @Component({
@@ -9,24 +10,26 @@ import { PatientService } from '../patient.service';
 })
 export class PostPatientDataComponent implements OnInit {
   form: FormGroup;
+  id = this.route.snapshot.paramMap.get("id"); 
 
   constructor(
     private fb: FormBuilder,
-    private service: PatientService
+    private service: PatientService,
+    private route: ActivatedRoute
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.form = this.fb.group({
-      bloodGlucose: [''],
-      carbIntake: [''],
+      bloodGlucose: [null, Validators.required],
+      carbIntake: [null, Validators.required],
     });
   }
 
-  clickOnSubmit() {
-    this.service.postPatientData(this.form).subscribe(patientData => 
+  onSubmit() { 
+    this.service.postPatientData(this.id, this.form).subscribe(patientData => 
       {
-        alert(JSON.stringify(patientData))
-        this.ngOnInit();
+        console.log(patientData);
+        //this.ngOnInit();
       });
   }
 

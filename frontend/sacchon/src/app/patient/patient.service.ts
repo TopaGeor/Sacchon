@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { Consultations } from '../shared/consultations/consultations';
 import { Patient } from '../shared/patient';
 import { PatientData } from '../shared/patient-data';
-import { PatientDataDetailComponent } from '../shared/patient-data-detail/patient-data-detail.component';
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +51,7 @@ export class PatientService {
   }
 
   getPatientsDataDetail(patientId, dataId): Observable<PatientData[]> {
-    let url = this.app+"patient/"+`${patientId}`+"/data/"+`${dataId}`
+    let url = this.app+"patient/"+patientId+"/data/"+dataId
     return this.http.get<PatientData[]>(
       url,
       {headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' +this.password)})}
@@ -67,17 +66,38 @@ export class PatientService {
     );
   }
 
-  postPatientData(values): Observable<any>{
+  postPatientData(id, values): Observable<PatientData[]>{
     console.log(values);
-    return this.http.post(
-      this.app+"patient",
+    return this.http.post<PatientData[]>(
+      this.app+"patient/"+`${id}`+"/data",
       {
         'bloodGlucose':values.get('bloodGlucose').value,
         'carbIntake':values.get('carbIntake').value,
-        'date':values.get(Date.now).value
+        'date': new Date()
       },
       {
         headers:new HttpHeaders({'Authorization': 'Basic ' + btoa(this.username + ':' + this.password)})
       });
+  }
+
+  putPatientData(patientId, dataId, values): Observable<PatientData[]>{
+    console.log(values);
+    return this.http.post<PatientData[]>(
+      this.app+"patient/"+patientId+"/data/"+dataId,
+      {
+        'bloodGlucose':values.get('bloodGlucose').value,
+        'carbIntake':values.get('carbIntake').value,
+        'date': new Date()
+      },
+      {
+        headers:new HttpHeaders({'Authorization': 'Basic ' + btoa(this.username + ':' + this.password)})
+      });
+  }
+
+  deletePatientData(patientId, dataId): Observable<any>{
+    return this.http.delete<any>(
+      this.app+"patient/"+patientId+"/data/"+dataId,
+      {headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' +this.password)})}
+    )
   }
 }

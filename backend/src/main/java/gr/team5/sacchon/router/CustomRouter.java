@@ -44,8 +44,6 @@ public class CustomRouter {
         // update/get specific patient of a doctor
         router.attach("/doctor/{doctor_id}/patient/{id}", PatientResourceImpl.class);
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         // update & delete
         router.attach("/doctor/{doctor_id}/patient/{patient_id}/consultation/{id}", ConsultationResourceImpl.class);
 

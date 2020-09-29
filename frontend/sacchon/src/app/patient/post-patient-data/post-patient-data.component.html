@@ -1,17 +1,26 @@
-<form [formGroup]="form">
-  <table align="center" border="1">
-
-    <tr>
-      <td>bloodGlucose </td>
-      <td><input type="text" id="bloodGlucose" name="bloodGlucose" formControlName="bloodGlucose"> </td>
-    </tr>
-    <tr>
-      <td>carbIntake </td>
-      <td> <input type="text" id="carbIntake" name="carbIntake" formControlName="carbIntake"> </td>
-    </tr>
-    <tr>
-      <td>
-        <button (click)="clickOnSubmit()">Submit </button>
-  </table>
-
-</form>
+<div class="container mr-5 mt-5">
+  <div class="card" style="width: 18rem;">
+    <article class="card-body">
+      <h4 class="card-title mb-4 mt-1">Insert your daily data</h4>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label  class="font-weight-bold" for="bloodGlucose">Blood Glucose: </label>
+          <input  type="text"
+                  class="form-control"
+                  id="bloodGlucose"
+                  placeholder="in mg/dL"
+                  formControlName="bloodGlucose"/>
+        </div>
+        <div class="form-group">
+          <label  class="font-weight-bold" for="carbIntake">Carb Intake: </label>
+          <input  type="text"
+                  class="form-control"
+                  id="carbIntake"
+                  placeholder="in grams"
+                  formControlName="carbIntake"/>
+        </div>
+    <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>
+  </form>
+</article>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+
+<div class=" content">
+    <div class=" row">
+      <div class=" col-lg-6 col-md-12">
+        <div class="card">
+          <div class=" card-header">
+            <h4 class=" card-title">Doctor Details</h4>
+          </div>
+          <div class=" card-body">
+            <div class=" table-responsive">
+              <table class=" table tablesorter" id="">
+                <thead class=" text-primary">
+                  <tr>
+                    <th>id</th>
+                    <th>username</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngIf="doctorDetails">
+                    <td>{{doctorDetails.id}}</td>
+                    <td>{{doctorDetails.username}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
