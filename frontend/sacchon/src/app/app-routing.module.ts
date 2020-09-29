@@ -18,6 +18,8 @@ import { DoctorDetailsComponent } from './doctor/doctor-details/doctor-details.c
 import { PostConsultationComponent } from './doctor/post-consultation/post-consultation.component';
 import { PutPatientDataComponent } from './patient/put-patient-data/put-patient-data.component';
 import { DeletePatientDataComponent } from './patient/delete-patient-data/delete-patient-data.component';
+import { DeleteDoctorComponent } from './doctor/delete-doctor/delete-doctor.component';
+import { PutConsultationComponent } from './doctor/put-consultation/put-consultation.component';
 
 const routes: Routes = [
   {
@@ -104,17 +106,26 @@ const routes: Routes = [
         path: ':doctorId',
         component: DoctorDetailsComponent
       },
-    ]
-  },
-  {
-    path: 'consultation',
-    children: [
       {
-        path: '?doctor_id=:doctorId&?patient_id=:patientId',
+        path: ':doctorId/deleteDoc',
+        component: DeleteDoctorComponent
+      },
+      {
+        path: ':doctorId/patient/:patientId/consultation/post',
         component: PostConsultationComponent,
+      },
+      {
+        path: ':doctorId/patient/:patientId/consultation/:consId',
+        component: PutConsultationComponent
       }
     ]
   },
+  // {
+  //   path: 'consultation',
+  //   children: [
+      
+  //   ]
+  // },
   {
     path: "**",
     redirectTo: "dashboard"

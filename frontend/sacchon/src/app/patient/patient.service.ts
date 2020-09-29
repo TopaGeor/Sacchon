@@ -15,8 +15,8 @@ export class PatientService {
   readonly app = "http://localhost:9000/";
 
 
-  username = "chief";
-  password = "chief";
+  username = "patient";
+  password = "patient";
 
   
   getPatient(): Observable<Patient[]> {
@@ -82,7 +82,7 @@ export class PatientService {
 
   putPatientData(patientId, dataId, values): Observable<PatientData[]>{
     console.log(values);
-    return this.http.post<PatientData[]>(
+    return this.http.put<PatientData[]>(
       this.app+"patient/"+patientId+"/data/"+dataId,
       {
         'bloodGlucose':values.get('bloodGlucose').value,

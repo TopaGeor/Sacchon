@@ -14,6 +14,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './patient/login/login.component';
 import { CommonModule } from '@angular/common';
+import { DoctorModule } from './doctor/doctor.module';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { CommonModule } from '@angular/common';
     AppRoutingModule,
     PatientModule,
     HttpClientModule,
+    DoctorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

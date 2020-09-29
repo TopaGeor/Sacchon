@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -23,6 +24,7 @@ export class PostConsultationComponent implements OnInit {
     this.form = this.fb.group({
       advice: [null, Validators.required]
     });
+
   }
 
   onSubmit() {
