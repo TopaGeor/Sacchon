@@ -1,7 +1,9 @@
 package gr.team5.sacchon.resource;
 
 import gr.team5.sacchon.exception.NotFoundException;
+import gr.team5.sacchon.model.Consultation;
 import gr.team5.sacchon.model.Patient;
+import gr.team5.sacchon.repository.ConsultationRepository;
 import gr.team5.sacchon.repository.DoctorRepository;
 import gr.team5.sacchon.repository.PatientRepository;
 import gr.team5.sacchon.repository.util.JpaUtil;
@@ -13,8 +15,7 @@ import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
 
 import javax.persistence.EntityManager;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Logger;
 
 public class PatientNeedConsListResourceImpl extends ServerResource implements PatientNeedConsListResource{
@@ -22,6 +23,7 @@ public class PatientNeedConsListResourceImpl extends ServerResource implements P
 
     private DoctorRepository doctorRepository;
     private long doctorId;
+    private ConsultationRepository consultationRepository;
     private EntityManager entityManager;
 
     /**
@@ -38,6 +40,7 @@ public class PatientNeedConsListResourceImpl extends ServerResource implements P
         try {
             entityManager = JpaUtil.getEntityManager();
             doctorRepository = new DoctorRepository(entityManager);
+            consultationRepository = new ConsultationRepository(entityManager);
             doctorId = Long.parseLong(getAttribute("doctor_id"));
         } catch (Exception e) {
             throw new ResourceException(e);
@@ -56,6 +59,23 @@ public class PatientNeedConsListResourceImpl extends ServerResource implements P
         try {
 //            List<Patient> patients  = doctorRepository.findPatientsNeedsCons(doctorId);
 //            return patients;
+            List<Consultation> consultations = consultationRepository.findConsultationByDoctorId(doctorId);
+            Set<Integer> idSet;
+            Calendar current = Calendar.getInstance();
+
+            consultations.forEach(consultation -> {
+                Calendar expirationDate = Calendar.getInstance();
+                expirationDate.setTime(consultation.getDateCreated());
+                expirationDate.add(Calendar.MONTH, +1);
+                expirationDate.add(Calendar.DATE, -1);
+
+                System.out.println(expirationDate.getTime());
+
+                if(expirationDate.compareTo(current) < 0){
+                    System.out.println("AAAAAA");
+
+                }
+            });
 
 //
 //            List<PatientRepresentation> result = new ArrayList<>();
