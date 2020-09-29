@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface PatientNeedConsListResource {
     @Get("json")
-    public List<Patient> getPatientsWithNoCons() throws NotFoundException;
+    public List<PatientRepresentation> getPatientsWithNoCons() throws NotFoundException;
 }
