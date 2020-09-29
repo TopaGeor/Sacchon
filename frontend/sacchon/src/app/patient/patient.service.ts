@@ -58,6 +58,15 @@ export class PatientService {
       );
   }
 
+  getPatientsDataAverage(patientId, opts): Observable<PatientData[]> {
+    let url = this.app+"patient/"+patientId+"/data/average";
+    return this.http.get<PatientData[]>(
+      url,
+      {params: opts, 
+        headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' +this.password)})}
+    )
+  }
+
   getPatientsConsultation(patientId, doctorId): Observable<Consultations[]> {
     let url = this.app+"doctor/"+`${doctorId}`+"/patient/"+`${patientId}`+"/consultation"
     return this.http.get<Consultations[]>(
@@ -100,4 +109,5 @@ export class PatientService {
       {headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' +this.password)})}
     )
   }
+
 }

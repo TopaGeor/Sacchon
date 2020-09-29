@@ -8,7 +8,6 @@ import { PatientDataDetailComponent } from './patient/patient-data-detail/patien
 import { PatientNullComponent } from './patient/patient-null/patient-null.component';
 import { PatientComponent } from './patient/patient/patient.component';
 import { PatientDataComponent } from './patient/patient-data/patient-data.component';
-import { ConsultationsComponent } from './shared/consultations/consultations.component';
 import { PostPatientDataComponent } from './patient/post-patient-data/post-patient-data.component';
 import { PatientDetailsComponent } from './patient/patient-details/patient-details.component';
 import { PatientLoginComponent } from './login-layout/patient-login/patient-login.component';
@@ -18,6 +17,7 @@ import { DoctorDetailsComponent } from './doctor/doctor-details/doctor-details.c
 import { PostConsultationComponent } from './doctor/post-consultation/post-consultation.component';
 import { PutPatientDataComponent } from './patient/put-patient-data/put-patient-data.component';
 import { DeletePatientDataComponent } from './patient/delete-patient-data/delete-patient-data.component';
+import { AverageComponent } from './patient/average/average.component';
 import { DeleteDoctorComponent } from './doctor/delete-doctor/delete-doctor.component';
 import { PutConsultationComponent } from './doctor/put-consultation/put-consultation.component';
 
@@ -60,6 +60,10 @@ const routes: Routes = [
         component: PostPatientDataComponent,
       },
       {
+        path: ':patientId/data/average',
+        component: AverageComponent,
+      },
+      {
         path: ':patientId/data/:dataId',
         component: PatientDataDetailComponent,
       },
@@ -70,10 +74,6 @@ const routes: Routes = [
       {
         path: ':patientId/data/:dataId/delete',
         component: DeletePatientDataComponent,
-      },
-      {
-        path: ':patientId/:doctorId/consultation',
-        component: ConsultationsComponent,
       }
     ]
   },
@@ -83,15 +83,6 @@ const routes: Routes = [
       {
         path: '',
         component: PatientNullComponent,
-      }
-    ]
-  },
-  {
-    path: 'post-patient-data',
-    children: [
-      {
-        path: '',
-        component: PostPatientDataComponent,
       }
     ]
   },
