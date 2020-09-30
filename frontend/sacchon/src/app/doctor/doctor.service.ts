@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Consultations } from '../shared/consultations/consultations';
 import { Doctor } from '../shared/doctor';
+import { Consultations } from './consultations/consultations';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +28,16 @@ export class DoctorService {
     return this.http.get<Doctor[]>(
       url,
       {headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' +this.password)})}
+    );
+  }
+
+  getConsultation(patientId, doctorId): Observable<Consultations[]> {
+    let url = this.app + "consultation"
+    return this.http.get<Consultations[]>(
+      url,
+      {
+        params: {doctor_id: doctorId, patient_id: patientId },
+        headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' +this.password)})}
     );
   }
 

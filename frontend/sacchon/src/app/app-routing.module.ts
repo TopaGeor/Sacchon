@@ -20,6 +20,7 @@ import { DeletePatientDataComponent } from './patient/delete-patient-data/delete
 import { AverageComponent } from './patient/average/average.component';
 import { DeleteDoctorComponent } from './doctor/delete-doctor/delete-doctor.component';
 import { PutConsultationComponent } from './doctor/put-consultation/put-consultation.component';
+import { ConsultationsComponent } from './doctor/consultations/consultations.component';
 
 const routes: Routes = [
   {
@@ -100,6 +101,10 @@ const routes: Routes = [
       {
         path: ':doctorId/deleteDoc',
         component: DeleteDoctorComponent
+      },
+      {
+        path: ':doctorId/consultation',
+        component: ConsultationsComponent,
       },
       {
         path: ':doctorId/patient/:patientId/consultation/post',
