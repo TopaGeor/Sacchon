@@ -1,7 +1,7 @@
-package gr.team5.sacchon.resource;
+package gr.team5.sacchon.resource.chief;
 
 import gr.team5.sacchon.exception.NotFoundException;
-import gr.team5.sacchon.representation.ChiefInfoSubRepresentation;
+import gr.team5.sacchon.representation.chief.ChiefInfoSubRepresentation;
 import org.restlet.resource.Get;
 
 import java.util.List;

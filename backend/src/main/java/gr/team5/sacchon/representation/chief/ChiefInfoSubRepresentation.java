@@ -1,7 +1,9 @@
-package gr.team5.sacchon.representation;
+package gr.team5.sacchon.representation.chief;
 
 import gr.team5.sacchon.model.Consultation;
 import gr.team5.sacchon.model.PatientData;
+import gr.team5.sacchon.representation.ConsultationRepresentation;
+import gr.team5.sacchon.representation.PatientDataRepresentation;
 import lombok.Data;
 
 @Data
