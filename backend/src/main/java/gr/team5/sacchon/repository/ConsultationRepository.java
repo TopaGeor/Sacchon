@@ -42,7 +42,8 @@ public class ConsultationRepository {
     public List<Consultation> findAll() {
         List<Consultation> cons = entityManager.createQuery(
                 " FROM Consultation" +
-                " WHERE patient_id IS NOT NULL", Consultation.class)
+                " WHERE patient_id IS NOT NULL" +
+                " AND WHERE doctor_id IS NOT NULL", Consultation.class)
                 .getResultList();
         return cons;
     }

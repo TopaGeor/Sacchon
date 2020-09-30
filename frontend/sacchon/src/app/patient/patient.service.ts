@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Consultations } from '../shared/consultations/consultations';
 import { Patient } from '../shared/patient';
 import { PatientData } from '../shared/patient-data';
 
@@ -15,8 +14,8 @@ export class PatientService {
   readonly app = "http://localhost:9000/";
 
 
-  username = "chief";
-  password = "chief";
+  username = "patient";
+  password = "patient";
 
   
   getPatient(): Observable<Patient[]> {
@@ -58,12 +57,13 @@ export class PatientService {
       );
   }
 
-  getPatientsConsultation(patientId, doctorId): Observable<Consultations[]> {
-    let url = this.app+"doctor/"+`${doctorId}`+"/patient/"+`${patientId}`+"/consultation"
-    return this.http.get<Consultations[]>(
+  getPatientsDataAverage(patientId, opts): Observable<PatientData[]> {
+    let url = this.app+"patient/"+patientId+"/data/average";
+    return this.http.get<PatientData[]>(
       url,
-      {headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' +this.password)})}
-    );
+      {params: opts, 
+        headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' +this.password)})}
+    )
   }
 
   postPatientData(id, values): Observable<PatientData[]>{
@@ -82,7 +82,7 @@ export class PatientService {
 
   putPatientData(patientId, dataId, values): Observable<PatientData[]>{
     console.log(values);
-    return this.http.post<PatientData[]>(
+    return this.http.put<PatientData[]>(
       this.app+"patient/"+patientId+"/data/"+dataId,
       {
         'bloodGlucose':values.get('bloodGlucose').value,
@@ -100,4 +100,5 @@ export class PatientService {
       {headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' +this.password)})}
     )
   }
+
 }
