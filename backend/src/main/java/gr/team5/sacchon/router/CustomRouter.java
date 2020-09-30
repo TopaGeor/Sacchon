@@ -3,6 +3,7 @@ package gr.team5.sacchon.router;
 import gr.team5.sacchon.resource.*;
 import gr.team5.sacchon.resource.chief.ChiefInfoSubImpl;
 import gr.team5.sacchon.resource.chief.ChiefNoActivityImpl;
+import gr.team5.sacchon.resource.chief.ChiefPatientConsPendingImpl;
 import org.restlet.Application;
 import org.restlet.routing.Router;
 
@@ -65,6 +66,9 @@ public class CustomRouter {
 
         // chief retrieving patients or doctors with no activity
         router.attach("/chief/noActivity", ChiefNoActivityImpl.class);
+
+        // chief retrieving patients who are waiting for consultation
+        router.attach("/chief/needCons", ChiefPatientConsPendingImpl.class);
 
 
         return router;
