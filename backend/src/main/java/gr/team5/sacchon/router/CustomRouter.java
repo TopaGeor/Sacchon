@@ -28,6 +28,8 @@ public class CustomRouter {
         router.attach("/patient/{id}", PatientResourceImpl.class);
 
         router.attach("/patient/{id}/data", PatientDataListResourceImpl.class);
+
+        // chief
         router.attach("/patient/{id}/data/average", PatientDataListResourceImpl.class);
         router.attach("/patient/{patient_id}/data/{id}", PatientDataResourceImpl.class);
 
@@ -43,6 +45,8 @@ public class CustomRouter {
 
         // update/get specific patient of a doctor
         router.attach("/doctor/{doctor_id}/patient/{id}", PatientResourceImpl.class);
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // update & delete
         router.attach("/doctor/{doctor_id}/patient/{patient_id}/consultation/{id}", ConsultationResourceImpl.class);
