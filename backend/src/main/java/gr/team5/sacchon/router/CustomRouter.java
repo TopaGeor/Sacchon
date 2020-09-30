@@ -1,6 +1,9 @@
 package gr.team5.sacchon.router;
 
 import gr.team5.sacchon.resource.*;
+import gr.team5.sacchon.resource.chief.ChiefInfoSubImpl;
+import gr.team5.sacchon.resource.chief.ChiefNoActivityImpl;
+import gr.team5.sacchon.resource.chief.ChiefPatientConsPendingImpl;
 import org.restlet.Application;
 import org.restlet.routing.Router;
 
@@ -28,6 +31,7 @@ public class CustomRouter {
         router.attach("/patient/{id}", PatientResourceImpl.class);
 
         router.attach("/patient/{id}/data", PatientDataListResourceImpl.class);
+
         router.attach("/patient/{id}/data/average", PatientDataListResourceImpl.class);
         router.attach("/patient/{patient_id}/data/{id}", PatientDataResourceImpl.class);
 
@@ -44,6 +48,8 @@ public class CustomRouter {
         // update/get specific patient of a doctor
         router.attach("/doctor/{doctor_id}/patient/{id}", PatientResourceImpl.class);
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         // update & delete
         router.attach("/doctor/{doctor_id}/patient/{patient_id}/consultation/{id}", ConsultationResourceImpl.class);
 
@@ -52,6 +58,18 @@ public class CustomRouter {
 
         // find patients with no consultation
         router.attach("/doctor/{doctor_id}/patientNoCons", PatientNeedConsListResourceImpl.class);
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        // chief Uri for retrieving patientData or consultation for a time range
+        router.attach("/chief", ChiefInfoSubImpl.class);
+
+        // chief retrieving patients or doctors with no activity
+        router.attach("/chief/noActivity", ChiefNoActivityImpl.class);
+
+        // chief retrieving patients who are waiting for consultation
+        router.attach("/chief/needCons", ChiefPatientConsPendingImpl.class);
+
 
         return router;
     }

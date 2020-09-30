@@ -43,6 +43,7 @@ public class DoctorListResourceImpl extends ServerResource implements DoctorList
     /**
      * Initializes the doctor repository
      */
+    @Override
     protected void doInit() {
 
         LOGGER.info("Initializing doctor list resource starts");
