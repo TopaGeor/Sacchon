@@ -1,5 +1,7 @@
-import { Doctor } from '../doctor';
-import { Patient } from '../patient';
+import { Doctor } from 'src/app/shared/doctor';
+import { Patient } from 'src/app/shared/patient';
+
+
 
 export interface Consultations {
     id: number;

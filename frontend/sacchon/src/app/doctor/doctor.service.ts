@@ -1,8 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Consultations } from '../shared/consultations/consultations';
 import { Doctor } from '../shared/doctor';
+import { Consultations } from './consultations/consultations';
 
 @Injectable({
   providedIn: 'root'
@@ -31,16 +31,29 @@ export class DoctorService {
     );
   }
 
+  getConsultation(patientId, doctorId): Observable<Consultations[]> {
+    let url = this.app + "consultation"
+    return this.http.get<Consultations[]>(
+      url,
+      {
+        params: {doctor_id: doctorId, patient_id: patientId },
+        headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' +this.password)})}
+    );
+  }
+
   postConsultation(doctorId, patientId, values) {
+
+    const url = this.app + "consultation";
+    console.log(url);
     console.log(values);
     return this.http.post<Consultations[]>(
-      this.app + "consultation",
+      url,
       {
         'advice': values.get('advice').value,
-        'date': new Date()
+        'dateCreated': new Date()
       },
       {
-        params: {doctor_id: '1', patient_id: '3'},
+        params: { 'doctor_id': doctorId, 'patient_id': patientId},
         headers:new HttpHeaders({'Authorization': 'Basic ' + btoa(this.username + ':' + this.password)})
       }
     );

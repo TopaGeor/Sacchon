@@ -46,6 +46,7 @@ public class PatientDataListResourceImpl extends ServerResource implements Patie
     /**
      * Initializes patient data repository
      */
+    @Override
     protected void doInit() {
 
         LOGGER.info("Initializing patient data list resource starts");

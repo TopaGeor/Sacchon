@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { PatientComponent } from './patient/patient.component';
 import { PatientRoutingModule } from './patient-routing.module';
 
-import { ConsultationsComponent } from '../shared/consultations/consultations.component';
 import { PatientNullComponent } from './patient-null/patient-null.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
@@ -23,7 +22,6 @@ import { AverageComponent } from './average/average.component';
     PatientComponent,  
     PatientNullComponent,
     PatientDetailsComponent, 
-    ConsultationsComponent, 
     PostPatientDataComponent,
     PatientDataComponent,
     PatientDataDetailComponent,
