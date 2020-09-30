@@ -164,7 +164,7 @@ public class PatientDataListResourceImpl extends ServerResource implements Patie
             List<PatientDataRepresentation> result = new ArrayList<>();
 
             if (dateFrom == null || dateTo == null) {
-                patientsData   = patientDataRepository.findDataById(id);
+                patientsData   = patientDataRepository.findDataByPatientId(id);
                 patientsData.forEach(patientData -> result.add(new PatientDataRepresentation(patientData)));
             } else {
                 bloodGlucoseAvg = patientDataRepository.findBloodGlucoseFromTo(id, dateFrom, dateTo);

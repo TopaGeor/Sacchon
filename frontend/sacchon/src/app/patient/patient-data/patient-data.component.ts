@@ -11,7 +11,7 @@ import { PatientData } from 'src/app/shared/patient-data';
 })
 export class PatientDataComponent implements OnInit {
   patientData: PatientData[];
-  id =  this.route.snapshot.paramMap.get("id"); 
+  patientId =  this.route.snapshot.paramMap.get("id");
 
   constructor(
     private service: PatientService,
@@ -20,10 +20,9 @@ export class PatientDataComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.service.getPatientsData(this.id).subscribe(
+    this.service.getPatientsData(this.patientId).subscribe(
       patientData => {this.patientData = patientData;
       console.log(patientData);
     })
   }
-
 }

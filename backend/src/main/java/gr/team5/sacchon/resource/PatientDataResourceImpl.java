@@ -68,9 +68,6 @@ public class PatientDataResourceImpl extends ServerResource implements PatientDa
 
         LOGGER.info("Retrieve patient data");
 
-        // Checking authorization, if role is patient not allowed
-        ResourceUtils.checkRole(this, Shield.ROLE_PATIENT);
-
         // Initialize persistence layer
         PatientDataRepository patientDataRepository = new PatientDataRepository(entityManager);
         PatientData patientData;

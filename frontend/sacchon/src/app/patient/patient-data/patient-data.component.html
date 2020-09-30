@@ -1,6 +1,7 @@
-<div class=" content">
+<div class=" content col-lg-6">
+
     <div class=" row">
-      <div class=" col-lg-6 col-md-12">
+      <div class="">
         <div class="card">
           <div class=" card-header">
             <h4 class=" card-title">Patients Data</h4>
@@ -10,9 +11,9 @@
               <table class=" table tablesorter" id="">
                 <thead class=" text-primary">
                   <tr>
-                    <th>id</th>
-                    <th>hasNotification</th>
-                    <th>n</th>
+                    <th>Date</th>
+                    <th>Glucose Level</th>
+                    <th>Carbon Intake</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -20,12 +21,15 @@
                     <td>{{ pd.date |  date:'dd-MM-yy' }}</td>
                     <td>{{pd.bloodGlucose}}</td>
                     <td>{{pd.carbIntake}}</td>
+                    <td><button type="submit" class="btn btn-outline-primary pull-right" routerLink="./pd.id">Details</button></td>
+                    <td><button type="submit" class="btn btn-outline-warning pull-right" routerLink="./pd.id/edit">Edit Data</button></td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
         </div>
+        <br>
         <button type="button" class="btn btn-primary pull-right" routerLink="./post"><i class="fa fa-plus"></i> Add New Data</button>
       </div>
     </div>

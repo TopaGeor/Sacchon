@@ -8,12 +8,18 @@ import { PatientDataDetailComponent } from './patient/patient-data-detail/patien
 import { PatientNullComponent } from './patient/patient-null/patient-null.component';
 import { PatientComponent } from './patient/patient/patient.component';
 import { PatientDataComponent } from './patient/patient-data/patient-data.component';
-import { ConsultationsComponent } from './shared/consultations/consultations.component';
 import { PostPatientDataComponent } from './patient/post-patient-data/post-patient-data.component';
 import { PatientDetailsComponent } from './patient/patient-details/patient-details.component';
 import { PatientLoginComponent } from './login-layout/patient-login/patient-login.component';
 import { DoctorLoginComponent } from './login-layout/doctor-login/doctor-login.component';
+import { ChiefDoctorLoginComponent } from './login-layout/chief-doctor-login/chief-doctor-login.component';
 import { DoctorDetailsComponent } from './doctor/doctor-details/doctor-details.component';
+import { PostConsultationComponent } from './doctor/post-consultation/post-consultation.component';
+import { PutPatientDataComponent } from './patient/put-patient-data/put-patient-data.component';
+import { DeletePatientDataComponent } from './patient/delete-patient-data/delete-patient-data.component';
+import { AverageComponent } from './patient/average/average.component';
+import { DeleteDoctorComponent } from './doctor/delete-doctor/delete-doctor.component';
+import { PutConsultationComponent } from './doctor/put-consultation/put-consultation.component';
 
 const routes: Routes = [
   {
@@ -26,6 +32,10 @@ const routes: Routes = [
       {
         path: 'doctor',
         component: DoctorLoginComponent
+      },
+      {
+        path: 'chief_doctor',
+        component: ChiefDoctorLoginComponent
       }
     ]
   },
@@ -50,12 +60,20 @@ const routes: Routes = [
         component: PostPatientDataComponent,
       },
       {
+        path: ':patientId/data/average',
+        component: AverageComponent,
+      },
+      {
         path: ':patientId/data/:dataId',
         component: PatientDataDetailComponent,
       },
       {
-        path: ':patientId/:doctorId/consultation',
-        component: ConsultationsComponent,
+        path: ':patientId/data/:dataId/edit',
+        component: PutPatientDataComponent,
+      },
+      {
+        path: ':patientId/data/:dataId/delete',
+        component: DeletePatientDataComponent,
       }
     ]
   },
@@ -69,15 +87,6 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'post-patient-data',
-    children: [
-      {
-        path: '',
-        component: PostPatientDataComponent,
-      }
-    ]
-  },
-  {
     path: 'doctor',
     children: [
       {
@@ -86,11 +95,28 @@ const routes: Routes = [
       },
       {
         path: ':doctorId',
-        component: DoctorDetailsComponent,
-        loadChildren: () => import('./doctor/doctor.module').then(m => m.DoctorModule)
+        component: DoctorDetailsComponent
       },
+      {
+        path: ':doctorId/deleteDoc',
+        component: DeleteDoctorComponent
+      },
+      {
+        path: ':doctorId/patient/:patientId/consultation/post',
+        component: PostConsultationComponent,
+      },
+      {
+        path: ':doctorId/patient/:patientId/consultation/:consId',
+        component: PutConsultationComponent
+      }
     ]
   },
+  // {
+  //   path: 'consultation',
+  //   children: [
+      
+  //   ]
+  // },
   {
     path: "**",
     redirectTo: "dashboard"

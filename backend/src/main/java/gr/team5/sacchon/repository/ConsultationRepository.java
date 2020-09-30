@@ -16,18 +16,29 @@ public class ConsultationRepository {
 
     private EntityManager entityManager;
 
-    // Constructor
+
+    /**
+     * ConsultationRepository constructor
+     * @param entityManager
+     */
     public ConsultationRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
-    // Find a consultation by id
+    /**
+     * Find a consultation by id
+     * @param id
+     * @return
+     */
     public Optional<Consultation> findById(Long id) {
         Consultation consultation = entityManager.find(Consultation.class, id);
         return consultation != null ? Optional.of(consultation) : Optional.empty();
     }
 
-    // Find all consultations
+    /**
+     * Find all consultations
+     * @return
+     */
     public List<Consultation> findAll() {
         List<Consultation> cons = entityManager.createQuery(
                 " FROM Consultation" +
@@ -37,7 +48,11 @@ public class ConsultationRepository {
         return cons;
     }
 
-    // Find Consultations by patient id
+    /**
+     * Find Consultations by patient id
+     * @param id
+     * @return
+     */
     public List<Consultation> findConsultationByPatientId(long id) {
         List<Consultation> c = entityManager.createQuery("SELECT c" +
                 " FROM Consultation c" +
@@ -50,7 +65,11 @@ public class ConsultationRepository {
         return c;
     }
 
-    // Find all consultations of a patient id
+    /**
+     * Find all consultations of a patient id
+     * @param id
+     * @return
+     */
     public List<Consultation> findAllConsultationByPatientId(long id) {
         List<Consultation> c = entityManager.createQuery("SELECT c" +
                 " FROM Consultation c" +
@@ -61,6 +80,12 @@ public class ConsultationRepository {
         return c;
     }
 
+    /**
+     * Find consultation of specific patient and doctor
+     * @param patientId
+     * @param doctorId
+     * @return
+     */
     public List<Consultation> findConsultationByPatientAndDoctor(
             long patientId,
             long doctorId ){
@@ -75,7 +100,11 @@ public class ConsultationRepository {
         return c;
     }
 
-    // Find Consultations by doctor id
+    /**
+     * Find Consultations by doctor id
+     * @param id
+     * @return
+     */
     public List<Consultation> findConsultationByDoctorId(long id) {
         List<Consultation> c = entityManager.createQuery("SELECT c" +
                 " FROM Consultation c" +
@@ -88,7 +117,11 @@ public class ConsultationRepository {
         return c;
     }
 
-    // Save a new consultation
+    /**
+     * Save a new consultation
+     * @param consultation
+     * @return
+     */
     public Optional<Consultation> save(Consultation consultation){
         try {
             entityManager.getTransaction().begin();
@@ -101,7 +134,11 @@ public class ConsultationRepository {
         return Optional.empty();
     }
 
-    // Modify a consultation to a patient
+    /**
+     * Modify a consultation to a patient
+     * @param consultation
+     * @return
+     */
     public Optional<Consultation> update(Consultation consultation) {
         Consultation in = entityManager.find(Consultation.class, consultation.getId());
         in.setAdvice(consultation.getAdvice());
@@ -116,5 +153,7 @@ public class ConsultationRepository {
         return Optional.empty();
     }
 
-    // Consultations cannot be deleted
+    /**
+     * Consultations cannot be deleted
+     */
 }
