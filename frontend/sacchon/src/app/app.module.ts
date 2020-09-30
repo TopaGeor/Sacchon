@@ -15,6 +15,7 @@ import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './patient/login/login.component';
 import { CommonModule } from '@angular/common';
 import { DoctorModule } from './doctor/doctor.module';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({

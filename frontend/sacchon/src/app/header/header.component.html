@@ -1,14 +1,16 @@
 <div class="header">
-  <a href="" class="logo"><img src="../../assets/img/logo.png" height="50px" width="50px" /> Sacchon</a>
+  <a href="" class="logo">
+    <img  src="../../assets/img/logo.png" 
+          height="50px" 
+          width="50px" /> 
+      Sacchon</a>
   <div class="header-right">
-    <div class="dropdown">
-      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Login
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">Patient Login</a>
-        <a class="dropdown-item" href="#">Doctor Login</a>
-        <a class="dropdown-item" href="#">Chief Login</a>
+    <div ngbDropdown container="body">
+      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle> Login </button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button ngbDropdownItem routerLink="./login/patient"> Patient Login </button>
+        <button ngbDropdownItem routerLink="./login/doctor"> Doctor Login </button>
+        <button ngbDropdownItem routerLink="./login/chief_doctor"> Chief Doctor Login </button>
       </div>
     </div>
   </div>
