@@ -7,6 +7,7 @@ import { PostConsultationComponent } from './post-consultation/post-consultation
 import { DeleteDoctorComponent } from './delete-doctor/delete-doctor.component';
 import { PutConsultationComponent } from './put-consultation/put-consultation.component';
 import { ConsultationsComponent } from './consultations/consultations.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -14,6 +15,7 @@ import { ConsultationsComponent } from './consultations/consultations.component'
   declarations: [DoctorComponent, DoctorDetailsComponent, ConsultationsComponent, PostConsultationComponent, DeleteDoctorComponent, PutConsultationComponent],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     DoctorRoutingModule
   ]
 })
