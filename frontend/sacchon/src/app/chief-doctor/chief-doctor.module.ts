@@ -4,6 +4,7 @@ import { ChiefDoctorComponent } from './chief-doctor/chief-doctor.component';
 import { InfoSubDataComponent } from './info-sub-data/info-sub-data.component';
 import { InfoSubConsultComponent } from './info-sub-consult/info-sub-consult.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NeedConsultComponent } from './need-consult/need-consult.component';
 
 
 
@@ -11,7 +12,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [
     ChiefDoctorComponent,
     InfoSubDataComponent,
-    InfoSubConsultComponent
+    InfoSubConsultComponent,
+    NeedConsultComponent
   ],
   imports: [
     CommonModule,

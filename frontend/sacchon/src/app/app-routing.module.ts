@@ -23,6 +23,7 @@ import { PutConsultationComponent } from './doctor/put-consultation/put-consulta
 import { ConsultationsComponent } from './doctor/consultations/consultations.component';
 import { InfoSubDataComponent } from './chief-doctor/info-sub-data/info-sub-data.component';
 import { InfoSubConsultComponent } from './chief-doctor/info-sub-consult/info-sub-consult.component';
+import { NeedConsultComponent } from './chief-doctor/need-consult/need-consult.component';
 
 const routes: Routes = [
   {
@@ -121,6 +122,10 @@ const routes: Routes = [
   {
     path: 'chief',
     children: [
+      {
+        path: 'needCons',
+        component: NeedConsultComponent,
+      },
       {
         path: ':patientId/data/infoSub',
         component: InfoSubDataComponent,
