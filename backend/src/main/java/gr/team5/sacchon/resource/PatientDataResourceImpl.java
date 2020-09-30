@@ -81,24 +81,28 @@ public class PatientDataResourceImpl extends ServerResource implements PatientDa
             if (!isExisting()) {
                 LOGGER.config("patient data id does not exist: " + id);
                 throw new NotFoundException("No patient data with id: " + id);
-            } else {
-
-                Optional<Patient> oPatient = patientRepository.findById(patientId);
-                setExisting(oPatient.isPresent());
-
-                if (!isExisting()) {
-                    LOGGER.config("patient does not exist: " + patientId);
-                    throw new NotFoundException("No patient data with id: " + patientId);
-                }
-
-                patientData = oPatientData.get();
-
-                PatientDataRepresentation result = new PatientDataRepresentation(patientData);
-
-                LOGGER.finer("Patient data successfully retrieved.");
-
-                return result;
             }
+
+            if(oPatientData.get().getId() != patientId){
+                LOGGER.config("This patient does not have access to data with id: " + id);
+                throw new NotFoundException("This patient does not have access to data with id: " + id);
+            }
+
+            Optional<Patient> oPatient = patientRepository.findById(patientId);
+            setExisting(oPatient.isPresent());
+
+            if (!isExisting()) {
+                LOGGER.config("patient does not exist: " + patientId);
+                throw new NotFoundException("No patient data with id: " + patientId);
+            }
+
+            patientData = oPatientData.get();
+
+            PatientDataRepresentation result = new PatientDataRepresentation(patientData);
+
+            LOGGER.finer("Patient data successfully retrieved.");
+
+            return result;
         } catch (Exception e) {
             throw new ResourceException(e);
         }

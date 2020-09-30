@@ -31,12 +31,13 @@ public class PatientRepresentation {
             username = patient.getUsername();
 //          password = patient.getPassword();
             patientId = patient.getId();
-            doctorId = patient.getDoctor().getId();
             hasNotification = patient.isHasNotification();
 
             if (patient.getDoctor() == null) {
+                doctorId = -1;
                 uri = "http://localhost:9000/patient_null/" + patient.getId();
             } else {
+                doctorId = patient.getDoctor().getId();
                 uri = "http://localhost:9000/patient/" + patient.getId();
             }
         }
