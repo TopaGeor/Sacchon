@@ -25,7 +25,7 @@ import { DeletePatientComponent } from './patient/delete-patient/delete-patient.
 import { InfoSubDataComponent } from './chief-doctor/info-sub-data/info-sub-data.component';
 import { InfoSubConsultComponent } from './chief-doctor/info-sub-consult/info-sub-consult.component';
 import { NoActUserComponent } from './chief-doctor/no-act-user/no-act-user.component';
-
+import { NeedConsultComponent } from './chief-doctor/need-consult/need-consult.component';
 
 const routes: Routes = [
   {
@@ -128,6 +128,10 @@ const routes: Routes = [
   {
     path: 'chief',
     children: [
+      {
+        path: 'needCons',
+        component: NeedConsultComponent,
+      },
       {
         path: ':patientId/data/infoSub',
         component: InfoSubDataComponent,

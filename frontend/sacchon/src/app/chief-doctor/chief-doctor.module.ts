@@ -5,6 +5,8 @@ import { InfoSubDataComponent } from './info-sub-data/info-sub-data.component';
 import { InfoSubConsultComponent } from './info-sub-consult/info-sub-consult.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NoActUserComponent } from './no-act-user/no-act-user.component';
+import { NeedConsultComponent } from './need-consult/need-consult.component';
+
 
 
 @NgModule({
@@ -13,6 +15,7 @@ import { NoActUserComponent } from './no-act-user/no-act-user.component';
     InfoSubDataComponent,
     InfoSubConsultComponent,
     NoActUserComponent
+    NeedConsultComponent
   ],
   imports: [
     CommonModule,

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Consultations } from '../doctor/consultations/consultations';
 import { Patient } from '../shared/patient';
 import { PatientData } from '../shared/patient-data';
+import { NeedConsultComponent } from './need-consult/need-consult.component';
 
 @Injectable({
   providedIn: 'root'
@@ -48,5 +49,12 @@ export class ChiefDoctorService {
         headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' +this.password)})
       }
     )
+
+  needConsult(): Observable<Patient[]> {
+    return this.http.get<Patient[]>(
+      this.app + "chief/needCons",
+      {headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' +this.password)})}
+    );
+
   }
 }
