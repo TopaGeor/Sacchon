@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { PatientService } from '../patient.service';
 
@@ -15,7 +16,8 @@ export class PatientDetailsComponent implements OnInit, OnDestroy {
 
   constructor(
     private service: PatientService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private modalService: NgbModal
   ) {}
 
     
@@ -24,6 +26,10 @@ export class PatientDetailsComponent implements OnInit, OnDestroy {
       patientDetail => {this.patientDetail = patientDetail;
       console.log(patientDetail);
     })
+  }
+
+  openVerticallyCentered(content) {
+    this.modalService.open(content, { centered: true });
   }
 
   ngOnDestroy() {
