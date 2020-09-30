@@ -83,7 +83,7 @@ public class PatientDataResourceImpl extends ServerResource implements PatientDa
                 throw new NotFoundException("No patient data with id: " + id);
             }
 
-            if(oPatientData.get().getId() != patientId){
+            if(oPatientData.get().getPatient().getId() != patientId){
                 LOGGER.config("This patient does not have access to data with id: " + id);
                 throw new NotFoundException("This patient does not have access to data with id: " + id);
             }
