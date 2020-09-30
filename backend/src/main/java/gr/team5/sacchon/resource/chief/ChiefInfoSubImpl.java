@@ -1,4 +1,4 @@
-package gr.team5.sacchon.resource;
+package gr.team5.sacchon.resource.chief;
 
 import gr.team5.sacchon.exception.NotFoundException;
 import gr.team5.sacchon.model.Consultation;
@@ -6,8 +6,7 @@ import gr.team5.sacchon.model.PatientData;
 import gr.team5.sacchon.repository.ConsultationRepository;
 import gr.team5.sacchon.repository.PatientDataRepository;
 import gr.team5.sacchon.repository.util.JpaUtil;
-import gr.team5.sacchon.representation.ChiefInfoSubRepresentation;
-import gr.team5.sacchon.representation.PatientDataRepresentation;
+import gr.team5.sacchon.representation.chief.ChiefInfoSubRepresentation;
 import org.restlet.engine.Engine;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
@@ -80,7 +79,7 @@ public class ChiefInfoSubImpl extends ServerResource implements ChiefInfoSub {
         } catch (Exception e) {
             throw new ResourceException(e);
         }
-        LOGGER.info("Initializing patient data list resource ends");
+        LOGGER.info("Initializing chief gets info ends");
     }
 
     @Override
@@ -89,6 +88,10 @@ public class ChiefInfoSubImpl extends ServerResource implements ChiefInfoSub {
 
         if (from == null || to == null){
             throw new NotFoundException("You need to provide from and to");
+        }
+
+        if (doctorId != null && patientId != null){
+            throw new NotFoundException("You can only ask a user at the time");
         }
 
         List<ChiefInfoSubRepresentation> result = new ArrayList<>();
