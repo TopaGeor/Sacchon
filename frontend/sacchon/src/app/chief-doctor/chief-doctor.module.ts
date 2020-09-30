@@ -4,14 +4,15 @@ import { ChiefDoctorComponent } from './chief-doctor/chief-doctor.component';
 import { InfoSubDataComponent } from './info-sub-data/info-sub-data.component';
 import { InfoSubConsultComponent } from './info-sub-consult/info-sub-consult.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { NoActUserComponent } from './no-act-user/no-act-user.component';
 
 
 @NgModule({
   declarations: [
     ChiefDoctorComponent,
     InfoSubDataComponent,
-    InfoSubConsultComponent
+    InfoSubConsultComponent,
+    NoActUserComponent
   ],
   imports: [
     CommonModule,
