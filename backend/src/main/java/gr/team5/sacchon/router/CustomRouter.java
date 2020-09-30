@@ -29,7 +29,6 @@ public class CustomRouter {
 
         router.attach("/patient/{id}/data", PatientDataListResourceImpl.class);
 
-        // chief
         router.attach("/patient/{id}/data/average", PatientDataListResourceImpl.class);
         router.attach("/patient/{patient_id}/data/{id}", PatientDataResourceImpl.class);
 
@@ -56,6 +55,12 @@ public class CustomRouter {
 
         // find patients with no consultation
         router.attach("/doctor/{doctor_id}/patientNoCons", PatientNeedConsListResourceImpl.class);
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        // chief Uri
+        router.attach("/chief", ChiefInfoSubImpl.class);
+
 
         return router;
     }
