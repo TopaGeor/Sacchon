@@ -12,12 +12,21 @@ public class ChiefInfoSubRepresentation {
     private PatientDataRepresentation patientData;
     private ConsultationRepresentation consultation;
 
-
+    /**
+     * Constructor
+     * @param newData
+     * will represent the resource
+     */
     public ChiefInfoSubRepresentation(PatientData newData){
         patientData = new PatientDataRepresentation(newData);
         consultation = null;
     }
 
+    /**
+     * Constructor
+     * @param newData
+     * will represent the resource
+     */
     public ChiefInfoSubRepresentation(Consultation newData){
         patientData = null;
         consultation = new ConsultationRepresentation(newData);

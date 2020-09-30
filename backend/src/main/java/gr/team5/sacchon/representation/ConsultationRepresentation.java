@@ -17,13 +17,14 @@ public class ConsultationRepresentation {
 
     /**
      * The URL of this resource which is:
-     * http://localhost:9000/patient/{id}/consultations
+     * http://localhost:9000/patient/{id}/consultation
      */
     private String uri;
 
     /**
      * Constructor
-     * @param consultation will be represent the resource
+     * @param consultation
+     * will represent the resource
      */
     public ConsultationRepresentation(
             Consultation consultation) {
