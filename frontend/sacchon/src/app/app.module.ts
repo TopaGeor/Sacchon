@@ -16,6 +16,8 @@ import { LoginComponent } from './patient/login/login.component';
 import { CommonModule } from '@angular/common';
 import { DoctorModule } from './doctor/doctor.module';
 import { SharedModule } from './shared/shared.module';
+import { ChiefDoctorComponent } from './chief-doctor/chief-doctor/chief-doctor.component';
+import { ChiefDoctorModule } from './chief-doctor/chief-doctor.module';
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import { SharedModule } from './shared/shared.module';
     AppRoutingModule,
     PatientModule,
     HttpClientModule,
-    DoctorModule
+    DoctorModule,
+    ChiefDoctorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
