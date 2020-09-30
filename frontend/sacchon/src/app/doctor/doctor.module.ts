@@ -6,11 +6,12 @@ import { DoctorDetailsComponent } from './doctor-details/doctor-details.componen
 import { PostConsultationComponent } from './post-consultation/post-consultation.component';
 import { DeleteDoctorComponent } from './delete-doctor/delete-doctor.component';
 import { PutConsultationComponent } from './put-consultation/put-consultation.component';
+import { ConsultationsComponent } from './consultations/consultations.component';
 
 
 
 @NgModule({
-  declarations: [DoctorComponent, DoctorDetailsComponent, PostConsultationComponent, DeleteDoctorComponent, PutConsultationComponent],
+  declarations: [DoctorComponent, DoctorDetailsComponent, ConsultationsComponent, PostConsultationComponent, DeleteDoctorComponent, PutConsultationComponent],
   imports: [
     CommonModule,
     DoctorRoutingModule
