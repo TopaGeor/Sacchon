@@ -21,8 +21,10 @@ import { AverageComponent } from './patient/average/average.component';
 import { DeleteDoctorComponent } from './doctor/delete-doctor/delete-doctor.component';
 import { PutConsultationComponent } from './doctor/put-consultation/put-consultation.component';
 import { ConsultationsComponent } from './doctor/consultations/consultations.component';
+import { DeletePatientComponent } from './patient/delete-patient/delete-patient.component';
 import { InfoSubDataComponent } from './chief-doctor/info-sub-data/info-sub-data.component';
 import { InfoSubConsultComponent } from './chief-doctor/info-sub-consult/info-sub-consult.component';
+import { NoActUserComponent } from './chief-doctor/no-act-user/no-act-user.component';
 import { NeedConsultComponent } from './chief-doctor/need-consult/need-consult.component';
 
 const routes: Routes = [
@@ -78,6 +80,10 @@ const routes: Routes = [
       {
         path: ':patientId/data/:dataId/delete',
         component: DeletePatientDataComponent,
+      },
+      {
+        path: ':id/delete',
+        component: DeletePatientComponent
       }
     ]
   },
@@ -133,6 +139,10 @@ const routes: Routes = [
       {
         path: ':doctorId/consultation/infoSub',
         component: InfoSubConsultComponent,
+      },
+      {
+        path: 'noActivity',
+        component: NoActUserComponent
       }
     ]
   },

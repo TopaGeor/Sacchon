@@ -40,10 +40,21 @@ export class ChiefDoctorService {
     )
   }
 
+  nonActivePatients(opts): Observable<Patient[]> {
+    let url = this.app + "chief/noActivity";
+    return this.http.get<Patient[]>(
+      url,
+      {
+        params: opts,
+        headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' +this.password)})
+      }
+    )
+
   needConsult(): Observable<Patient[]> {
     return this.http.get<Patient[]>(
       this.app + "chief/needCons",
       {headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' +this.password)})}
     );
+
   }
 }
