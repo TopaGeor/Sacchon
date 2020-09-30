@@ -14,7 +14,7 @@ import { NeedConsultComponent } from './need-consult/need-consult.component';
     ChiefDoctorComponent,
     InfoSubDataComponent,
     InfoSubConsultComponent,
-    NoActUserComponent
+    NoActUserComponent,
     NeedConsultComponent
   ],
   imports: [

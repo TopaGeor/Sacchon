@@ -49,6 +49,7 @@ export class ChiefDoctorService {
         headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' +this.password)})
       }
     )
+  }
 
   needConsult(): Observable<Patient[]> {
     return this.http.get<Patient[]>(
