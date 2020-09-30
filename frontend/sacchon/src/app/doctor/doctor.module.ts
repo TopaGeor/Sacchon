@@ -12,7 +12,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [DoctorComponent, DoctorDetailsComponent, ConsultationsComponent, PostConsultationComponent, DeleteDoctorComponent, PutConsultationComponent],
+  declarations: [
+    DoctorComponent, 
+    DoctorDetailsComponent, 
+    ConsultationsComponent, 
+    PostConsultationComponent, 
+    PutConsultationComponent,
+    DeleteDoctorComponent, 
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,

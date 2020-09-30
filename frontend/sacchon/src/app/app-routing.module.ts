@@ -111,7 +111,7 @@ const routes: Routes = [
         component: PostConsultationComponent,
       },
       {
-        path: ':doctorId/patient/:patientId/consultation/:consId',
+        path: ':doctorId/patient/:patientId/consultation/:consId/edit',
         component: PutConsultationComponent
       }
     ]

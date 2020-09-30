@@ -65,7 +65,7 @@ export class DoctorService {
       this.app + "doctor/" + doctorId + "/patient/" + patientId + "/consultation/" + consId,
       {
         'advice': values.get('advice').value,
-        'date': new Date()
+        'dateCreated': new Date()
       },
       {
         headers:new HttpHeaders({'Authorization': 'Basic ' + btoa(this.username + ':' + this.password)})

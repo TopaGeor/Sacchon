@@ -10,8 +10,8 @@ import { DoctorService } from '../doctor.service';
 })
 export class PutConsultationComponent implements OnInit {
   form: FormGroup;
-  patientId = this.route.snapshot.paramMap.get("patientId"); 
-  doctorId = this.route.snapshot.paramMap.get("doctorId"); 
+  doctorId = this.route.snapshot.paramMap.get("doctorId");
+  patientId = this.route.snapshot.paramMap.get("patientId");  
   consId = this.route.snapshot.paramMap.get("consId"); 
 
   constructor(
