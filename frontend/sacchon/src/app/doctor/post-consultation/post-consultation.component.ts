@@ -11,8 +11,9 @@ import { DoctorService } from '../doctor.service';
 })
 export class PostConsultationComponent implements OnInit {
   form: FormGroup;
+  doctorId =  this.route.snapshot.paramMap.get("doctorId");
   patientId = this.route.snapshot.paramMap.get("patientId");
-  doctorId = this.route.snapshot.paramMap.get("doctorId");
+  
 
   constructor(
     private fb: FormBuilder,
@@ -25,9 +26,14 @@ export class PostConsultationComponent implements OnInit {
       advice: [null, Validators.required]
     });
 
+    // this.params = new HttpParams()
+    // .set('doctor_id', this.route.snapshot.paramMap.get("doctorId"))
+    // .set('patient_id', this.route.snapshot.paramMap.get("patientId"));
+
   }
 
   onSubmit() {
+
     this.service.postConsultation(this.doctorId, this.patientId, this.form).subscribe(consult => {
       console.log(consult);
     });

@@ -117,9 +117,12 @@ const routes: Routes = [
     ]
   },
   // {
-  //   path: 'consultation',
+  //   path: 'consultation?doctor_id=:doctorId&patient_id=:patientId',
   //   children: [
-      
+  //     {
+  //       path: '',
+  //       component: PostConsultationComponent
+  //     }
   //   ]
   // },
   {
