@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { PatientComponent } from './patient/patient.component';
 import { PatientRoutingModule } from './patient-routing.module';
 
-import { ConsultationsComponent } from '../shared/consultations/consultations.component';
 import { PatientNullComponent } from './patient-null/patient-null.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
@@ -13,6 +12,8 @@ import { PatientDataDetailComponent } from './patient-data-detail/patient-data-d
 import { PutPatientDataComponent } from './put-patient-data/put-patient-data.component';
 import { DeletePatientDataComponent } from './delete-patient-data/delete-patient-data.component';
 import { PostPatientDataComponent } from './post-patient-data/post-patient-data.component';
+import { DeletePatientComponent } from './delete-patient/delete-patient.component';
+import { AverageComponent } from './average/average.component';
 
 
 
@@ -21,12 +22,13 @@ import { PostPatientDataComponent } from './post-patient-data/post-patient-data.
     PatientComponent,  
     PatientNullComponent,
     PatientDetailsComponent, 
-    ConsultationsComponent, 
     PostPatientDataComponent,
     PatientDataComponent,
     PatientDataDetailComponent,
     PutPatientDataComponent,
-    DeletePatientDataComponent
+    DeletePatientDataComponent,
+    DeletePatientComponent,
+    AverageComponent
   ],
   imports: [
     CommonModule,

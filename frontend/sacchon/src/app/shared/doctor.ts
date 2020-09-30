@@ -1,4 +1,5 @@
-import { Consultations } from './consultations/consultations';
+
+import { Consultations } from '../doctor/consultations/consultations';
 import { Patient } from './patient';
 
 

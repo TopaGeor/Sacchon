@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PatientService } from 'src/app/patient/patient.service';
+import { DoctorService } from '../doctor.service';
 
 @Component({
   selector: 'app-consultations',
@@ -13,11 +13,11 @@ export class ConsultationsComponent implements OnInit {
   doctorId =  this.route.snapshot.paramMap.get("doctorId");
 
   constructor(
-    private service: PatientService,
+    private service: DoctorService,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.service.getPatientsConsultation(this.doctorId, this.patientId).subscribe(
+    this.service.getConsultation(this.patientId, this.doctorId).subscribe(
       patientConsultation => {this.patientConsultation = patientConsultation;
       console.log(patientConsultation);
     })

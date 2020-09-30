@@ -25,7 +25,7 @@ export class PostPatientDataComponent implements OnInit {
     });
   }
 
-  onSubmit() { 
+  onSubmit() {
     this.service.postPatientData(this.id, this.form).subscribe(patientData => 
       {
         console.log(patientData);
