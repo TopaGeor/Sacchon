@@ -21,6 +21,8 @@ import { AverageComponent } from './patient/average/average.component';
 import { DeleteDoctorComponent } from './doctor/delete-doctor/delete-doctor.component';
 import { PutConsultationComponent } from './doctor/put-consultation/put-consultation.component';
 import { ConsultationsComponent } from './doctor/consultations/consultations.component';
+import { InfoSubDataComponent } from './chief-doctor/info-sub-data/info-sub-data.component';
+import { InfoSubConsultComponent } from './chief-doctor/info-sub-consult/info-sub-consult.component';
 
 const routes: Routes = [
   {
@@ -116,15 +118,19 @@ const routes: Routes = [
       }
     ]
   },
-  // {
-  //   path: 'consultation?doctor_id=:doctorId&patient_id=:patientId',
-  //   children: [
-  //     {
-  //       path: '',
-  //       component: PostConsultationComponent
-  //     }
-  //   ]
-  // },
+  {
+    path: 'chief',
+    children: [
+      {
+        path: ':patientId/data/infoSub',
+        component: InfoSubDataComponent,
+      },
+      {
+        path: ':doctorId/consultation/infoSub',
+        component: InfoSubConsultComponent,
+      }
+    ]
+  },
   {
     path: "**",
     redirectTo: "dashboard"

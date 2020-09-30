@@ -26,6 +26,7 @@ export class AverageComponent implements OnInit {
       to: [null, Validators.required],
     });
   }
+  
   onSubmit() { 
     this.service.getPatientsDataAverage(this.patientId, this.form.value).subscribe(
       patientDataAverage => {this.patientDataAverage = patientDataAverage;
