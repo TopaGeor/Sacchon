@@ -108,6 +108,7 @@ public class ChiefNoActivityImpl extends ServerResource implements ChiefNoActivi
                         patientDataRepository.findDataByPatientId(patient.getId());
 
                 patientData.forEach(patientData1 -> {
+                    // if patient has at least one data storage remove him
                     if (((patientData1.getDate().compareTo(from) >= 0) &&
                             (patientData1.getDate().compareTo(to) < 0))) {
                         patientSet.remove(patient);
