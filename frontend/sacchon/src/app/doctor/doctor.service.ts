@@ -43,16 +43,17 @@ export class DoctorService {
 
   postConsultation(doctorId, patientId, values) {
 
-    const url = this.app + "consultation?doctor_id=" + doctorId + "&patient_id=" + patientId;
+    const url = this.app + "consultation";
     console.log(url);
     console.log(values);
     return this.http.post<Consultations[]>(
       url,
       {
         'advice': values.get('advice').value,
-        'date': new Date()
+        'dateCreated': new Date()
       },
       {
+        params: { 'doctor_id': doctorId, 'patient_id': patientId},
         headers:new HttpHeaders({'Authorization': 'Basic ' + btoa(this.username + ':' + this.password)})
       }
     );
