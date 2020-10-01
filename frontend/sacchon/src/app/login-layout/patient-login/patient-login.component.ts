@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PatientService } from 'src/app/patient/patient.service';
+import { Router } from '@angular/router';
+
+import { AuthLayoutService } from '../auth-layout.service';
 
 @Component({
   selector: 'app-patient-login',
@@ -13,7 +15,8 @@ export class PatientLoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private service: PatientService
+    private service: AuthLayoutService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -24,9 +27,9 @@ export class PatientLoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.service.getPatient().subscribe(
+    this.patient = this.service.patientLogin(this.form.value).subscribe(
       patient => {this.patient = patient;
-      console.log(patient);
+      this.router.navigate(['patient/'+patient.id])
     })
   }
 

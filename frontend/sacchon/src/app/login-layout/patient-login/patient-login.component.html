@@ -2,7 +2,7 @@
   <div class="card" style="width: 18rem;">
     <article class="card-body">
     <h4 class="card-title mb-4 mt-1">Patient Sign in</h4>
-    <form formGroup="form" ngSubmit="onSubmit()">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label  class="font-weight-bold" for="username">Username: </label>
         <input  type="text"
@@ -19,8 +19,7 @@
                 placeholder="password"
                 formControlName="password"/>
       </div>
-  
-      <button class="btn btn-primary" type="submit">Login</button>
+        <button class="btn btn-primary" type="submit">Login</button>
     </form>
     </article>
   </div>

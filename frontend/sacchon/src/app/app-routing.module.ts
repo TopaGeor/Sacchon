@@ -27,6 +27,7 @@ import { InfoSubConsultComponent } from './chief-doctor/info-sub-consult/info-su
 import { NoActUserComponent } from './chief-doctor/no-act-user/no-act-user.component';
 import { NeedConsultComponent } from './chief-doctor/need-consult/need-consult.component';
 import { ChiefDoctorComponent } from './chief-doctor/chief-doctor/chief-doctor.component';
+import { LandpageComponent } from './login-layout/landpage/landpage.component';
 
 const routes: Routes = [
   {
@@ -84,7 +85,7 @@ const routes: Routes = [
       },
       {
         path: ':id/delete',
-        component: DeletePatientComponent
+        component: DeletePatientComponent,
       }
     ]
   },
@@ -134,6 +135,10 @@ const routes: Routes = [
     path: 'chief',
     children: [
       {
+        path: '',
+        component: ChiefDoctorComponent
+      },
+      {
         path: 'needCons',
         component: NeedConsultComponent,
       },
@@ -153,7 +158,7 @@ const routes: Routes = [
   },
   {
     path: "**",
-    redirectTo: "dashboard"
+    component: LandpageComponent
   }
 ];
 
