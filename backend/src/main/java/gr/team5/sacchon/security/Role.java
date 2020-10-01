@@ -18,14 +18,15 @@ public enum Role {
 
     /**
      * Get the Role and check if it exists inside the enum Role.
-     * @param roleParameter
-     * @return
+     * @param roleParameter a string that describes the role
+     * @return role of the user
      */
 
     public static Role getRoleValue(String roleParameter) {
         for (Role role: Role.values()) {
-            if (roleParameter.equals((role.getRoleName())))
+            if (roleParameter.equals((role.getRoleName()))) {
                 return role;
+            }
         }
 
         return ROLE_NA;
