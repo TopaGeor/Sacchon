@@ -87,6 +87,13 @@ public class ChiefNoActivityImpl extends ServerResource implements ChiefNoActivi
         LOGGER.info("Initializing chief not activity ends");
     }
 
+    /**
+     * Represents:
+     * 1) The list of the patients with no activity over a time range
+     * 2) The list of the doctors with no activity over a time range
+     * @return ChiefNoActivityRepresentation
+     * @throws NotFoundException
+     */
     @Override
     public List<ChiefNoActivityRepresentation> getNoActivity() throws NotFoundException {
         LOGGER.info("Start process get no activity");
