@@ -13,6 +13,7 @@ export class DoctorComponent implements OnInit {
   patients: Patient[];
   patientsNull;
   doctorId = this.route.snapshot.paramMap.get("doctorId");
+  patientId = this.route.snapshot.paramMap.get("patientId");
 
   constructor(
     private service: DoctorService,
