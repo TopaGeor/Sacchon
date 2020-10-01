@@ -26,6 +26,7 @@ import { InfoSubDataComponent } from './chief-doctor/info-sub-data/info-sub-data
 import { InfoSubConsultComponent } from './chief-doctor/info-sub-consult/info-sub-consult.component';
 import { NoActUserComponent } from './chief-doctor/no-act-user/no-act-user.component';
 import { NeedConsultComponent } from './chief-doctor/need-consult/need-consult.component';
+import { ChiefDoctorComponent } from './chief-doctor/chief-doctor/chief-doctor.component';
 
 const routes: Routes = [
   {
@@ -101,11 +102,15 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: DoctorComponent,
+        component: ChiefDoctorComponent,
       },
       {
         path: ':doctorId',
         component: DoctorDetailsComponent
+      },
+      {
+        path: ':doctorId/patient',
+        component: DoctorComponent
       },
       {
         path: ':doctorId/deleteDoc',

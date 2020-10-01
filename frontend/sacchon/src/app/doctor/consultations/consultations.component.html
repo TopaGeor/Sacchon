@@ -1,8 +1,8 @@
 
-<div class=" content col-lg-6">
+<div class=" content col-lg-12 col-md-12">
     <div class=" row">
       <div class=" col-lg-6 col-md-12">
-        <div class="card mr-5">
+        <div class="card mr-5 col-md-12">
           <div class=" card-header">
             <h4 class=" card-title">Patients Consultations</h4>
           </div>
@@ -12,7 +12,8 @@
                 <thead class=" text-primary">
                   <tr>
                     <th>id</th>
-                    <th>hasNotification</th>
+                    <th>advice</th>
+                    <th>dateCreated</th>
                     <th>username</th>
                   </tr>
                 </thead>
@@ -20,6 +21,7 @@
                   <tr *ngFor="let pc of patientConsultation">
                     <td>{{pc.id}}</td>
                     <td>{{pc.advice}}</td>
+                    <td>{{pc.dateCreated | date:'dd-MM-yyyy'}}</td>
                     <td>{{pc.username}}</td>
                     <td><button class="btn btn-primary">More Info</button></td>
                   </tr>

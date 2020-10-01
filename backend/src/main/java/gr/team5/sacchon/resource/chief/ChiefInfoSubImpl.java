@@ -82,6 +82,13 @@ public class ChiefInfoSubImpl extends ServerResource implements ChiefInfoSub {
         LOGGER.info("Initializing chief gets info ends");
     }
 
+    /**
+     * Represents:
+     * 1) information submissions of a patient over a time range
+     * 2) information submissions of a doctor over a time range
+     * @return ChiefInfoSubRepresentation
+     * @throws NotFoundException
+     */
     @Override
     public List<ChiefInfoSubRepresentation> getInfoSubmit() throws NotFoundException {
         LOGGER.info("Start process chief gets information");
