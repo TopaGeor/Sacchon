@@ -47,16 +47,15 @@ public class DoctorRepository {
      * @return
      */
     public Optional<Doctor> save(Doctor doctor){
-        // For Chousiadas to test
-//        DatabaseUser user = new DatabaseUser();
-//        user.setUsername(doctor.getUsername());
-//        user.setPassword(doctor.getPassword());
-//        user.setRole(Role.ROLE_DOCTOR);
+        DatabaseUser user = new DatabaseUser();
+        user.setUsername(doctor.getUsername());
+        user.setPassword(doctor.getPassword());
+        user.setRole(Role.ROLE_DOCTOR);
 
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(doctor);
-//            entityManager.persist(user);
+            entityManager.persist(user);
             entityManager.getTransaction().commit();
             return Optional.of(doctor);
         } catch (Exception e) {
@@ -71,20 +70,16 @@ public class DoctorRepository {
      * @return
      */
     public Optional<Doctor> update(Doctor doctor) {
-        // For Chousiadas to test
         Doctor in = entityManager.find(Doctor.class, doctor.getId());
-//        DatabaseUser user = entityManager.find(DatabaseUser.class, in.getUsername());
+        DatabaseUser user = entityManager.find(DatabaseUser.class, in.getUsername());
 
-        in.setUsername(doctor.getUsername());
         in.setPassword(doctor.getPassword());
-
-//        user.setUsername(doctor.getUsername());
-//        user.setPassword(doctor.getPassword());
+        user.setPassword(doctor.getPassword());
 
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(in);
-//            entityManager.persist(user);
+            entityManager.persist(user);
             entityManager.getTransaction().commit();
             return Optional.of(in);
         } catch (Exception e) {
@@ -99,17 +94,16 @@ public class DoctorRepository {
      * @return
      */
     public boolean delete(Long id){
-        // For Chousiadas to test
 
         Optional<Doctor> tempDoctor = findById(id);
         if (tempDoctor.isPresent()){
             Doctor toDelete = tempDoctor.get();
-//            DatabaseUser user = entityManager.find(DatabaseUser.class, toDelete.getUsername());
+            DatabaseUser user = entityManager.find(DatabaseUser.class, toDelete.getUsername());
 
             try{
                 entityManager.getTransaction().begin();
                 entityManager.remove(toDelete);
-//                entityManager.remove(user);
+                entityManager.remove(user);
                 entityManager.getTransaction().commit();
             } catch (Exception e) {
                 e.printStackTrace();
