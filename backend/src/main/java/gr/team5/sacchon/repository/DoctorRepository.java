@@ -23,6 +23,10 @@ public class DoctorRepository {
         this.entityManager = entityManager;
     }
 
+    public List<Doctor> findByName(String name){
+        return entityManager.createQuery("FROM Doctor WHERE username = :name").setParameter("name", name).getResultList();
+    }
+
     /**
      * Find doctor by primary key id
      * @param id
