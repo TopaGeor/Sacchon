@@ -35,6 +35,17 @@ public class PatientRepository extends ServerResource {
         return patient != null ? Optional.of(patient) : Optional.empty();
     }
 
+
+    /**
+     * find patient by name
+     * @param name
+     * @return
+     */
+    public List<Patient> findByName(String name){
+        return entityManager.createQuery("FROM Patient WHERE username = :name").setParameter("name", name).getResultList();
+    }
+
+
     /**
      * Find all patients
      * @return
