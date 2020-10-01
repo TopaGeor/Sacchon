@@ -1,7 +1,6 @@
 package gr.team5.sacchon.repository;
 
 import gr.team5.sacchon.model.Consultation;
-import gr.team5.sacchon.model.Patient;
 
 import javax.persistence.EntityManager;
 import java.util.Optional;
@@ -126,7 +125,7 @@ public class ConsultationRepository {
     public Optional<Consultation> save(Consultation consultation){
         try {
             entityManager.getTransaction().begin();
-            entityManager.persist (consultation);
+            entityManager.persist(consultation);
             entityManager.getTransaction().commit();
             return Optional.of(consultation);
         } catch (Exception e) {
@@ -145,7 +144,7 @@ public class ConsultationRepository {
         in.setAdvice(consultation.getAdvice());
         try {
             entityManager.getTransaction().begin();
-            entityManager.persist (in);
+            entityManager.persist(in);
             entityManager.getTransaction().commit();
             return Optional.of(in);
         } catch (Exception e) {

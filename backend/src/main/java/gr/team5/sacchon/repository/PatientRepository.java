@@ -2,7 +2,6 @@ package gr.team5.sacchon.repository;
 
 import gr.team5.sacchon.model.DatabaseUser;
 import gr.team5.sacchon.model.Patient;
-import gr.team5.sacchon.representation.PatientRepresentation;
 import gr.team5.sacchon.security.Role;
 import org.restlet.resource.ServerResource;
 
