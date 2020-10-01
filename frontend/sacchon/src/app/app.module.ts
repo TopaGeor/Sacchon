@@ -12,20 +12,19 @@ import { RouterModule } from '@angular/router';
 import { PatientModule } from './patient/patient.module';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
-import { LoginComponent } from './patient/login/login.component';
 import { CommonModule } from '@angular/common';
 import { DoctorModule } from './doctor/doctor.module';
 // import { SharedModule } from './shared/shared.module';
 // import { ChiefDoctorComponent } from './chief-doctor/chief-doctor/chief-doctor.component';
 import { ChiefDoctorModule } from './chief-doctor/chief-doctor.module';
+import { LoginLayoutModule } from './login-layout/login-layout.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent,
-    LoginComponent
+    FooterComponent
   ],
   imports: [
     RouterModule.forRoot([]),
@@ -38,7 +37,8 @@ import { ChiefDoctorModule } from './chief-doctor/chief-doctor.module';
     PatientModule,
     HttpClientModule,
     DoctorModule,
-    ChiefDoctorModule
+    ChiefDoctorModule,
+    LoginLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

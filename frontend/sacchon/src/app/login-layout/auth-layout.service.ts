@@ -13,10 +13,21 @@ export class AuthLayoutService {
   readonly app = "http://localhost:9000/";
 
 
-  patientLogin(username, password): Observable<Patient[]> {
-    return this.http.post<Patient[]>(
-      this.app+'patient/login',
-      {headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( username+ ':' +password)})}
+  patientLogin(opts): Observable<any> {
+    return this.http.get<any>(
+      this.app+'login/'+opts.username + '/' +opts.password
+    )
+  }
+
+  doctorLogin(opts): Observable<any> {
+    return this.http.get<any>(
+      this.app+'login/'+opts.username + '/' +opts.password
+    )
+  }
+
+  chiefLogin(opts): Observable<any> {
+    return this.http.get<any>(
+      this.app+'login/'+opts.username + '/' +opts.password
     )
   }
 }
