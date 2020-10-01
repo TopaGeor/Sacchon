@@ -30,13 +30,13 @@
       <div class="card" style="width: 25rem;">
         <div class=" card-header">
           <h4 class=" card-title"></h4>
-          <select class="mdb-select md-form">
+          <select class="mdb-select md-form" (click)="getPatientNull()">
             <option value="" disabled selected> Patients with no doctor </option>
-            <option *ngFor="let patient of patients">{{patient.username}}</option>
+            <option *ngFor="let pn of patientsNull">{{pn.username}}</option>
           </select>
         </div>
         <div class=" card-body">
-          something
+          
         </div>
       </div>
     </div>

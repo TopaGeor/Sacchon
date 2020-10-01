@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { PatientService } from 'src/app/patient/patient.service';
 import { Patient } from 'src/app/shared/patient';
 import { DoctorService } from '../doctor.service';
 
@@ -10,10 +11,12 @@ import { DoctorService } from '../doctor.service';
 })
 export class DoctorComponent implements OnInit {
   patients: Patient[];
+  patientsNull;
   doctorId = this.route.snapshot.paramMap.get("doctorId");
 
   constructor(
     private service: DoctorService,
+    private servicePatient: PatientService,
     private route: ActivatedRoute
     ) { }
 
@@ -21,6 +24,14 @@ export class DoctorComponent implements OnInit {
     this.service.getDoctorsPatients(this.doctorId).subscribe(
       patients => {this.patients = patients;
       console.log(patients);
+      }
+    );
+  }
+
+  getPatientNull() {
+    this.servicePatient.getPatientsNull().subscribe(
+      patientsNull => {this.patientsNull = patientsNull;
+      console.log(patientsNull);
       }
     );
   }
