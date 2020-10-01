@@ -1,31 +1,45 @@
 
 <div class=" content">
-    <div class=" row">
-      <div class=" col-lg-6 col-md-12">
-        <div class="card">
-          <div class=" card-header">
-            <h4 class=" card-title">Doctors List</h4>
-          </div>
-          <div class=" card-body">
-            <div class=" table-responsive">
-              <table class=" table tablesorter" id="">
-                <thead class=" text-primary">
-                  <tr>
-                    <th>id</th>
-                    <th>username</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let doctor of doctors">
-                    <td>{{doctor.id}}</td>
-                    <td>{{doctor.username}}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+  <div class=" row">
+    <div class=" col-lg-6 col-md-12">
+      <div class="card">
+        <div class=" card-header">
+          <h4 class=" card-title">Patient List</h4>
+        </div>
+        <div class=" card-body">
+          <div class=" table-responsive">
+            <table class=" table tablesorter" id="">
+              <thead class=" text-primary">
+                <tr>
+                  <th>id</th>
+                  <th>username</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let patient of patients">
+                  <td>{{patient.id}}</td>
+                  <td>{{patient.username}}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
+    <div class="col-lg-6">
+      <div class="card" style="width: 25rem;">
+        <div class=" card-header">
+          <h4 class=" card-title"></h4>
+          <select class="mdb-select md-form" (click)="getPatientNull()">
+            <option value="" disabled selected> Patients with no doctor </option>
+            <option *ngFor="let pn of patientsNull">{{pn.username}}</option>
+          </select>
+        </div>
+        <div class=" card-body">
+          
+        </div>
+      </div>
+    </div>
   </div>
-  
+</div>
+

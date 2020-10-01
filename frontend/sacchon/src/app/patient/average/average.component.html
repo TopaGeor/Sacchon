@@ -8,18 +8,22 @@
             <input  type="text"
                     class="form-control"
                     id="from"
-                    placeholder="Starting Date..."
+                    placeholder="yyyy-MM-dd"
                     formControlName="from"/>
+                    <span class="text-danger" *ngIf="form.get('from').errors?.required && form.get('from').dirty">*This field is required</span>
+                    <span class="text-danger" *ngIf="form.get('from').errors?.pattern && form.get('from').dirty">*This field should match the yyyy-MM-dd pattern</span>
           </div>
           <div class="form-group">
             <label  class="font-weight-bold" for="to">To:</label>
             <input  type="text"
                     class="form-control"
                     id="to"
-                    placeholder="End Date..."
+                    placeholder="yyyy-MM-dd"
                     formControlName="to"/>
+                    <span class="text-danger" *ngIf="form.get('to').errors?.required && form.get('to').dirty">*This field is required</span>
+                    <span class="text-danger" *ngIf="form.get('to').errors?.pattern && form.get('to').dirty">*This field should match the yyyy-MM-dd pattern</span>
           </div>
-      <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>
+      <button class="btn btn-primary btn-lg btn-block" [disabled]="!form.valid" type="submit">Submit</button>
     </form>
   </article>
     </div>

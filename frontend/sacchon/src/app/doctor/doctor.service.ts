@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Doctor } from '../shared/doctor';
+import { Patient } from '../shared/patient';
 import { Consultations } from './consultations/consultations';
 
 @Injectable({
@@ -19,6 +20,14 @@ export class DoctorService {
   getDoctors(): Observable<Doctor[]> {
     return this.http.get<Doctor[]>(
       this.app + 'doctor',
+      {headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' +this.password)})}
+    );
+  }
+
+  getDoctorsPatients(doctorId): Observable<Patient[]> {
+    let url = this.app + "doctor/" + doctorId + "/patient";
+    return this.http.get<Patient[]>(
+      url,
       {headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' +this.password)})}
     );
   }
