@@ -83,7 +83,7 @@ const routes: Routes = [
       },
       {
         path: ':id/delete',
-        component: DeletePatientComponent
+        component: DeletePatientComponent,
       }
     ]
   },
