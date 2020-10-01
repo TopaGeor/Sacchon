@@ -8,10 +8,13 @@ import { PatientService } from '../patient.service';
   templateUrl: './put-patient-data.component.html',
   styleUrls: ['./put-patient-data.component.scss']
 })
+
 export class PutPatientDataComponent implements OnInit {
   form: FormGroup;
   patientId = this.route.snapshot.paramMap.get("patientId"); 
-  dataId = this.route.snapshot.paramMap.get("dataId"); 
+  dataId = this.route.snapshot.paramMap.get("dataId");
+  bloodGlucose = this.route.snapshot.paramMap.get("bloodGlucose");
+  carbIntake = this.route.snapshot.paramMap.get("carbIntake");
 
   constructor(
     private fb: FormBuilder,
@@ -21,8 +24,8 @@ export class PutPatientDataComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      bloodGlucose: [null, Validators.required],
-      carbIntake: [null, Validators.required],
+      bloodGlucose: [this.bloodGlucose, Validators.pattern('^[-+]?[0-9]*\.?[0-9]+$')],
+      carbIntake: [this.carbIntake, Validators.pattern('^[-+]?[0-9]*\.?[0-9]+$')],
     });
   }
 
