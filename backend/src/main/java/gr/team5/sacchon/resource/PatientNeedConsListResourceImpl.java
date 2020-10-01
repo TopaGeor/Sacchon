@@ -51,6 +51,11 @@ public class PatientNeedConsListResourceImpl extends ServerResource implements P
         LOGGER.info("Initializing patient list resource ends");
     }
 
+    /**
+     *
+     * @return patients who do not have a consultation
+     * @throws NotFoundException
+     */
     @Override
     public List<PatientRepresentation> getPatientsWithNoCons() throws NotFoundException {
         LOGGER.finer("Select all patients that they need consultation.");

@@ -95,7 +95,7 @@ public class PatientRepository extends ServerResource {
     }
 
     /**
-     * Update username & password
+     * Update, set a doctor to a patient
      * @param patient
      * @return
      */

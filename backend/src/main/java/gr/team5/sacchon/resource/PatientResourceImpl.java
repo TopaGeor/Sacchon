@@ -176,7 +176,10 @@ public class PatientResourceImpl extends ServerResource implements PatientResour
     }
 
     /**
-     *
+     * Update a patient
+     * Set doctor to a patient accordingly to:
+     * 1) patient has at least one data storage
+     * 2) has passed the time of a month from this storage
      * @param patientReprIn
      * @return updates a patient
      * @throws NotFoundException
@@ -214,10 +217,12 @@ public class PatientResourceImpl extends ServerResource implements PatientResour
                     List<PatientData> patientData =
                             patientDataRepository.findDataByPatientId(id);
 
+                    // checking if patient has data
                     if (patientData.size() < 1) {
                         throw new NotFoundException("This patient has not enough data for consultation");
                     }
 
+                    // checking the time passed since patient store data
                     Calendar current = Calendar.getInstance();
                     Calendar creationDate = Calendar.getInstance();
                     final AtomicInteger t = new AtomicInteger(1);
