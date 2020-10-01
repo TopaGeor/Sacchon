@@ -4,6 +4,7 @@ import gr.team5.sacchon.resource.*;
 import gr.team5.sacchon.resource.chief.ChiefInfoSubImpl;
 import gr.team5.sacchon.resource.chief.ChiefNoActivityImpl;
 import gr.team5.sacchon.resource.chief.ChiefPatientConsPendingImpl;
+import gr.team5.sacchon.resource.login.LoginResourceImpl;
 import org.restlet.Application;
 import org.restlet.routing.Router;
 
@@ -18,6 +19,7 @@ public class CustomRouter {
     public Router publicResources() {
         Router router = new Router();
         router.attach("/ping", PingServerResource.class);
+        router.attach("/login/{username}/{password}", LoginResourceImpl.class);
         return router;
     }
 
