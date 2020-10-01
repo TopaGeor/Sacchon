@@ -10,20 +10,23 @@
             <div class=" table-responsive">
               <table class=" table tablesorter" id="">
                 <thead class=" text-primary">
-                  <tr>
-                    <th>id</th>
-                    <th>hasNotification</th>
-                    <th>username</th>
-                    <th>doctor_id</th>
+                  <tr class="d-flex">
+                    <th class="col-3">Your unique number</th>
+                    <th class="col-3">New notification</th>
+                    <th class="col-3">Name</th>
+                    <th class="col-3">Doctor number</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngIf="patientDetail">
-                    <td>{{patientDetail.id}}</td>
-                    <td>{{patientDetail.hasNotification}}</td>
-                    <td>{{patientDetail.username}}</td>
-                    <td>{{patientDetail.doctor_id}}</td>
-                    <td><button class="btn btn-outline-danger pull-right" (click)="openVerticallyCentered(content)">Delete Account</button></td>
+                  <tr *ngIf="patientDetail" class="d-flex">
+                    <td class="col-3">{{patientDetail.patientId}}</td>
+                    <td class="col-3">
+                      <p *ngIf="patientDetail.hasNotification">You have a new notification!</p>
+                      <p *ngIf="!patientDetail.hasNotification">No new notification!</p>
+                    </td>
+                    <td class="col-3">{{patientDetail.username}}</td>
+                    <td class="col-3">{{patientDetail.doctorId}}</td>
+                    <td class="col-3"><button class="btn btn-outline-danger pull-right" (click)="openVerticallyCentered(content)">Delete Account</button></td>
                   </tr>
                 </tbody>
               </table>

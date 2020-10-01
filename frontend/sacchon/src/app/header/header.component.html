@@ -2,22 +2,20 @@
   <a href="" class="logo">
     <img src="../../assets/img/logo.png" height="50px" width="50px" />
     Sacchon</a>
-    <div class="topnav">
+    <div class="topnav" *ngIf="isLogged">
       <div id="myLinks">
-        <a href="#news">Home</a>
+        <a href="">Home</a>
         <a routerLink="patient/{{id}}/data">My Data</a>
-        <a href="#about">My Consultations</a>
+        <a href="">My Consultations</a>
       </div>
     </div>
 
   <div class="header-right">
-    <div ngbDropdown container="body">
-      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle> Login </button>
-      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-        <button ngbDropdownItem routerLink="./login/patient"> Patient Login </button>
-        <button ngbDropdownItem routerLink="./login/doctor"> Doctor Login </button>
-        <button ngbDropdownItem routerLink="./login/chief_doctor"> Chief Doctor Login </button>
-      </div>
+    <div *ngIf="!isLogged">
+      <button class="btn btn-outline-primary" routerLink="./login"> Login </button>
+    </div>
+    <div *ngIf="isLogged">
+      <button class="btn btn-outline-primary" (click)="logout()"> Logout </button>
     </div>
   </div>
 </div>
