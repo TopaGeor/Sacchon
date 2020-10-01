@@ -29,7 +29,12 @@ export class LoginComponent implements OnInit {
     this.user = this.service.login(this.form.value).subscribe(user => {
       if(user != null) {
         this.user = user;
-        sessionStorage.setItem("credentials", this.user);
+        sessionStorage.setItem("credentials", JSON.stringify({
+          id: this.user.id,
+          password: this.user.password,
+          role: this.user.role,
+          username: this.user.username
+        }));
 
         if(user.role == "ROLE_PATIENT") {
 
@@ -38,8 +43,9 @@ export class LoginComponent implements OnInit {
 
           this.router.navigate(['doctor/' + user.id]);
         } else if (user.role == "ROLE_CHIEF") {
-          
+
           this.router.navigate(['chief']);
+          this.router
         }
       } else {
         alert("Wrong username or password!!");

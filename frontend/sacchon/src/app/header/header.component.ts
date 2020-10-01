@@ -10,6 +10,7 @@ import { AuthLayoutService } from '../login-layout/auth-layout.service';
 export class HeaderComponent implements OnInit {
   id = this.route.snapshot.paramMap.get('id');
   isLogged: boolean;
+  role = this.route.snapshot.paramMap.get('role');
 
   constructor(
     private route: ActivatedRoute,
@@ -22,10 +23,10 @@ export class HeaderComponent implements OnInit {
       this.isLogged = false;
       this.router.navigate(['']);
     } else {
+      var temp = JSON.parse(sessionStorage.getItem("credentials"));
+      this.role = temp.role;
       this.isLogged = true;
-      console.log("ngOnInit");
       console.log(sessionStorage.getItem("credentials"))
-      console.log("ngOnInit");
       //this.router.navigate(['./patient/' + this.id]);
     }
     this.service.responseOfAuth.subscribe(data => {
@@ -36,6 +37,7 @@ export class HeaderComponent implements OnInit {
   logout() {
     sessionStorage.removeItem("credentials");
     this.isLogged = false;
+    this.role = "";
     this.router.navigate(['../']);
   }
 }
