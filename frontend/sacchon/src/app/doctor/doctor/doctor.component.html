@@ -10,15 +10,26 @@
           <div class=" table-responsive">
             <table class=" table tablesorter" id="">
               <thead class=" text-primary">
-                <tr>
-                  <th>id</th>
-                  <th>username</th>
+                <tr class="d-flex">
+                  <th class="col-3">id</th>
+                  <th class="col-3">username</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let patient of patients">
-                  <td>{{patient.id}}</td>
-                  <td>{{patient.username}}</td>
+                <tr *ngFor="let patient of patients" class="d-flex">
+                  <td class="col-3">{{patient.patientId}}</td>
+                  <td class="col-3">{{patient.username}}</td>
+                  <td class="col-3"><button 
+                      type="submit" class="btn btn-outline-primary pull-right" 
+                      routerLink="./{{patient.patientId}}/consultation/post">
+                      Consult</button>
+                  </td>
+                  <td class="col-3"><button 
+                      type="submit" 
+                      class="btn btn-outline-warning pull-right" 
+                      routerLink="../consultation">
+                      Patients Consults</button>
+                  </td>
                 </tr>
               </tbody>
             </table>

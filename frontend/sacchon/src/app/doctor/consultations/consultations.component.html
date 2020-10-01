@@ -10,20 +10,24 @@
             <div class=" table-responsive">
               <table class=" table tablesorter" id="">
                 <thead class=" text-primary">
-                  <tr>
-                    <th>id</th>
-                    <th>advice</th>
-                    <th>dateCreated</th>
-                    <th>username</th>
+                  <tr class="d-flex">
+                    <th class="col-3">patient id</th>
+                    <th class="col-3">advice</th>
+                    <th class="col-3">date Created</th>
+                    <th class="col-3">consultation id</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let pc of patientConsultation">
-                    <td>{{pc.id}}</td>
-                    <td>{{pc.advice}}</td>
-                    <td>{{pc.dateCreated | date:'dd-MM-yyyy'}}</td>
-                    <td>{{pc.username}}</td>
-                    <td><button class="btn btn-primary">More Info</button></td>
+                  <tr *ngFor="let pc of patientConsultation" class="d-flex">
+                    <td class="col-3">{{pc.patientId}}</td>
+                    <td class="col-3">{{pc.advice}}</td>
+                    <td class="col-3">{{pc.dateCreated | date:'dd-MM-yyyy'}}</td>
+                    <td class="col-3">{{pc.consultationId}}</td>
+                    <td class="col-3"><button 
+                      type="submit" class="btn btn-outline-warning pull-right" 
+                      routerLink="../patient/{{pc.patientId}}/consultation/{{pc.consultationId}}/edit">
+                      Edit Consult</button>
+                    </td>
                   </tr>
                 </tbody>
               </table>
