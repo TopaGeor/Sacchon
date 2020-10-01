@@ -2,7 +2,7 @@
   <a href="" class="logo">
     <img src="../../assets/img/logo.png" height="50px" width="50px" />
     Sacchon</a>
-    <div class="topnav" *ngIf="isLogged">
+    <div class="topnav" *ngIf="role==='ROLE_PATIENT'">
       <div id="myLinks">
         <a href="">Home</a>
         <a routerLink="patient/{{id}}/data">My Data</a>
@@ -15,7 +15,7 @@
       <button class="btn btn-outline-primary" routerLink="./login"> Login </button>
     </div>
     <div *ngIf="isLogged">
-      <button class="btn btn-outline-primary" (click)="logout()"> Logout </button>
+      <button class="btn btn-outline-primary" (click)="logout()"> Logout {{role}} </button>
     </div>
   </div>
 </div>
