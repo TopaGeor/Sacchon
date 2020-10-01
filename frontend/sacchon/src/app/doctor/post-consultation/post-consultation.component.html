@@ -8,10 +8,11 @@
           <textarea
                   class="form-control"
                   id="advice"
-                  placeholder=""
-                  formControlName="advice"></textarea>
+                  placeholder="advice"
+                  formControlName="advice">
+                <span class="text-danger" *ngIf="form.get('advice').errors?.required && form.get('advice').dirty">*This field is required</span>
         </div>
-    <button class="btn btn-primary" type="submit">Consult</button>
+    <button class="btn btn-primary btn-lg btn-block" [disabled]="!form.valid" type="submit">Submit</button>
   </form>
 </article>
   </div>

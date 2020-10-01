@@ -24,7 +24,8 @@ public class PatientRepresentation {
 
     /**
      * Constructor
-     * @param patient will be represent the resource
+     * @param patient
+     * will represent the resource
      */
     public PatientRepresentation(Patient patient) {
         if (patient != null) {
