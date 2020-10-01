@@ -5,14 +5,15 @@
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label  class="font-weight-bold" for="advice">Consult: </label>
-          <input  type="text"
+          <textarea
                   class="form-control"
                   id="advice"
                   placeholder="advice"
-                  formControlName="advice"/>
+                  formControlName="advice"></textarea>
+                <span class="text-danger" *ngIf="form.get('advice').errors?.required && form.get('advice').dirty">*This field is required</span>
         </div>
-    <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>
-  </form>
-</article>
+        <button class="btn btn-primary btn-lg btn-block" [disabled]="!form.valid" type="submit">Submit</button>
+      </form>
+    </article>
   </div>
 </div>

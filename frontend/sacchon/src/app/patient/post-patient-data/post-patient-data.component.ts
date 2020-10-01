@@ -20,8 +20,8 @@ export class PostPatientDataComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      bloodGlucose: [null, Validators.required],
-      carbIntake: [null, Validators.required],
+      bloodGlucose: [null, [Validators.required, Validators.pattern('^[-+]?[0-9]*\.?[0-9]+$')]],
+      carbIntake: [null, [Validators.required, Validators.pattern("^[-+]?[0-9]*\.?[0-9]+$")]],
     });
   }
 

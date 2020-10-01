@@ -2,7 +2,7 @@
     <div class="card" style="width: 18rem;">
       <article class="card-body">
         <h4 class="card-title mb-4 mt-1">Modify a consultation for your patient</h4>
-        <form formGroup="form" ngSubmit="onSubmit()">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
           <div class="form-group">
             <label  class="font-weight-bold" for="advice">Consult: </label>
             <textarea
@@ -10,9 +10,11 @@
                     id="advice"
                     placeholder=""
                     formControlName="advice"></textarea>
+                  <span class="text-danger" *ngIf="form.get('advice').errors?.required && form.get('advice').dirty">*This field is required</span>
+                    
           </div>
       
-        <button class="btn btn-primary" type="submit">Consult</button>
+        <button class="btn btn-primary" [disabled]="!form.valid" type="submit">Consult</button>
       </form>
       </article>
     </div>

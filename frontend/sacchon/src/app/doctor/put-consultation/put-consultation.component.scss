@@ -1,0 +1,9 @@
+textarea.ng-invalid {
+    &.ng-dirty {
+        border: 1px solid red; 
+    }
+}
+
+textarea.ng-valid {
+    border: 1px solid green;
+}

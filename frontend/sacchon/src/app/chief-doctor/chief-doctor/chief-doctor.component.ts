@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DoctorService } from 'src/app/doctor/doctor.service';
+import { Doctor } from 'src/app/shared/doctor';
 
 @Component({
   selector: 'app-chief-doctor',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chief-doctor.component.scss']
 })
 export class ChiefDoctorComponent implements OnInit {
+  doctors: Doctor[];
 
-  constructor() { }
+  constructor(private service: DoctorService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.service.getDoctors().subscribe(
+      doctors => {this.doctors = doctors;
+      console.log(doctors);
+      }
+    );
   }
-
 }

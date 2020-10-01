@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PatientService } from '../../patient/patient.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class PatientDataDetailComponent implements OnInit {
 
   constructor(
     private service: PatientService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit() {
@@ -22,5 +24,13 @@ export class PatientDataDetailComponent implements OnInit {
       patientDataDetail => { this.patientDataDetail = patientDataDetail;
       console.log(patientDataDetail);
       })
+  }
+
+  onClickDelete() {
+    this.modalService.dismissAll;
+  }
+
+  openVerticallyCentered(content) {
+    this.modalService.open(content, { centered: true });
   }
 }

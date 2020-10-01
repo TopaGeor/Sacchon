@@ -10,9 +10,10 @@ import { DoctorService } from '../doctor.service';
 })
 export class PutConsultationComponent implements OnInit {
   form: FormGroup;
-  patientId = this.route.snapshot.paramMap.get("patientId"); 
-  doctorId = this.route.snapshot.paramMap.get("doctorId"); 
-  consId = this.route.snapshot.paramMap.get("consId"); 
+  doctorId = this.route.snapshot.paramMap.get("doctorId");
+  patientId = this.route.snapshot.paramMap.get("patientId");  
+  consId = this.route.snapshot.paramMap.get("consId");
+  advice = this.route.snapshot.paramMap.get("advice");
 
   constructor(
     private fb: FormBuilder,
@@ -22,7 +23,7 @@ export class PutConsultationComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      advice: [null, Validators.required]
+      advice: [this.advice, Validators.required]
     });
   }
 

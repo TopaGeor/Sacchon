@@ -19,7 +19,8 @@ public class DoctorRepresentation {
 
     /**
      * Constructor
-     * @param doctor will be represent the resource
+     * @param doctor
+     * will represent the resource
      */
     public DoctorRepresentation(
             Doctor doctor) {
