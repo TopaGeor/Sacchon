@@ -209,33 +209,33 @@ public class PatientResourceImpl extends ServerResource implements PatientResour
             if (isExisting()) {
 
                 LOGGER.finer("Update patient.");
-                List<PatientData> patientData =
-                        patientDataRepository.findDataByPatientId(id);
-
-                if(patientData.size() < 1){
-                    throw new NotFoundException("This patient has not enough data for consultation");
-                }
-
-                Calendar current = Calendar.getInstance();
-                Calendar creationDate = Calendar.getInstance();
-                final AtomicInteger t = new AtomicInteger(1);
-
-                patientData.forEach(patientData1 -> {
-                    creationDate.setTime(patientData1.getDate());
-                    creationDate.add(Calendar.MONTH, +1);
-                    creationDate.add(Calendar.DATE, -1);
-
-                    if(creationDate.compareTo(current) < 0){
-                        t.set(0);
-                    }
-                });
-
-                if (t.get() == 1){
-                    throw new NotFoundException("This patient is less than a month old");
-                }
-
                 // Set a doctor to a patient
-                if(doctorId != null){
+                if (doctorId != null) {
+                    List<PatientData> patientData =
+                            patientDataRepository.findDataByPatientId(id);
+
+                    if (patientData.size() < 1) {
+                        throw new NotFoundException("This patient has not enough data for consultation");
+                    }
+
+                    Calendar current = Calendar.getInstance();
+                    Calendar creationDate = Calendar.getInstance();
+                    final AtomicInteger t = new AtomicInteger(1);
+
+                    patientData.forEach(patientData1 -> {
+                        creationDate.setTime(patientData1.getDate());
+                        creationDate.add(Calendar.MONTH, +1);
+                        creationDate.add(Calendar.DATE, -1);
+
+                        if (creationDate.compareTo(current) < 0) {
+                            t.set(0);
+                        }
+                    });
+
+                    if (t.get() == 1) {
+                        throw new NotFoundException("This patient is less than a month old");
+                    }
+
                     Optional<Doctor> oDoctor = doctorRepository.findById(doctorId);
                     patientIn.setDoctor(oDoctor.get());
                 }

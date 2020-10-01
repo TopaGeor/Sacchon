@@ -79,7 +79,6 @@ public class PatientRepository extends ServerResource {
      * @return
      */
     public Optional<Patient> save(Patient patient){
-        // For Chousiadas to test
         DatabaseUser user = new DatabaseUser();
         user.setUsername(patient.getUsername());
         user.setPassword(patient.getPassword());
@@ -103,16 +102,13 @@ public class PatientRepository extends ServerResource {
      * @return
      */
     public Optional<Patient> update(Patient patient){
-        // For Chousiadas to test
         Patient in = entityManager.find(Patient.class, patient.getId());
         DatabaseUser user = entityManager.find(DatabaseUser.class, in.getUsername());
 
-        in.setUsername(patient.getUsername());
         in.setHasNotification(patient.isHasNotification());
         in.setPassword(patient.getPassword());
         in.setDoctor(patient.getDoctor());
 
-        user.setUsername(patient.getUsername());
         user.setPassword(patient.getPassword());
 
         try {
@@ -150,7 +146,6 @@ public class PatientRepository extends ServerResource {
      * @return
      */
     public boolean delete(Long id){
-        // For Chousiadas to test
         Optional<Patient> tempPatient = findById(id);
         if (tempPatient.isPresent()){
             Patient toDelete = tempPatient.get();

@@ -47,7 +47,6 @@ public class DoctorRepository {
      * @return
      */
     public Optional<Doctor> save(Doctor doctor){
-        // For Chousiadas to test
         DatabaseUser user = new DatabaseUser();
         user.setUsername(doctor.getUsername());
         user.setPassword(doctor.getPassword());
@@ -71,14 +70,10 @@ public class DoctorRepository {
      * @return
      */
     public Optional<Doctor> update(Doctor doctor) {
-        // For Chousiadas to test
         Doctor in = entityManager.find(Doctor.class, doctor.getId());
         DatabaseUser user = entityManager.find(DatabaseUser.class, in.getUsername());
 
-        in.setUsername(doctor.getUsername());
         in.setPassword(doctor.getPassword());
-
-        user.setUsername(doctor.getUsername());
         user.setPassword(doctor.getPassword());
 
         try {
@@ -99,7 +94,6 @@ public class DoctorRepository {
      * @return
      */
     public boolean delete(Long id){
-        // For Chousiadas to test
 
         Optional<Doctor> tempDoctor = findById(id);
         if (tempDoctor.isPresent()){
