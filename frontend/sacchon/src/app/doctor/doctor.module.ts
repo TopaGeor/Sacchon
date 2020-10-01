@@ -7,13 +7,22 @@ import { PostConsultationComponent } from './post-consultation/post-consultation
 import { DeleteDoctorComponent } from './delete-doctor/delete-doctor.component';
 import { PutConsultationComponent } from './put-consultation/put-consultation.component';
 import { ConsultationsComponent } from './consultations/consultations.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
-  declarations: [DoctorComponent, DoctorDetailsComponent, ConsultationsComponent, PostConsultationComponent, DeleteDoctorComponent, PutConsultationComponent],
+  declarations: [
+    DoctorComponent, 
+    DoctorDetailsComponent, 
+    ConsultationsComponent, 
+    PostConsultationComponent, 
+    PutConsultationComponent,
+    DeleteDoctorComponent, 
+  ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     DoctorRoutingModule
   ]
 })

@@ -12,6 +12,7 @@
                     <th>Glucose Level</th>
                     <th>CarbInTake</th>
                     <th></th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -19,10 +20,23 @@
                     <td>{{ patientDataDetail.date |  date:'dd-MM-yy' }}</td>
                     <td>{{patientDataDetail.bloodGlucose}}</td>
                     <td>{{patientDataDetail.carbIntake}}</td>
-                    <td><button type="button" class="btn btn-danger pull-right" routerLink="./delete">Remove Data</button></td>
+                    <td><button class="btn btn-outline-danger" (click)="openVerticallyCentered(content)">Delete Data</button></td>
                   </tr>
                 </tbody>
               </table>
             </div>
         </div>
   </div>
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Delete Data</h4>
+    </div>
+    <div class="modal-body">
+      <p>Do you want to delete your data?</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" aria-label="close" class="btn btn-outline-primary" (click)="modal.close('Close click')">Close</button>
+      <button type="button" class="btn btn-danger" (click)="modal.close('Close click')" routerLink="./delete">Delete</button>
+    </div>
+  </ng-template>

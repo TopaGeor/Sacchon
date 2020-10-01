@@ -94,9 +94,18 @@ export class PatientService {
       });
   }
 
+  deletePatient(id): Observable<Patient[]> {
+    let url = this.app+"patient/"+id;
+    return this.http.delete<Patient[]>(
+      url,
+      {headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' +this.password)})}
+    )
+  }
+
   deletePatientData(patientId, dataId): Observable<any>{
+    let url = this.app+"patient/"+patientId+"/data/"+dataId;
     return this.http.delete<any>(
-      this.app+"patient/"+patientId+"/data/"+dataId,
+      url,
       {headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' +this.password)})}
     )
   }

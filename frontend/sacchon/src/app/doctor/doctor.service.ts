@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Doctor } from '../shared/doctor';
@@ -42,15 +42,18 @@ export class DoctorService {
   }
 
   postConsultation(doctorId, patientId, values) {
+
+    const url = this.app + "consultation";
+    console.log(url);
     console.log(values);
     return this.http.post<Consultations[]>(
-      this.app + "consultation",
+      url,
       {
         'advice': values.get('advice').value,
-        'date': new Date()
+        'dateCreated': new Date()
       },
       {
-        params: {doctor_id: '1', patient_id: '3'},
+        params: { 'doctor_id': doctorId, 'patient_id': patientId},
         headers:new HttpHeaders({'Authorization': 'Basic ' + btoa(this.username + ':' + this.password)})
       }
     );
@@ -62,7 +65,7 @@ export class DoctorService {
       this.app + "doctor/" + doctorId + "/patient/" + patientId + "/consultation/" + consId,
       {
         'advice': values.get('advice').value,
-        'date': new Date()
+        'dateCreated': new Date()
       },
       {
         headers:new HttpHeaders({'Authorization': 'Basic ' + btoa(this.username + ':' + this.password)})
