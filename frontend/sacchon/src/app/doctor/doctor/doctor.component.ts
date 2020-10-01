@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Doctor } from 'src/app/shared/doctor';
+import { ActivatedRoute } from '@angular/router';
+import { Patient } from 'src/app/shared/patient';
 import { DoctorService } from '../doctor.service';
 
 @Component({
@@ -8,14 +9,18 @@ import { DoctorService } from '../doctor.service';
   styleUrls: ['./doctor.component.scss']
 })
 export class DoctorComponent implements OnInit {
-  doctors: Doctor[];
+  patients: Patient[];
+  doctorId = this.route.snapshot.paramMap.get("doctorId");
 
-  constructor(private service: DoctorService) { }
+  constructor(
+    private service: DoctorService,
+    private route: ActivatedRoute
+    ) { }
 
   ngOnInit() {
-    this.service.getDoctors().subscribe(
-      doctors => {this.doctors = doctors;
-      console.log(doctors);
+    this.service.getDoctorsPatients(this.doctorId).subscribe(
+      patients => {this.patients = patients;
+      console.log(patients);
       }
     );
   }

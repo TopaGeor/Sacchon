@@ -5,13 +5,13 @@
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label  class="font-weight-bold" for="advice">Consult: </label>
-          <input  type="text"
+          <textarea
                   class="form-control"
                   id="advice"
-                  placeholder="advice"
-                  formControlName="advice"/>
+                  placeholder=""
+                  formControlName="advice"></textarea>
         </div>
-    <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>
+    <button class="btn btn-primary" type="submit">Consult</button>
   </form>
 </article>
   </div>
