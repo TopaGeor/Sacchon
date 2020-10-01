@@ -21,6 +21,12 @@ import { AverageComponent } from './patient/average/average.component';
 import { DeleteDoctorComponent } from './doctor/delete-doctor/delete-doctor.component';
 import { PutConsultationComponent } from './doctor/put-consultation/put-consultation.component';
 import { ConsultationsComponent } from './doctor/consultations/consultations.component';
+import { DeletePatientComponent } from './patient/delete-patient/delete-patient.component';
+import { InfoSubDataComponent } from './chief-doctor/info-sub-data/info-sub-data.component';
+import { InfoSubConsultComponent } from './chief-doctor/info-sub-consult/info-sub-consult.component';
+import { NoActUserComponent } from './chief-doctor/no-act-user/no-act-user.component';
+import { NeedConsultComponent } from './chief-doctor/need-consult/need-consult.component';
+import { ChiefDoctorComponent } from './chief-doctor/chief-doctor/chief-doctor.component';
 
 const routes: Routes = [
   {
@@ -75,6 +81,10 @@ const routes: Routes = [
       {
         path: ':patientId/data/:dataId/delete',
         component: DeletePatientDataComponent,
+      },
+      {
+        path: ':id/delete',
+        component: DeletePatientComponent
       }
     ]
   },
@@ -92,11 +102,15 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: DoctorComponent,
+        component: ChiefDoctorComponent,
       },
       {
         path: ':doctorId',
         component: DoctorDetailsComponent
+      },
+      {
+        path: ':doctorId/patient',
+        component: DoctorComponent
       },
       {
         path: ':doctorId/deleteDoc',
@@ -111,20 +125,32 @@ const routes: Routes = [
         component: PostConsultationComponent,
       },
       {
-        path: ':doctorId/patient/:patientId/consultation/:consId',
+        path: ':doctorId/patient/:patientId/consultation/:consId/edit',
         component: PutConsultationComponent
       }
     ]
   },
-  // {
-  //   path: 'consultation?doctor_id=:doctorId&patient_id=:patientId',
-  //   children: [
-  //     {
-  //       path: '',
-  //       component: PostConsultationComponent
-  //     }
-  //   ]
-  // },
+  {
+    path: 'chief',
+    children: [
+      {
+        path: 'needCons',
+        component: NeedConsultComponent,
+      },
+      {
+        path: ':patientId/data/infoSub',
+        component: InfoSubDataComponent,
+      },
+      {
+        path: ':doctorId/consultation/infoSub',
+        component: InfoSubConsultComponent,
+      },
+      {
+        path: 'noActivity',
+        component: NoActUserComponent
+      }
+    ]
+  },
   {
     path: "**",
     redirectTo: "dashboard"

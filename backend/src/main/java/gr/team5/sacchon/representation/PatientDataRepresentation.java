@@ -25,7 +25,8 @@ public class PatientDataRepresentation {
 
     /**
      * Constructor
-     * @param patientData will be represent the resource
+     * @param patientData
+     * will represent the resource
      */
     public PatientDataRepresentation(
             PatientData patientData) {

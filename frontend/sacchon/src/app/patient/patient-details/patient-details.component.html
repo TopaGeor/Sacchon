@@ -23,6 +23,7 @@
                     <td>{{patientDetail.hasNotification}}</td>
                     <td>{{patientDetail.username}}</td>
                     <td>{{patientDetail.doctor_id}}</td>
+                    <td><button class="btn btn-outline-danger pull-right" (click)="openVerticallyCentered(content)">Delete Account</button></td>
                   </tr>
                 </tbody>
               </table>
@@ -33,3 +34,15 @@
     </div>
   </div>
   
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Delete Data</h4>
+    </div>
+    <div class="modal-body">
+      <p>Do you want to delete your data?</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" aria-label="close" class="btn btn-outline-primary" (click)="modal.close('Close click')">Close</button>
+      <button type="submit" class="btn btn-danger" (click)="modal.close('Close click')" routerLink="./delete">Delete</button>
+    </div>
+  </ng-template>

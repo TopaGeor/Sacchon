@@ -9,6 +9,12 @@ public class ChiefPatientConsPendingRepresentation {
     private PatientRepresentation patient;
     private int elapsedTime;
 
+    /**
+     * Constructor
+     * @param inPatient
+     * @param time
+     * will represent the resource
+     */
     public ChiefPatientConsPendingRepresentation(
             Patient inPatient, Long time){
         patient = new PatientRepresentation(inPatient);

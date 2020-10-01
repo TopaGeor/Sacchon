@@ -17,8 +17,6 @@ public class PatientRepository extends ServerResource {
 
     private EntityManager entityManager;
 
-    // Constructor
-
     /**
      * PatientRepository constructor
      * @param entityManager
