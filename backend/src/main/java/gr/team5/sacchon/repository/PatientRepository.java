@@ -96,7 +96,7 @@ public class PatientRepository extends ServerResource {
     }
 
     /**
-     * Update username & password
+     * Update, set a doctor to a patient
      * @param patient
      * @return
      */
@@ -152,12 +152,12 @@ public class PatientRepository extends ServerResource {
         Optional<Patient> tempPatient = findById(id);
         if (tempPatient.isPresent()){
             Patient toDelete = tempPatient.get();
-//            DatabaseUser user = entityManager.find(DatabaseUser.class, toDelete.getUsername());
+            DatabaseUser user = entityManager.find(DatabaseUser.class, toDelete.getUsername());
 
             try{
                 entityManager.getTransaction().begin();
                 entityManager.remove(toDelete);
-//                entityManager.remove(user);
+                entityManager.remove(user);
                 entityManager.getTransaction().commit();
             } catch (Exception e) {
                 e.printStackTrace();

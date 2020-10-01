@@ -51,6 +51,12 @@ public class ChiefPatientConsPendingImpl
         LOGGER.info("End initialization chief patient needs consultation");
     }
 
+    /**
+     * Represents:
+     * The list of the patients who are waiting for a consultation and the time elapsed since they needed to have one
+     * @return ChiefPatientConsPendingRepresentation
+     * @throws
+     */
     @Override
     public List<ChiefPatientConsPendingRepresentation> getPatientsConsPending() throws NotFoundException {
         LOGGER.info("Start getting patients that need consultation");
