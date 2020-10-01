@@ -17,8 +17,6 @@ public class PatientRepository extends ServerResource {
 
     private EntityManager entityManager;
 
-    // Constructor
-
     /**
      * PatientRepository constructor
      * @param entityManager
@@ -80,15 +78,15 @@ public class PatientRepository extends ServerResource {
      */
     public Optional<Patient> save(Patient patient){
         // For Chousiadas to test
-        DatabaseUser user = new DatabaseUser();
-        user.setUsername(patient.getUsername());
-        user.setPassword(patient.getPassword());
-        user.setRole(Role.ROLE_PATIENT);
+//        DatabaseUser user = new DatabaseUser();
+//        user.setUsername(patient.getUsername());
+//        user.setPassword(patient.getPassword());
+//        user.setRole(Role.ROLE_PATIENT);
 
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(patient);
-            entityManager.persist(user);
+//            entityManager.persist(user);
             entityManager.getTransaction().commit();
             return Optional.of(patient);
         } catch (Exception e) {
@@ -105,20 +103,20 @@ public class PatientRepository extends ServerResource {
     public Optional<Patient> update(Patient patient){
         // For Chousiadas to test
         Patient in = entityManager.find(Patient.class, patient.getId());
-        DatabaseUser user = entityManager.find(DatabaseUser.class, in.getUsername());
+//        DatabaseUser user = entityManager.find(DatabaseUser.class, in.getUsername());
 
         in.setUsername(patient.getUsername());
         in.setHasNotification(patient.isHasNotification());
         in.setPassword(patient.getPassword());
         in.setDoctor(patient.getDoctor());
 
-        user.setUsername(patient.getUsername());
-        user.setPassword(patient.getPassword());
+//        user.setUsername(patient.getUsername());
+//        user.setPassword(patient.getPassword());
 
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(in);
-            entityManager.persist(user);
+//            entityManager.persist(user);
             entityManager.getTransaction().commit();
             return Optional.of(in);
         } catch (Exception e) {
@@ -154,12 +152,12 @@ public class PatientRepository extends ServerResource {
         Optional<Patient> tempPatient = findById(id);
         if (tempPatient.isPresent()){
             Patient toDelete = tempPatient.get();
-            DatabaseUser user = entityManager.find(DatabaseUser.class, toDelete.getUsername());
+//            DatabaseUser user = entityManager.find(DatabaseUser.class, toDelete.getUsername());
 
             try{
                 entityManager.getTransaction().begin();
                 entityManager.remove(toDelete);
-                entityManager.remove(user);
+//                entityManager.remove(user);
                 entityManager.getTransaction().commit();
             } catch (Exception e) {
                 e.printStackTrace();
