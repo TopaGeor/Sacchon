@@ -1,9 +1,15 @@
 <div class="header">
   <a href="" class="logo">
-    <img  src="../../assets/img/logo.png" 
-          height="50px" 
-          width="50px" /> 
-      Sacchon</a>
+    <img src="../../assets/img/logo.png" height="50px" width="50px" />
+    Sacchon</a>
+    <div class="topnav">
+      <div id="myLinks">
+        <a href="#news">Home</a>
+        <a routerLink="patient/{{id}}/data">My Data</a>
+        <a href="#about">My Consultations</a>
+      </div>
+    </div>
+
   <div class="header-right">
     <div ngbDropdown container="body">
       <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle> Login </button>

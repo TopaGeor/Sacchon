@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PatientService } from '../patient.service';
 
 @Component({
@@ -19,7 +19,8 @@ export class PutPatientDataComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private service: PatientService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -33,7 +34,7 @@ export class PutPatientDataComponent implements OnInit {
     this.service.putPatientData(this.patientId, this.dataId, this.form).subscribe(patientData => 
       {
         console.log(patientData);
-        //this.ngOnInit();
+        this.router.navigateByUrl(`patient/${this.patientId}/data`);
       });
   }
 
