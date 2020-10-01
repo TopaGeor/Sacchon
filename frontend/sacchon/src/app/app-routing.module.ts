@@ -10,9 +10,6 @@ import { PatientComponent } from './patient/patient/patient.component';
 import { PatientDataComponent } from './patient/patient-data/patient-data.component';
 import { PostPatientDataComponent } from './patient/post-patient-data/post-patient-data.component';
 import { PatientDetailsComponent } from './patient/patient-details/patient-details.component';
-import { PatientLoginComponent } from './login-layout/patient-login/patient-login.component';
-import { DoctorLoginComponent } from './login-layout/doctor-login/doctor-login.component';
-import { ChiefDoctorLoginComponent } from './login-layout/chief-doctor-login/chief-doctor-login.component';
 import { DoctorDetailsComponent } from './doctor/doctor-details/doctor-details.component';
 import { PostConsultationComponent } from './doctor/post-consultation/post-consultation.component';
 import { PutPatientDataComponent } from './patient/put-patient-data/put-patient-data.component';
@@ -28,24 +25,12 @@ import { NoActUserComponent } from './chief-doctor/no-act-user/no-act-user.compo
 import { NeedConsultComponent } from './chief-doctor/need-consult/need-consult.component';
 import { ChiefDoctorComponent } from './chief-doctor/chief-doctor/chief-doctor.component';
 import { LandpageComponent } from './login-layout/landpage/landpage.component';
+import { LoginComponent } from './login-layout/login/login.component';
 
 const routes: Routes = [
   {
     path: 'login',
-    children: [
-      {
-        path: 'patient',
-        component: PatientLoginComponent
-      },
-      {
-        path: 'doctor',
-        component: DoctorLoginComponent
-      },
-      {
-        path: 'chief_doctor',
-        component: ChiefDoctorLoginComponent
-      }
-    ]
+    component: LoginComponent
   },
   {
     path: 'patient',

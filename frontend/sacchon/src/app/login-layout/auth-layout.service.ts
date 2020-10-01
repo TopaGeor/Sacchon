@@ -1,7 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Patient } from '../shared/patient';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,24 +9,20 @@ export class AuthLayoutService {
 
   constructor(private http: HttpClient) {}
 
+  responseOfAuth = new Subject<boolean>();
+  data;
   readonly app = "http://localhost:9000/";
 
-
-  patientLogin(opts): Observable<any> {
-    return this.http.get<any>(
-      this.app+'login/'+opts.username + '/' +opts.password
+  login(opts): Observable<any>  {
+    this.data = this.http.get<any>(
+      this.app + 'login/' + opts.username + '/' + opts.password
     )
-  }
+    if(this.data === null){
+      this.responseOfAuth.next(false);
+    } else {
+      this.responseOfAuth.next(true);
+    }
 
-  doctorLogin(opts): Observable<any> {
-    return this.http.get<any>(
-      this.app+'login/'+opts.username + '/' +opts.password
-    )
-  }
-
-  chiefLogin(opts): Observable<any> {
-    return this.http.get<any>(
-      this.app+'login/'+opts.username + '/' +opts.password
-    )
+    return this.data;
   }
 }
