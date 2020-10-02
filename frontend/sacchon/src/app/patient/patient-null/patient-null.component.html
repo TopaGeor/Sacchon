@@ -17,10 +17,15 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let pn of patientNull">
-                    <td>{{pn.id}}</td>
+                  <tr *ngFor="let pn of patientNull; let i = index">
+                    <td>{{i}}</td>
                     <td>{{pn.hasNotification}}</td>
                     <td>{{pn.username}}</td>
+                    <td><button 
+                      type="submit" 
+                      class="btn btn-outline-primary pull-right" 
+                      (click)="setOnSubmit(i)">
+                      Get Patient</button></td>
                   </tr>
                 </tbody>
               </table>

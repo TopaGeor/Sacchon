@@ -26,6 +26,7 @@ import { NeedConsultComponent } from './chief-doctor/need-consult/need-consult.c
 import { ChiefDoctorComponent } from './chief-doctor/chief-doctor/chief-doctor.component';
 import { LandpageComponent } from './login-layout/landpage/landpage.component';
 import { LoginComponent } from './login-layout/login/login.component';
+import { SetPatientToDoctorComponent } from './patient/set-patient-to-doctor/set-patient-to-doctor.component';
 
 const routes: Routes = [
   {
@@ -42,6 +43,13 @@ const routes: Routes = [
       {
         path: ':id',
         component: PatientDetailsComponent,
+      },
+      {
+        path: ':patientId/:doctorId',
+        component: PatientNullComponent,
+      },{
+        path: ':patientId/:doctorId/ok',
+        component: SetPatientToDoctorComponent,
       },
       {
         path: ':id/data',
