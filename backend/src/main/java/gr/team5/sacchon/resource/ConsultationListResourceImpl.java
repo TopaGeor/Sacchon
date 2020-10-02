@@ -119,7 +119,8 @@ public class ConsultationListResourceImpl extends ServerResource implements Cons
 
             Optional<Patient> oPatient = patientRepository.findById(patientId);
 
-            if ( oPatient.get().getDoctor().getId() != doctorId ){
+            Long test = oPatient.get().getDoctor().getId();
+            if (!test.equals(doctorId)){
                 throw new BadEntityException("This patient has different doctor");
             }
 
