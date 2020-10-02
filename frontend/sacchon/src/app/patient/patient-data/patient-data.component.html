@@ -1,11 +1,20 @@
-<div class=" content col-lg-10">
+<div class="content">
+  <!-- col-lg-10 -->
 
-  <div class="row justify-content-md-center">
+  <div class="row">
+    <!-- justify-content-md-center -->
     <div class="col col-lg">
       <div class="card">
-        <div class=" card-header">
-          <h4 class=" card-title">Patients Data</h4>
+
+        <div class="card-header">
+          <h4 class=" card-title">Patients' Data
+            <button type="button" class="btn btn-primary pull-right" style="float: right"  routerLink="./post">
+              <i class="fa fa-plus"></i>
+              Add New Data
+            </button>
+          </h4>
         </div>
+
         <div class=" card-body">
           <div class=" table-responsive">
             <table class=" table tablesorter">
@@ -13,7 +22,7 @@
                 <tr>
                   <th>Date</th>
                   <th>Glucose Level</th>
-                  <th>Carbon Intake</th>
+                  <th>Carb Intake</th>
                   <th></th>
                   <th></th>
                 </tr>
@@ -32,15 +41,10 @@
             </table>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="col col-lg-3 mt-2">
-      <div class="row mt-2">
-        <button type="button" class="btn btn-primary pull-right" routerLink="./post"><i class="fa fa-plus"></i> Add New
-          Data</button>
-      </div>
-      <div class="row mt-2">
-        <button class="btn btn-dark pull-right" routerLink="../"><i class="fa fa-undo"></i> Back</button>
+
+        <div class="card-footer">
+          <button class="btn btn-dark pull-right" style="float: right"  routerLink="../"><i class="fa fa-undo"></i> Back</button>
+        </div>
       </div>
     </div>
   </div>
