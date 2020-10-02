@@ -2,7 +2,7 @@
   <div class="card" style="width: 25rem;">
     <article class="card-body">
       <h4 class="card-title mb-4 mt-1">View Average Period Data</h4>
-      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <form [formGroup]="form" >
         <div class="form-group">
           <label class="font-weight-bold" for="from">From:</label>
           <input type="text" class="form-control" id="from" placeholder="yyyy-MM-dd" formControlName="from" />
@@ -19,11 +19,37 @@
           <span class="text-danger" *ngIf="form.get('to').errors?.pattern && form.get('to').dirty">*This field should
             match the yyyy-MM-dd pattern</span>
         </div>
-        <button class="btn btn-primary btn-lg btn-block" [disabled]="!form.valid" type="submit">Submit</button>
+        <button class="btn btn-primary btn-lg btn-block" [disabled]="!form.valid" (click)="specificModal(specificContent)">Submit</button>
       </form>
     </article>
-    <button class="btn btn-dark pull-right" routerLink="../"><i class="fa fa-undo"></i> Back</button>
-    <button class="btn btn-dark pull-right" (click)="dailyAverage()"><i class="fa fa-undo"></i> Back</button>
+    <button class="btn btn-dark pull-right mt-1" routerLink="../"><i class="fa fa-undo"></i> Back</button>
+    <button class="btn btn-dark pull-right mt-2" (click)="dailyModal(dailyContent)"><i class="fas fa-database"></i> Get Daily Average</button>
 
   </div>
 </div>
+
+<ng-template #dailyContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Daily Average</h4>
+  </div>
+  <div class="modal-body">
+    <p>Blood Glucose: {{dailyBloodGlucose}}</p>
+    <p>Carb Intake: {{dailycarbInTake}}</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" aria-label="close" class="btn btn-outline-primary" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
+
+<ng-template #specificContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Specific Period Average</h4>
+  </div>
+  <div class="modal-body">
+    <p>Blood Glucose: {{dailyBloodGlucose}}</p>
+    <p>Carb Intake: {{dailycarbInTake}}</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" aria-label="close" class="btn btn-outline-primary" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
