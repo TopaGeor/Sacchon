@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Consultations } from '../doctor/consultations/consultations';
 import { Patient } from '../shared/patient';
 import { PatientData } from '../shared/patient-data';
 
@@ -76,8 +77,19 @@ export class PatientService {
     let url = this.app+"patient/"+patientId+"/data/average";
     return this.http.get<PatientData[]>(
       url,
-      {params: opts, 
+      {params: opts,
         headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' +this.password)})}
+    )
+  }
+
+  getPatientsConsultations(patientId): Observable<Consultations[]> {
+    let url = this.app+"consultation";
+    return this.http.get<Consultations[]>(
+      url,
+      {
+        params: {patient_id: patientId},
+        headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' +this.password)})
+      }
     )
   }
 

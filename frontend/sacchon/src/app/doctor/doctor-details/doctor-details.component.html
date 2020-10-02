@@ -1,35 +1,30 @@
+<div class="content" style="margin-left:45px; margin-top:10px">
+  <div class="row">
+    <div class="col-lg-6 col-md-12">
+      <h4> <img src="https://placekeanu.com/52/52/g" alt="placeholder"> Doctor Details</h4>
+        <div class="table">
 
-<div class=" content">
-    <div class=" row">
-      <div class=" col-lg-6 col-md-12">
-        <div class="card">
-          <div class=" card-header">
-            <h4 class=" card-title">Doctor Details</h4>
-          </div>
-          <div class=" card-body">
-            <div class=" table-responsive">
-              <table class=" table tablesorter" id="">
-                <thead class=" text-primary">
-                  <tr>
-                    <th>id</th>
-                    <th>username</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngIf="doctorDetails">
-                    <td>{{doctorDetails.id}}</td>
-                    <td>{{doctorDetails.username}}</td>
-                    <td><button type="button" class="btn btn-outline-danger pull-right"  (click)="openVerticallyCentered(content)">Delete Account</button></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <table class="table tablesorter">
+            <thead class="text-primary">
+              <tr class="d-flex">
+                <th class="col">Your unique number</th>
+                <th class="col">Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="doctorDetails" class="d-flex">
+                <td class="col">{{doctorDetails.doctorId}}</td>
+                <td class="col">{{doctorDetails.username}}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-      </div>
+
+      <button type="button" class="btn btn-outline-danger pull-right"  (click)="openVerticallyCentered(content)">Delete Account</button>
     </div>
   </div>
-  
+</div>
+
   <ng-template #content let-modal>
     <div class="modal-header">
       <h4 class="modal-title">Delete Profile</h4>

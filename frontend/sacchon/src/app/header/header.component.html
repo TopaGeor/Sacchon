@@ -7,7 +7,7 @@
       <div id="myLinks">
         <a href="patient/{{id}}">Home</a>
         <a routerLink="patient/{{id}}/data" routerLinkActive="active">My Data</a>
-        <a href="consultation?patientId={{id}}">My Consultations</a>
+        <a href="patient/{{id}}/consultations">My Consultations</a>
       </div>
     </div>
     <div class="topnav" *ngIf="role==='ROLE_DOCTOR'">

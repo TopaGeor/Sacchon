@@ -27,6 +27,8 @@ import { ChiefDoctorComponent } from './chief-doctor/chief-doctor/chief-doctor.c
 import { LandpageComponent } from './login-layout/landpage/landpage.component';
 import { LoginComponent } from './login-layout/login/login.component';
 import { SetPatientToDoctorComponent } from './patient/set-patient-to-doctor/set-patient-to-doctor.component';
+import { PatientConsultationComponent } from './patient/patient-consultation/patient-consultation.component';
+
 
 const routes: Routes = [
   {
@@ -79,6 +81,10 @@ const routes: Routes = [
       {
         path: ':id/delete',
         component: DeletePatientComponent,
+      },
+      {
+        path: ':id/consultations',
+        component: PatientConsultationComponent
       }
     ]
   },
@@ -146,15 +152,6 @@ const routes: Routes = [
       {
         path: 'noActivity',
         component: NoActUserComponent
-      }
-    ]
-  },
-  {
-    path: 'consultation',
-    children: [
-      {
-        path: '',
-        component: ConsultationsComponent
       }
     ]
   },
