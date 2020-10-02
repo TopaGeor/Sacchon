@@ -3,7 +3,7 @@
     <div class=" col-lg-6 col-md-12">
       <div class="card">
         <div class=" card-header">
-          <h4 class=" card-title">Non-Active users List</h4>
+          <h4 class=" card-title">Non-Active Patients List</h4>
         </div>
         <div class=" card-body">
           <div class=" table-responsive">
@@ -16,7 +16,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let nau of nonActiveDoctor">
+                <tr *ngFor="let nau of nonActivePatient">
                   <td>{{nau.username}}</td>
                   <td>{{nau.id}}</td>
                 </tr>
