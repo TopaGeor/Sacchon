@@ -1,43 +1,38 @@
-
 <div class=" content">
-    <div class=" row">
-      <div class=" col-lg-6 col-md-12">
-        <div class="card">
-          <div class=" card-header">
-            <h4 class=" card-title">Patients with no Doctor</h4>
-          </div>
-          <div class=" card-body">
-            <div class=" table-responsive">
-              <table class=" table tablesorter" id="">
-                <thead class=" text-primary">
-                  <tr>
-                    <th>id</th>
-                    <th>hasNotification</th>
-                    <th>username</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let pn of patientNull; let i = index">
-                    <td>{{i}}</td>
-                    <td>{{pn.hasNotification}}</td>
-                    <td>{{pn.username}}</td>
-                    <td><button 
-                      type="submit" 
-                      class="btn btn-outline-primary pull-right" 
-                      (click)="setOnSubmit(i)">
+  <div class=" row">
+    <div class=" col-lg-6 col-md-12">
+      <div class="card">
+        <div class=" card-header">
+          <h4 class=" card-title">Patients with no Doctor</h4>
+        </div>
+        <div class=" card-body">
+          <div class=" table-responsive">
+            <table class=" table tablesorter" id="">
+              <thead class=" text-primary">
+                <tr>
+                  <th>id</th>
+                  <th>hasNotification</th>
+                  <th>username</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let pn of patientNull; let i = index">
+                  <td>{{i}}</td>
+                  <td>{{pn.hasNotification}}</td>
+                  <td>{{pn.username}}</td>
+                  <td><button type="submit" class="btn btn-outline-primary pull-right" (click)="setOnSubmit(i)">
                       Get Patient</button></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
-    <div class="col col-lg-3 mt-2">
-      <div class="row mt-2">
-        <button class="btn btn-dark pull-right" routerLink="../"><i class="fa fa-undo"></i> Back</button>
-      </div>
+  </div>
+  <div class="col col-lg-3 mt-2">
+    <div class="row mt-2">
+      <button class="btn btn-dark pull-right" routerLink="../"><i class="fa fa-undo"></i> Back</button>
     </div>
   </div>
 </div>
