@@ -19,6 +19,8 @@ export class PatientService {
   username = "patient";
   password = "patient";
 
+  usernameDoc = "doctor";
+  passwdDoc = "doctor";
   
   getPatient(): Observable<Patient[]> {
     return this.http.get<Patient[]>(
@@ -31,8 +33,20 @@ export class PatientService {
     let url = this.app+"patient_null"
     return this.http.get<Patient[]>(
       url,
-      {headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' +this.password)})}
+      {headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.usernameDoc+ ':' +this.passwdDoc)})}
       );
+  }
+
+  setPatient(patientId, doctorId, values): Observable<Patient[]> {
+    let url = this.app + "patient/" + patientId + "/" + doctorId;
+    return this.http.put<Patient[]>(
+      url,
+      {
+        'username':values.get('username').value,
+        'password':values.get('password').value
+      },
+      {headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.usernameDoc+ ':' +this.passwdDoc)})}
+    );
   }
 
   getPatientsDetails(id): Observable<Patient[]> {

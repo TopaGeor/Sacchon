@@ -14,7 +14,9 @@ import { DeletePatientDataComponent } from './delete-patient-data/delete-patient
 import { PostPatientDataComponent } from './post-patient-data/post-patient-data.component';
 import { DeletePatientComponent } from './delete-patient/delete-patient.component';
 import { AverageComponent } from './average/average.component';
+import { SetPatientToDoctorComponent } from './set-patient-to-doctor/set-patient-to-doctor.component';
 import { PatientConsultationComponent } from './patient-consultation/patient-consultation.component';
+
 
 
 
@@ -30,7 +32,9 @@ import { PatientConsultationComponent } from './patient-consultation/patient-con
     DeletePatientDataComponent,
     DeletePatientComponent,
     AverageComponent,
+    SetPatientToDoctorComponent,
     PatientConsultationComponent
+
   ],
   imports: [
     CommonModule,
