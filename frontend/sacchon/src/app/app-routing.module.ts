@@ -99,7 +99,7 @@ const routes: Routes = [
         component: DoctorComponent
       },
       {
-        path: ':doctorId/deleteDoc',
+        path: ':doctorId/delete',
         component: DeleteDoctorComponent
       },
       {

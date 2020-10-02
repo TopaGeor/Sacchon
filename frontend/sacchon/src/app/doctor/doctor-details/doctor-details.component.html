@@ -19,7 +19,7 @@
                   <tr *ngIf="doctorDetails">
                     <td>{{doctorDetails.id}}</td>
                     <td>{{doctorDetails.username}}</td>
-                    <td><button type="button" class="btn btn-outline-danger pull-right" routerLink="./deleteDoc">Delete Account</button></td>
+                    <td><button type="button" class="btn btn-outline-danger pull-right"  (click)="openVerticallyCentered(content)">Delete Account</button></td>
                   </tr>
                 </tbody>
               </table>
@@ -30,3 +30,15 @@
     </div>
   </div>
   
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Delete Profile</h4>
+    </div>
+    <div class="modal-body">
+      <p>Are you sure you want to delete your profile?</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" aria-label="close" class="btn btn-outline-primary" (click)="modal.close('Close click')">Close</button>
+      <button type="submit" class="btn btn-danger" (click)="modal.close('Close click')" routerLink="./delete">Delete</button>
+    </div>
+  </ng-template>
