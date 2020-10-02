@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { ChiefDoctorService } from '../chief-doctor.service';
 
 @Component({
@@ -8,40 +9,43 @@ import { ChiefDoctorService } from '../chief-doctor.service';
   styleUrls: ['./no-act-user.component.scss']
 })
 export class NoActUserComponent implements OnInit {
-  nonActiveUser;
-  form: FormGroup;
-  //userId = ['patient', 'doctor'];
+  nonActivePatient;
+  nonActiveDoctor;
+  doctorForm: FormGroup;
+  patientForm: FormGroup;
+  username = this.route.snapshot.paramMap.get("username");
+  id = this.route.snapshot.paramMap.get("id");
 
   constructor(
     private fb: FormBuilder,
+    private route: ActivatedRoute,
     private service: ChiefDoctorService
     ) {}
 
   ngOnInit() {
-    this.form = this.fb.group({
-      from: [null, [Validators.required, Validators.minLength(3)]],
-      to: [null, Validators.required],
-      who: "doctor",
+    this.doctorForm = this.fb.group({
+      from: '2020-09-01',
+      to: '2020-10-02',
+      who: 'doctor'
     });
+
+
+    this.patientForm = this.fb.group({
+      from: '2020-09-01',
+      to: '2020-10-02',
+      who: 'patient'
+    });
+
+    this.service.nonActiveDoctor(this.doctorForm.value).subscribe(nonActiveDoctor => {
+      this.nonActiveDoctor = nonActiveDoctor;
+      console.log(nonActiveDoctor);
+    }    
     
-    // this.form.get('userId').valueChanges.subscribe(value => {
-
-    //   const nonActive = this.form.get('who');
-
-    //   if (value === 'patient') {
-    //     nonActive.setValidators(Validators.required);
-    //   } else {
-    //     nonActive.clearValidators();
-    //   }
-    //   nonActive.updateValueAndValidity();
-    // });
+    // this.service.nonActivePatients(this.patientForm.value).subscribe(nonActivePatient => {
+    //   this.nonActivePatient = nonActivePatient;
+    //   console.log(nonActivePatient);
+    // }
+  );
   }
 
-  onSubmit() {
-    this.service.nonActivePatients(this.form.value).subscribe(patientData => 
-      {
-        console.log(patientData);
-        //this.ngOnInit();
-      });
-  }
 }

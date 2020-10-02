@@ -1,59 +1,58 @@
-<div class="container mt-5">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label  class="font-weight-bold" for="from">from:</label>
-        <input  type="text"
-                class="form-control"
-                id="from"
-                placeholder="from"
-                formControlName="from"/>
-          <span class="text-danger" *ngIf="form.get('from').errors?.required && form.get('from').dirty">*This field is required</span>
-          <span class="text-danger" *ngIf="form.get('from').errors?.minlength && form.get('from').dirty">*The minimum length of field is 3 characters</span>
-      </div>
-      <div class="form-group">
-        <label  class="font-weight-bold" for="to">to:</label>
-        <input  type="text"
-                class="form-control"
-                id="from"
-                placeholder="to"
-                formControlName="to"/>
-          <span class="text-danger" *ngIf="form.get('to').errors?.required && form.get('to').dirty">*This field is required</span>
-      </div>
-  
-      <!-- <div class="form-group form-check">
-        <input class="form-check-input" formControlName="isExperienced" type="checkbox">
-        <label class="form-check-label">I have experience over 2 years </label>
-        <span class="text-danger" *ngIf="form.get('isExperienced').errors?.required && form.get('isExperienced').dirty">*This field is required</span>
-      </div>
-  
-      <div class="form-group">
-        <label class="font-weight-bold">Angular Preference</label>
-        <div class="form-check">
-          <input  class="form-check-input"
-                  type="radio"
-                  formControlName="angular"
-                  value="1"
-                  id="angularjs">
-          <label class="form-check-label" for="angularjs">angularJs</label>
+<div class="content">
+  <div class=" row">
+    <div class=" col-lg-6 col-md-12">
+      <div class="card">
+        <div class=" card-header">
+          <h4 class=" card-title">Non-Active Patients List</h4>
         </div>
-  
-      <div class="form-group">
-        <label class="font-weight-bold">Favourite Language</label>
-        <select class="form-control" formControlName="who">
-          <option [ngValue]="null">Select</option>
-          <option ng-model="who" *ngFor="let prom of who" [ngValue]="prom">
-            {{prom}}
-          </option>
-        </select>
-        <span class="text-danger" *ngIf="form.get('who').errors?.required && form.get('favouriteLanguage').dirty">*This field is required</span>
+        <div class=" card-body">
+          <div class=" table-responsive">
+            <table class=" table tablesorter" id="">
+              <thead class=" text-primary">
+                <tr>
+                  <!-- <th>id</th> -->
+                  <th>Username</th>
+                  <th>Id</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let nau of nonActivePatient">
+                  <td>{{nau.username}}</td>
+                  <td>{{nau.id}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-  
-      <div class="form-group" *ngIf="form.get('favouriteLanguage').value == 'JS'">
-        <label class="font-weight-bold">JS Version</label>
-        <input formControlName="jsversion" class="form-control" type="text">
-        <span class="text-danger" *ngIf="form.get('jsversion').errors?.required && form.get('jsversion').dirty">*This field is required</span>
-      </div> -->
-      
-      <button class="btn btn-primary" [disabled]="!form.valid" (click)="onSubmit()">Submit</button>
-    </form>
+    </div>
   </div>
+  <div class=" row">
+    <div class=" col-lg-6 col-md-12">
+      <div class="card">
+        <div class=" card-header">
+          <h4 class=" card-title">Non-Active Doctors List</h4>
+        </div>
+        <div class=" card-body">
+          <div class=" table-responsive">
+            <table class=" table tablesorter" id="">
+              <thead class=" text-primary">
+                <tr>
+                  <!-- <th>id</th> -->
+                  <th>Username</th>
+                  <th>Id</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let nau of nonActiveDoctor">
+                  <td>{{nau.doctor.username}}</td>
+                  <td>{{nau.doctor.doctorId}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
