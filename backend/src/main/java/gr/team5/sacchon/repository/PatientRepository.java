@@ -115,10 +115,12 @@ public class PatientRepository extends ServerResource {
         DatabaseUser user = entityManager.find(DatabaseUser.class, in.getUsername());
 
         in.setHasNotification(patient.isHasNotification());
-        in.setPassword(patient.getPassword());
         in.setDoctor(patient.getDoctor());
 
-        user.setPassword(patient.getPassword());
+        if(patient.getPassword() != null && !patient.getPassword().isEmpty()) {
+            in.setPassword(patient.getPassword());
+            user.setPassword(patient.getPassword());
+        }
 
         try {
             entityManager.getTransaction().begin();

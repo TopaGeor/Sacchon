@@ -22,7 +22,6 @@ export class PatientDataDetailComponent implements OnInit {
   ngOnInit() {
     this.service.getPatientsDataDetail(this.patientId, this.dataId).subscribe(
       patientDataDetail => { this.patientDataDetail = patientDataDetail;
-      console.log(patientDataDetail);
       })
   }
 

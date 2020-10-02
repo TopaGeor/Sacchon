@@ -19,7 +19,6 @@ export class PatientConsultationComponent implements OnInit {
   ngOnInit() {
     this.service.getPatientsConsultations(this.patientId).subscribe(
       patientConsultation => {this.patientConsultation = patientConsultation;
-      console.log(patientConsultation);
     })
   }
 }
