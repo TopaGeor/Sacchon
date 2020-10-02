@@ -47,9 +47,6 @@ const routes: Routes = [
         component: PatientDetailsComponent,
       },
       {
-        path: ':patientId/:doctorId',
-        component: PatientNullComponent,
-      },{
         path: ':patientId/:doctorId/ok',
         component: SetPatientToDoctorComponent,
       },
@@ -85,7 +82,11 @@ const routes: Routes = [
       {
         path: ':id/consultations',
         component: PatientConsultationComponent
-      }
+      },
+      {
+        path: ':patientId/:doctorId',
+        component: PatientNullComponent,
+      },
     ]
   },
   {
