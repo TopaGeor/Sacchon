@@ -6,7 +6,7 @@
       <div id="myLinks">
         <a href="">Home</a>
         <a routerLink="patient/{{id}}/data" routerLinkActive="active">My Data</a>
-        <a href="">My Consultations</a>
+        <a href="consultation?patientId={{id}}">My Consultations</a>
       </div>
     </div>
 
@@ -15,7 +15,7 @@
       <button class="btn btn-outline-primary" routerLink="./login"> Login </button>
     </div>
     <div *ngIf="isLogged">
-      <button class="btn btn-outline-primary" (click)="logout()"> Logout {{role}}</button>
+      <button class="btn btn-outline-primary" (click)="logout()"> Logout </button>
     </div>
   </div>
 </div>

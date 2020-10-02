@@ -11,6 +11,7 @@ export class HeaderComponent implements OnInit {
   id;
   isLogged: boolean;
   role: string;
+  user: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,6 +35,18 @@ export class HeaderComponent implements OnInit {
       this.isLogged = data;
     })
     this.service.currentRole.subscribe( role => this.role = role)
+
+    let credentials: any = sessionStorage.getItem("credentials")
+    if(credentials) {
+      credentials = JSON.parse(credentials)
+      if(credentials.role == "ROLE_PATIENT") {
+        this.service.roleHeader(credentials.role);
+      } else if (credentials.role == "ROLE_DOCTOR") {
+        this.service.roleHeader(credentials.role);
+      } else if (credentials.role == "ROLE_CHIEF") {
+        this.service.roleHeader(credentials.role);
+      }
+    }
   }
 
   logout() {

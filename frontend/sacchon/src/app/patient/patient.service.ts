@@ -15,8 +15,8 @@ export class PatientService {
   readonly app = "http://localhost:9000/";
 
 
-  username = "doctor";
-  password = "doctor";
+  username = "patient";
+  password = "patient";
 
   
   getPatient(): Observable<Patient[]> {

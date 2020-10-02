@@ -142,6 +142,15 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'consultation',
+    children: [
+      {
+        path: '',
+        component: ConsultationsComponent
+      }
+    ]
+  },
+  {
     path: "**",
     component: LandpageComponent
   }

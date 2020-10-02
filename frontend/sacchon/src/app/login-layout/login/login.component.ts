@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
     });
     this.service.currentRole.subscribe( role => this.role = role)
   }
+  
 
   onSubmit() {
     this.user = this.service.login(this.form.value).subscribe(user => {
@@ -41,7 +42,6 @@ export class LoginComponent implements OnInit {
         if(user.role == "ROLE_PATIENT") {
           this.service.currentRole.subscribe( role => this.role = role)
           this.service.roleHeader(user.role);
-          this.service.roleDefiner.next(user.role);
           this.router.navigate(['patient/' + user.id]);
         } else if (user.role == "ROLE_DOCTOR") {
           this.service.roleHeader(user.role);
@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
         }
       } else {
         alert("Wrong username or password!!");
-      }  
+      }
     })
   }
 }
