@@ -11,6 +11,7 @@ import { AuthLayoutService } from '../auth-layout.service';
 export class LoginComponent implements OnInit {
   form: FormGroup;
   user: any;
+  role: string;
 
   constructor(
     private fb: FormBuilder,
@@ -23,7 +24,9 @@ export class LoginComponent implements OnInit {
       username: [null, Validators.required],
       password: [null, Validators.required],
     });
+    this.service.currentRole.subscribe( role => this.role = role)
   }
+  
 
   onSubmit() {
     this.user = this.service.login(this.form.value).subscribe(user => {
@@ -37,19 +40,19 @@ export class LoginComponent implements OnInit {
         }));
 
         if(user.role == "ROLE_PATIENT") {
-
+          this.service.currentRole.subscribe( role => this.role = role)
+          this.service.roleHeader(user.role);
           this.router.navigate(['patient/' + user.id]);
         } else if (user.role == "ROLE_DOCTOR") {
-
+          this.service.roleHeader(user.role);
           this.router.navigate(['doctor/' + user.id]);
         } else if (user.role == "ROLE_CHIEF") {
-
+          this.service.roleHeader(user.role);
           this.router.navigate(['chief']);
-          this.router
         }
       } else {
         alert("Wrong username or password!!");
-      }  
+      }
     })
   }
 }

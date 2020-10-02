@@ -8,14 +8,15 @@ import { PatientData } from '../shared/patient-data';
   providedIn: 'root'
 })
 export class PatientService {
+  currentRole: any;
 
   constructor(private http: HttpClient) {}
 
   readonly app = "http://localhost:9000/";
 
 
-  username = "doctor";
-  password = "doctor";
+  username = "patient";
+  password = "patient";
 
   
   getPatient(): Observable<Patient[]> {
