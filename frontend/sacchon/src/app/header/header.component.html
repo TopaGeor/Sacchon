@@ -5,7 +5,7 @@
     <div class="topnav" *ngIf="role==='ROLE_PATIENT'">
       <div id="myLinks">
         <a href="">Home</a>
-        <a routerLink="patient/{{id}}/data">My Data</a>
+        <a routerLink="patient/{{id}}/data" routerLinkActive="active">My Data</a>
         <a href="">My Consultations</a>
       </div>
     </div>
@@ -15,7 +15,7 @@
       <button class="btn btn-outline-primary" routerLink="./login"> Login </button>
     </div>
     <div *ngIf="isLogged">
-      <button class="btn btn-outline-primary" (click)="logout()"> Logout {{role}} </button>
+      <button class="btn btn-outline-primary" (click)="logout()"> Logout {{role}}</button>
     </div>
   </div>
 </div>

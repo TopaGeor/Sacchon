@@ -8,6 +8,7 @@ import { PatientData } from '../shared/patient-data';
   providedIn: 'root'
 })
 export class PatientService {
+  currentRole: any;
 
   constructor(private http: HttpClient) {}
 

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +8,9 @@ import { Observable, Subject } from 'rxjs';
 export class AuthLayoutService {
 
   constructor(private http: HttpClient) {}
+
+  roleDefiner = new BehaviorSubject<string>("default role");
+  currentRole = this.roleDefiner.asObservable();
 
   responseOfAuth = new Subject<boolean>();
   data;
@@ -24,5 +27,9 @@ export class AuthLayoutService {
     }
 
     return this.data;
+  }
+
+  roleHeader(roleHeader: string) {
+    this.roleDefiner.next(roleHeader);
   }
 }
