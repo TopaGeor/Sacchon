@@ -1,7 +1,7 @@
 <div class="container mr-5 mt-5">
   <div class="card" style="width: 25rem;">
     <article class="card-body">
-      <h4 class="card-title mb-4 mt-1">View average daily data</h4>
+      <h4 class="card-title mb-4 mt-1">View Average Period Data</h4>
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label class="font-weight-bold" for="from">From:</label>
@@ -23,6 +23,7 @@
       </form>
     </article>
     <button class="btn btn-dark pull-right" routerLink="../"><i class="fa fa-undo"></i> Back</button>
+    <button class="btn btn-dark pull-right" (click)="dailyAverage()"><i class="fa fa-undo"></i> Back</button>
 
   </div>
 </div>

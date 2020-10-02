@@ -45,7 +45,7 @@ export class DoctorService {
     return this.http.get<Consultations[]>(
       url,
       {
-        params: {doctor_id: doctorId, patient_id: patientId},
+        params: {doctor_id: doctorId, patient_id: patientId },
         headers:new HttpHeaders({'Authorization': 'Basic ' + btoa( this.username+ ':' +this.password)})}
     );
   }
