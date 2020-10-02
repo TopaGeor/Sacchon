@@ -197,7 +197,9 @@ public class PatientResourceImpl extends ServerResource implements PatientResour
 
         // Check given entity
         ResourceValidator.notNull(patientReprIn);
-        ResourceValidator.validate(patientReprIn);
+        if(doctorId == null) {
+            ResourceValidator.validate(patientReprIn);
+        }
         LOGGER.finer("Patient checked");
 
         try {
