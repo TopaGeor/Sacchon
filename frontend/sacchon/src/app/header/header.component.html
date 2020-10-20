@@ -3,38 +3,41 @@
     <img src="../../assets/img/logo.png" height="50px" width="50px" />
     Sacchon</a>
   <div class="header-left">
-    <div class="topnav" *ngIf="role==='ROLE_PATIENT'">
-      <div id="myLinks">
+
+    <div class="topnav">
+      <div id="myLinks" *ngIf="role==='ROLE_PATIENT'">
         <a href="patient/{{id}}">Home</a>
         <a routerLink="patient/{{id}}/data">My Data</a>
-        <a routerLink="patient/{{id}}/consultations">My Consultations</a>
         <a routerLink="patient/{{id}}/data/average">Average Metrics</a>
-
+        <a routerLink="patient/{{id}}/consultations">My Consultations</a>
       </div>
-    </div>
-    <div class="topnav" *ngIf="role==='ROLE_DOCTOR'">
-      <div id="myLinks">
+
+      <div id="myLinks" *ngIf="role==='ROLE_DOCTOR'">
         <a href="doctor/{{id}}/patient">Home</a>
-        <a routerLink="doctor/{{id}}/consultation" routerLinkActive="active">Consultations</a>
         <a routerLink="patient_null" routerLinkActive="active">Non-Doctor Patients</a>
         <a routerLink="doctor/{{id}}" routerLinkActive="active">My Account</a>
+        <a routerLink="doctor/{{id}}/consultation" routerLinkActive="active">Consultations</a>
       </div>
-    </div>
-    <div class="topnav" *ngIf="role==='ROLE_CHIEF'">
-      <div id="myLinks">
-        <a href="chief">Home</a>
-        <a routerLink="chief/needCons" routerLinkActive="active">Non-Consultation Patients</a>
-        <a routerLink="chief/noActivity" routerLinkActive="active">Non-Active Users</a>
-        <a routerLink="chief/{{id}}/data/infoSub" routerLinkActive="active">Information Submission</a>
+
+      <div id="myLinks" *ngIf="role==='ROLE_CHIEF'">
+        <!-- <a href="chief">Home</a> -->
+        <a [routerLink]="['']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"> Home </a>
+        <a [routerLink]="['/needCons']" routerLinkActive="active">Non-Consultation Patients</a>
+        <a [routerLink]="['/noActivity']" routerLinkActive="active">Non-Active Users</a>
+        <a routerLink="/chief/{{id}}/data/infoSub" routerLinkActive="active">Information Submission</a>
       </div>
+
     </div>
   </div>
+
   <div class="header-right">
     <div *ngIf="!isLogged">
       <button class="btn btn-outline-primary" routerLink="./login"> Login </button>
     </div>
+
     <div *ngIf="isLogged">
       <button class="btn btn-outline-primary" (click)="logout()"> Logout </button>
     </div>
+
   </div>
 </div>
