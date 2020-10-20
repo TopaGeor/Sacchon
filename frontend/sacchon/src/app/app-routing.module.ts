@@ -19,10 +19,6 @@ import { DeleteDoctorComponent } from './doctor/delete-doctor/delete-doctor.comp
 import { PutConsultationComponent } from './doctor/put-consultation/put-consultation.component';
 import { ConsultationsComponent } from './doctor/consultations/consultations.component';
 import { DeletePatientComponent } from './patient/delete-patient/delete-patient.component';
-import { InfoSubDataComponent } from './chief-doctor/info-sub-data/info-sub-data.component';
-import { InfoSubConsultComponent } from './chief-doctor/info-sub-consult/info-sub-consult.component';
-import { NoActUserComponent } from './chief-doctor/no-act-user/no-act-user.component';
-import { NeedConsultComponent } from './chief-doctor/need-consult/need-consult.component';
 import { ChiefDoctorComponent } from './chief-doctor/chief-doctor/chief-doctor.component';
 import { LandpageComponent } from './login-layout/landpage/landpage.component';
 import { LoginComponent } from './login-layout/login/login.component';
@@ -31,6 +27,10 @@ import { PatientConsultationComponent } from './patient/patient-consultation/pat
 
 
 const routes: Routes = [
+  {
+    path: '',
+    component: LandpageComponent
+  },
   {
     path: 'login',
     component: LoginComponent
@@ -133,33 +133,14 @@ const routes: Routes = [
   },
   {
     path: 'chief',
-    children: [
-      {
-        path: '',
-        component: ChiefDoctorComponent
-      },
-      {
-        path: 'needCons',
-        component: NeedConsultComponent,
-      },
-      {
-        path: ':patientId/data/infoSub',
-        component: InfoSubDataComponent,
-      },
-      {
-        path: ':doctorId/consultation/infoSub',
-        component: InfoSubConsultComponent,
-      },
-      {
-        path: 'noActivity',
-        component: NoActUserComponent
-      }
-    ]
+    loadChildren: () => 
+    import('./chief-doctor/chief-doctor.module')
+    .then(m => m.ChiefDoctorModule)
   },
-  {
-    path: "**",
-    component: LandpageComponent
-  }
+  // {
+  //   path: "**",
+  //   component: LandpageComponent
+  // }
 ];
 
 @NgModule({

@@ -13,10 +13,10 @@ export class ChiefDoctorComponent implements OnInit {
   constructor(private service: DoctorService) { }
 
   ngOnInit() {
-    this.service.getDoctors().subscribe(
-      doctors => {this.doctors = doctors;
-      console.log(doctors);
-      }
-    );
+    // this.service.getDoctors().subscribe(
+    //   doctors => {this.doctors = doctors;
+    //   console.log(doctors);
+    //   }
+    // );
   }
 }
