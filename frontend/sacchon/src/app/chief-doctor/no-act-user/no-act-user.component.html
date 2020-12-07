@@ -1,10 +1,13 @@
 <div class="content">
+
   <div class=" row">
     <div class=" col-lg-6 col-md-12">
       <div class="card">
+
         <div class=" card-header">
           <h4 class=" card-title">Non-Active Patients List</h4>
         </div>
+
         <div class=" card-body">
           <div class=" table-responsive">
             <table class=" table tablesorter" id="">
@@ -15,34 +18,40 @@
                   <th>Id</th>
                 </tr>
               </thead>
+
               <tbody>
                 <tr *ngFor="let nau of nonActivePatient">
-                  <td>{{nau.username}}</td>
-                  <td>{{nau.id}}</td>
+                  <td>{{nau.patient.username}}</td>
+                  <td>{{nau.patient.patientId}}</td>
                 </tr>
               </tbody>
+
             </table>
           </div>
         </div>
       </div>
     </div>
   </div>
+
   <div class=" row">
     <div class=" col-lg-6 col-md-12">
       <div class="card">
+
         <div class=" card-header">
           <h4 class=" card-title">Non-Active Doctors List</h4>
         </div>
+
         <div class=" card-body">
+
           <div class=" table-responsive">
             <table class=" table tablesorter" id="">
               <thead class=" text-primary">
                 <tr>
-                  <!-- <th>id</th> -->
                   <th>Username</th>
                   <th>Id</th>
                 </tr>
               </thead>
+
               <tbody>
                 <tr *ngFor="let nau of nonActiveDoctor">
                   <td>{{nau.doctor.username}}</td>
@@ -51,8 +60,13 @@
               </tbody>
             </table>
           </div>
+
         </div>
+
       </div>
+
     </div>
+
   </div>
+
 </div>
