@@ -10,7 +10,6 @@ import { ConsultationsComponent } from './consultations/consultations.component'
 import { ReactiveFormsModule } from '@angular/forms';
 
 
-
 @NgModule({
   declarations: [
     DoctorComponent, 

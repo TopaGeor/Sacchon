@@ -5,7 +5,6 @@ import { Consultations } from '../doctor/consultations/consultations';
 import { Doctor } from '../shared/doctor';
 import { Patient } from '../shared/patient';
 import { PatientData } from '../shared/patient-data';
-import { NeedConsultComponent } from './need-consult/need-consult.component';
 
 @Injectable({
   providedIn: 'root'
