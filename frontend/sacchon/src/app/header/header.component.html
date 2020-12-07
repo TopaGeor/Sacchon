@@ -13,17 +13,17 @@
       </div>
 
       <div id="myLinks" *ngIf="role==='ROLE_DOCTOR'">
-        <a href="doctor/{{id}}/patient">Home</a>
-        <a routerLink="patient_null" routerLinkActive="active">Non-Doctor Patients</a>
-        <a routerLink="doctor/{{id}}" routerLinkActive="active">My Account</a>
-        <a routerLink="doctor/{{id}}/consultation" routerLinkActive="active">Consultations</a>
+        <a routerLink="/doctor/{{id}}/patient" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a> 
+        <a routerLink="/doctor/patient_null" routerLinkActive="active">Non-Doctor Patients</a>
+        <a routerLink="/doctor/{{id}}" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">My Account</a>
+        <a routerLink="/doctor/{{id}}/consultation" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Consultations</a>
       </div>
 
       <div id="myLinks" *ngIf="role==='ROLE_CHIEF'">
         <!-- <a href="chief">Home</a> -->
-        <a [routerLink]="['']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"> Home </a>
-        <a [routerLink]="['/needCons']" routerLinkActive="active">Non-Consultation Patients</a>
-        <a [routerLink]="['/noActivity']" routerLinkActive="active">Non-Active Users</a>
+        <a [routerLink]="['/chief']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"> Home </a>
+        <a [routerLink]="['/chief/needCons']" routerLinkActive="active">Non-Consultation Patients</a>
+        <a [routerLink]="['/chief/noActivity']" routerLinkActive="active">Non-Active Users</a>
         <a routerLink="/chief/{{id}}/data/infoSub" routerLinkActive="active">Information Submission</a>
       </div>
 
