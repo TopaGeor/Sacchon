@@ -1,7 +1,9 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+
 import { AuthLayoutService } from '../auth-layout.service';
+import { UserInfo } from '../../shared/user-info';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +12,7 @@ import { AuthLayoutService } from '../auth-layout.service';
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
-  user: any;
+  user: UserInfo;
   role: string;
 
   constructor(
@@ -29,14 +31,15 @@ export class LoginComponent implements OnInit {
   
 
   onSubmit() {
-    this.user = this.service.login(this.form.value).subscribe(user => {
+    this.service.login(this.form.value).subscribe(user => {
       if(user != null) {
         this.user = user;
+        console.log(this.user)
         sessionStorage.setItem("credentials", JSON.stringify({
           id: this.user.id,
           password: this.user.password,
           role: this.user.role,
-          username: this.user.username
+          username: this.user.name
         }));
 
         if(user.role == "ROLE_PATIENT") {
@@ -50,6 +53,7 @@ export class LoginComponent implements OnInit {
           this.service.roleHeader(user.role);
           this.router.navigate(['chief']);
         }
+        this.service.userId(user.id);
       } else {
         alert("Wrong username or password!!");
       }

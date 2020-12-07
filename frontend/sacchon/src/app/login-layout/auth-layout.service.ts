@@ -10,7 +10,10 @@ export class AuthLayoutService {
   constructor(private http: HttpClient) {}
 
   roleDefiner = new BehaviorSubject<string>("default role");
+  idDefiner = new BehaviorSubject<number>(-2);
+  
   currentRole = this.roleDefiner.asObservable();
+  currentId = this.idDefiner.asObservable();
 
   responseOfAuth = new Subject<boolean>();
   data;
@@ -31,5 +34,9 @@ export class AuthLayoutService {
 
   roleHeader(roleHeader: string) {
     this.roleDefiner.next(roleHeader);
+  }
+
+  userId(id: number){
+    this.idDefiner.next(id);
   }
 }
