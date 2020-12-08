@@ -6,10 +6,10 @@
 
     <div class="topnav">
       <div id="myLinks" *ngIf="role==='ROLE_PATIENT'">
-        <a href="patient/{{id}}">Home</a>
-        <a routerLink="patient/{{id}}/data">My Data</a>
-        <a routerLink="patient/{{id}}/data/average">Average Metrics</a>
-        <a routerLink="patient/{{id}}/consultations">My Consultations</a>
+        <a routerLink="patient/{{id}}" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+        <a routerLink="patient/{{id}}/data" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">My Data</a>
+        <a routerLink="patient/{{id}}/data/average" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Average Metrics</a>
+        <a routerLink="patient/{{id}}/consultations" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">My Consultations</a>
       </div>
 
       <div id="myLinks" *ngIf="role==='ROLE_DOCTOR'">
